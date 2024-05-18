@@ -4,49 +4,49 @@ using UnityEngine;
 
 public class FireMovement : MonoBehaviour
 {
-    private int direction;
-    private GameObject clone;
+    private Vector3 direction;
+    private Rigidbody2D rigid;
+
+    private void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        rigid.velocity = direction * 3;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.right * 4 * Time.deltaTime * direction;
+        // transform.position += direction * 4 * Time.deltaTime;
     }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        float yPos = col.transform.position.y;
-        float yHalfSize = col.transform.localScale.y / 2;
-        float firPos = transform.position.y;
-        if (yPos - yHalfSize < firPos && yPos + yHalfSize > firPos && col.gameObject.name != "Player")
+        float colPos = col.transform.position.y;
+        float colHalfSize = col.transform.localScale.y / 2;
+        float firePos = transform.position.y;
+        if (!col.gameObject.CompareTag("Player") && colPos - colHalfSize < firePos && colPos + colHalfSize > firePos) // 맵 형태에 따라 세밀한 조정 필요
         {
             destroyFire();
         }
         if (col.gameObject.tag == "Ground")
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.up * 3, ForceMode2D.Impulse);
+            rigid.AddForce(Vector2.up * 3, ForceMode2D.Impulse);
         }
     }
 
-    public void setDirection(int direction)
+    public void setDirection(Vector3 direction)
     {
         this.direction = direction;
     }
 
-    public void setClone(GameObject clone)
-    {
-        this.clone = clone;
-    }
-
     private void destroyFire()
     {
-        Destroy(clone);
+        Destroy(gameObject);
         GameObject.Find("Player").GetComponent<PlayerMovement>().addFire();
     }
 }
