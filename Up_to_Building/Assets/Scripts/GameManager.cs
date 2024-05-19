@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,10 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject Dragon;
+
+
+   
+
 
     [SerializeField]
     private Transform PlayerTrans;
@@ -30,19 +35,16 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
         {
+            
             instance = this;
+            
             DontDestroyOnLoad(this.gameObject);
         }
 
-        //Dragon.SetActive(true);
-        //DragonSys();
+     
     }
 
 
-    private void Update()
-    {
-        
-    }
 
 
     private void DragonSys()
@@ -58,6 +60,10 @@ public class GameManager : MonoBehaviour
         Dragon.SetActive(false);
         yield return null;
     }
+
+
+
+
 
 
     public void Respone(Transform transform)

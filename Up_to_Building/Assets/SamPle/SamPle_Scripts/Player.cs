@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Transform PlayerTransform;
+
+
+
     //컴포넌트
     public SpriteRenderer sprite; // 플레이어 스프라이트 렌더러
     public Rigidbody2D rb; // 플레이어 Rigidbody2D
@@ -15,7 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject fireball; // 발사체 프리팹
 
-    //hp
+    
    
     private int hp; // 플레이어 체력
     public int HP
@@ -85,6 +89,8 @@ public class Player : MonoBehaviour
         hp = 5; // 초기 체력 설정
         jump_power = 15; // 초기 점프 힘 설정
 
+        PlayerTransform = this.transform;
+
         // 컴포넌트 초기화
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -99,6 +105,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V)) { Debug.Log(HP); HP = 1; } // 체력 회복 키 입력 감지
         Shooting(); // 발사체 발사
         Jump_Attack(); // 점프 공격
+        Debug.DrawRay(transform.position, Vector2.down, new Color(0, 1, 0));
     }
 
     private void MoveManager()
@@ -136,6 +143,7 @@ public class Player : MonoBehaviour
         else if (x < 0) sprite.flipX = true; // 왼쪽 방향으로 이동할 때 스프라이트 방향 설정
     }
 
+
     private void Shooting()
     {
         if (Input.GetKeyDown(KeyCode.K)&&!isCrouch)
@@ -147,12 +155,9 @@ public class Player : MonoBehaviour
     public void Bull_Dir(bool isdir)
     {
         
-            Rigidbody2D bull_rb = !isdir ? Instantiate(fireball.GetComponent<Rigidbody2D>(), Right_pos.transform.position, Quaternion.Euler(0, 0, 0))
-                : Instantiate(fireball.GetComponent<Rigidbody2D>(), Left_pos.transform.position, Quaternion.Euler(0, 0, 0));// 발사체 생성;
-
-            bull_rb.velocity = !isdir? new Vector2(10,bull_rb.velocity.y) : new Vector2(-10, bull_rb.velocity.y);
-
-        
+            Bullet bulletdir = !isdir ? Instantiate(fireball.GetComponent<Bullet>(), Right_pos.transform.position, Quaternion.Euler(0, 0, 0))
+                : Instantiate(fireball.GetComponent<Bullet>(), Left_pos.transform.position, Quaternion.Euler(0, 0, 0));// 발사체 생성;
+        bulletdir.dir = isdir;
     }
 
        public void Jump_Attack()
@@ -160,11 +165,13 @@ public class Player : MonoBehaviour
         if (this.rb.velocity.y < 0)
         {
             
-            RaycastHit2D hit = Physics2D.Raycast(this.transform.position, Vector2.down, 1.0f, LayerMask.GetMask("Monster")); // 아래쪽으로 광선 쏘기
+            RaycastHit2D hit = Physics2D.BoxCast(col.bounds.center, col.bounds.size, 0f,Vector2.down, 0.5f,LayerMask.GetMask("Monster")); // 아래쪽으로 광선 쏘기
             if (hit.collider != null)
             {
-                hit.collider.gameObject.GetComponent<MonsterBase>().HP = -1; // 몬스터의 체력 감소
-               // hit.collider.gameObject.GetComponent<BoxCollider2D>().isTrigger = true; // 몬스터의 충돌 체크 해제
+                rb.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
+                isjump = true;
+               
+                Destroy(hit.collider.gameObject);
             }
         }
     }

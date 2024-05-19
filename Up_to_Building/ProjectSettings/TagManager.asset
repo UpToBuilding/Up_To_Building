@@ -5,14 +5,19 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Nomal_Obj
+  - Barrier
+  - Monster
+  - Check_Point
+  - Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
+  - Monster
   - 
   - 
   - 
