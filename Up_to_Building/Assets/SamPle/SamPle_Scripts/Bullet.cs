@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private float bulletSpeed;
     
-    private SpriteRenderer spriteRenderer;
+    protected SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     public bool dir;
 
@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
         ShootBullet(dir);
     }
 
-    private void ShootBullet(bool dir)
+    public virtual void ShootBullet(bool dir)
     {
         spriteRenderer.flipX = dir;
         if (!dir)
@@ -35,19 +35,6 @@ public class Bullet : MonoBehaviour
     }
 
 
-    private void monsterBulle(bool dir)
-    {
-        spriteRenderer.flipX = dir;
-        
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Monster")) this.gameObject.SetActive(false);
-        else if (collision.gameObject.CompareTag("Nomal_Obj"))
-        {
-            this.gameObject.SetActive(false);
-            Destroy(collision.gameObject);
-        }
-    }
+
 }
