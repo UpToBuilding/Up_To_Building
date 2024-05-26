@@ -9,6 +9,19 @@ public class Player : MonoBehaviour
     public static Transform PlayerTransform;
 
 
+    [SerializeField] private bool isRight;
+    [SerializeField] private PlayerUI playerUI;
+    private GameObject fire;
+    private bool enableJump;
+    private bool isDown;
+    private int maxFire; // 한번에 발사할 수 있는 최대 공격 횟수
+    private Vector3 playerDirection; // 플레이어 이동 방향
+    private float currentSpeed;
+ 
+
+
+
+
 
     //컴포넌트
     public SpriteRenderer sprite; // 플레이어 스프라이트 렌더러
@@ -28,10 +41,13 @@ public class Player : MonoBehaviour
         set
         {
             hp -= value;
-            if(GameManager.Instance.isResponeCheck)
-            GameManager.Instance.Respone(this.transform);
+            playerUI.lostLife();
+            /*if (GameManager.Instance.isResponeCheck)
+            GameManager.Instance.Respone(this.transform);*/
+
             if (hp <= 0)
             {
+                
                 ani.SetTrigger("death"); // 사망 트리거 설정
             }
         }
@@ -90,7 +106,7 @@ public class Player : MonoBehaviour
         jump_power = 15; // 초기 점프 힘 설정
 
         PlayerTransform = this.transform;
-
+      
         // 컴포넌트 초기화
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -113,13 +129,7 @@ public class Player : MonoBehaviour
         // 걷기
         Walk();
 
-        // 점프
-        if (rb.velocity.y == 0) Isjump = false; // 점프 중이 아닐 때만 점프 가능하도록 설정
-        if (Input.GetButton("Jump") && !Isjump && !IsCrouch)
-        {
-            Isjump = true;
-            rb.AddForce(Vector2.up * jump_power, ForceMode2D.Impulse); // 점프 힘 적용
-        }
+     
 
         // 엎드리기
         if (Input.GetKeyDown(KeyCode.Z)) IsCrouch = true; // 엎드리는 키 입력 감지
@@ -129,6 +139,18 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift) && !IsCrouch) speed = 6f; // 달리기 키 입력 감지
         else if (Input.GetKeyUp(KeyCode.LeftShift)) speed = 3; // 달리기 해제 키 입력 감지
     }
+
+
+    public void stand()
+    {
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        transform.position += Vector3.up * (transform.localScale.y - transform.localScale.x) / 2;
+        isDown = false;
+    }
+
+
+
+
 
     private void Walk()
     {
@@ -162,6 +184,14 @@ public class Player : MonoBehaviour
 
        public void Jump_Attack()
     {
+        // 점프
+        if (rb.velocity.y == 0) Isjump = false; // 점프 중이 아닐 때만 점프 가능하도록 설정
+        if (Input.GetButton("Jump") && !Isjump && !IsCrouch)
+        {
+            Isjump = true;
+            rb.AddForce(Vector2.up * jump_power, ForceMode2D.Impulse); // 점프 힘 적용
+        }
+
         if (this.rb.velocity.y < 0)
         {
             
@@ -180,4 +210,7 @@ public class Player : MonoBehaviour
     {
         this.gameObject.SetActive(false); // 게임 오브젝트 비활성화
     }
+
+
+  
 }

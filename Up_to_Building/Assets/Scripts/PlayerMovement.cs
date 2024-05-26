@@ -29,6 +29,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Movement();
+    }
+    public void Movement()
+    {
         playerDirection = Vector3.right * (isRight ? 1 : -1);
         currentSpeed = speed / (isDown ? 2 : 1);
 
@@ -57,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             attack();
-        } 
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D col)

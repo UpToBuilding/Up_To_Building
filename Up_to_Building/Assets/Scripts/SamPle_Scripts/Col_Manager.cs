@@ -28,13 +28,16 @@ public class Col_Manager : MonoBehaviour
             GameManager.Instance.isResponeCheck = true;
             GameManager.Instance.Check_Pos = new Vector2(this.transform.position.x, -3.2725f);
         }
+  
+
+       
     }
 
     // 일반 충돌 감지
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // 충돌한 객체가 장애물일 경우
-        if (collision.collider.gameObject.CompareTag(BarrierTag))
+        if (collision.collider.gameObject.CompareTag(BarrierTag)|| (collision.gameObject.CompareTag("Monster")))
         {
             // 플레이어의 체력감소
             player.HP = 1;

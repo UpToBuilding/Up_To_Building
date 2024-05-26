@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerUI : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement player;
+    [SerializeField] private Player player;
     private Transform[] lifePoints;
     private bool isMoveLeft;
     public bool IsMoveLeft {  get { return isMoveLeft; } }
@@ -23,8 +23,8 @@ public class PlayerUI : MonoBehaviour
 
     public void lostLife()
     {
-        lifePoints[player.Hp].gameObject.SetActive(false);
-        if (player.Hp == 0)
+        lifePoints[player.HP].gameObject.SetActive(false);
+        if (player.HP == 0)
         {
             Debug.Log("GameOver!");
             Time.timeScale = 0;
@@ -52,7 +52,7 @@ public class PlayerUI : MonoBehaviour
         isMoveRight = false;
     }
 
-    public void jump()
+  /*  public void jump()
     {
         player.jump();
     }
@@ -60,15 +60,15 @@ public class PlayerUI : MonoBehaviour
     public void sit()
     {
         player.sit();
-    }
+    }*/
 
     public void stand()
     {
         player.stand();
     }
 
-    public void attack()
+   /* public void attack()
     {
         player.attack();
-    }
+    }*/
 }
