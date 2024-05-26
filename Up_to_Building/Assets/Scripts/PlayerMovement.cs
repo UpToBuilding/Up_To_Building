@@ -32,12 +32,12 @@ public class PlayerMovement : MonoBehaviour
         playerDirection = Vector3.right * (isRight ? 1 : -1);
         currentSpeed = speed / (isDown ? 2 : 1);
 
-        if (playerUI.IsMoveRight)
+        if (playerUI.IsMoveRight || Input.GetKey(KeyCode.RightArrow))
         {
             transform.position += Vector3.right * currentSpeed * Time.deltaTime;
             isRight = true;
         }
-        else if (playerUI.IsMoveLeft)
+        else if (playerUI.IsMoveLeft || Input.GetKey(KeyCode.LeftArrow))
         {
             transform.position += Vector3.left * currentSpeed * Time.deltaTime;
             isRight = false;

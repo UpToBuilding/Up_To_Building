@@ -29,11 +29,13 @@ public class PauseUI : MonoBehaviour
 
     public void setting()
     {
+        pauseUIs.GetChild(1).gameObject.SetActive(false); // PausePanel
         pauseUIs.GetChild(2).gameObject.SetActive(true); // SettingPanel
     }
 
     public void closeSetting()
     {
+        pauseUIs.GetChild(1).gameObject.SetActive(true); // PausePanel
         pauseUIs.GetChild(2).gameObject.SetActive(false); // SettingPanel
     }
 
