@@ -29,9 +29,9 @@ public class Bullet : MonoBehaviour
         spriteRenderer.flipX = dir;
         if (!dir)
         {         
-            rb.AddForce(Vector2.right * bulletSpeed*Time.deltaTime,ForceMode2D.Impulse);
+            rb.AddForce(Vector2.right * bulletSpeed,ForceMode2D.Impulse);
         }
-        else  rb.AddForce( Vector2.left * bulletSpeed*Time.deltaTime,ForceMode2D.Impulse);
+        else  rb.AddForce( Vector2.left * bulletSpeed,ForceMode2D.Impulse);
     }
 
 
