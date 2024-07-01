@@ -35,11 +35,6 @@ public class Player : MonoBehaviour
         {
             hp += value;
             playerUI.lostLife();
-            if (IsSave)
-            {
-                this.gameObject.transform.position = GameManager.Instance.SavePoint.transform.position;
-            }
-            else { this.gameObject.transform.position = GameManager.Instance.initPoint.transform.position; }
             if (hp <= 0)
             {
                 
