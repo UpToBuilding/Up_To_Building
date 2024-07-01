@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
 
     //mainUI 연결 컴포넌트
     [SerializeField] private PlayerUI playerUI;
-   
-
+    
+    
 
 
     //컴포넌트
@@ -35,12 +35,13 @@ public class Player : MonoBehaviour
         {
             hp += value;
             playerUI.lostLife();
-            /*if (GameManager.Instance.isResponeCheck)
-            GameManager.Instance.Respone(this.transform);*/
-
+            if (IsSave)
+                this.gameObject.transform.position = GameManager.Instance.SavePoint.transform.position;
+            else { this.gameObject.transform.position = GameManager.Instance.initPoint.transform.position; }
             if (hp <= 0)
             {
                 
+                IsSave = false;
                 ani.SetTrigger("death"); // 사망 트리거 설정
             }
         }
@@ -64,28 +65,17 @@ public class Player : MonoBehaviour
         }
     }
 
-    private bool isCrouch; // 엎드림 상태
-    public bool IsCrouch
-    {
-        get => isCrouch;
-        set
-        {
-            isCrouch = value;
-            if (isCrouch)
-            {
-                speed = 1f; // 엎드릴 때 이동 속도 감소
-                ani.SetBool("Crouch", true); // 엎드리는 애니메이션 설정
-            }
-            else
-            {
-                speed = 3f; // 일어설 때 이동 속도 증가
-                ani.SetBool("Crouch", false); // 엎드리는 애니메이션 해제
-            }
-        }
-    }
+  
 
     [SerializeField]
     private Vector2 dir; // 이동 방향
+    public bool issave;
+    public bool IsSave
+    {
+        get;
+        set;
+    }
+
 
     private float x; // 수평 입력 값
 
@@ -127,12 +117,12 @@ public class Player : MonoBehaviour
      
 
         // 엎드리기
-        if (Input.GetKeyDown(KeyCode.Z)) IsCrouch = true; // 엎드리는 키 입력 감지
-        else if (Input.GetKeyUp(KeyCode.Z)) IsCrouch = false; // 엎드리기 해제 키 입력 감지
+        /*if (Input.GetKeyDown(KeyCode.Z)) IsCrouch = true; // 엎드리는 키 입력 감지
+        else if (Input.GetKeyUp(KeyCode.Z)) IsCrouch = false; // 엎드리기 해제 키 입력 감지*/
 
         // 달리기
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !IsCrouch) speed = 6f; // 달리기 키 입력 감지
-        else if (Input.GetKeyUp(KeyCode.LeftShift)) speed = 3; // 달리기 해제 키 입력 감지
+        //if (Input.GetKeyDown(KeyCode.LeftShift)) speed = 6f; // 달리기 키 입력 감지
+        //else if (Input.GetKeyUp(KeyCode.LeftShift)) speed = 3; // 달리기 해제 키 입력 감지
     }
 
 
@@ -151,15 +141,16 @@ public class Player : MonoBehaviour
         if (x != 0) ani.SetBool("run", true); // 이동 중일 때 애니메이션 설정
         else ani.SetBool("run", false); // 이동 중이 아닐 때 애니메이션 해제
 
-        if (x > 0) sprite.flipX = false; // 오른쪽 방향으로 이동할 때 스프라이트 방향 설정
-        else if (x < 0) sprite.flipX = true; // 왼쪽 방향으로 이동할 때 스프라이트 방향 설정
+        if (x > 0) sprite.flipX = true; // 오른쪽 방향으로 이동할 때 스프라이트 방향 설정
+        else if (x < 0) sprite.flipX = false; // 왼쪽 방향으로 이동할 때 스프라이트 방향 설정
     }
 
 
     private void Shooting()
     {
-        if (Input.GetKeyDown(KeyCode.K)&&!isCrouch)
+        if (Input.GetKeyDown(KeyCode.K))
         {
+            ani.SetTrigger("attack");
             Bull_Dir(sprite.flipX);
         }
     }
@@ -167,7 +158,7 @@ public class Player : MonoBehaviour
     public void Bull_Dir(bool isdir)
     {
         
-            Bullet bulletdir = !isdir ? Instantiate(fireball.GetComponent<Bullet>(), Right_pos.transform.position, Quaternion.Euler(0, 0, 0))
+            Bullet bulletdir = isdir ? Instantiate(fireball.GetComponent<Bullet>(), Right_pos.transform.position, Quaternion.Euler(0, 0, 0))
                 : Instantiate(fireball.GetComponent<Bullet>(), Left_pos.transform.position, Quaternion.Euler(0, 0, 0));// 발사체 생성;
         bulletdir.dir = isdir;
     }
@@ -176,7 +167,7 @@ public class Player : MonoBehaviour
     {
         // 점프
         if (rb.velocity.y == 0) Isjump = false; // 점프 중이 아닐 때만 점프 가능하도록 설정
-        if (Input.GetButton("Jump") && !Isjump && !IsCrouch)
+        if (Input.GetButton("Jump") && !Isjump)
         {
             Isjump = true;
             rb.AddForce(Vector2.up * jump_power, ForceMode2D.Impulse); // 점프 힘 적용
@@ -188,7 +179,7 @@ public class Player : MonoBehaviour
             RaycastHit2D hit = Physics2D.BoxCast(col.bounds.center, col.bounds.size, 0f,Vector2.down, 0.5f,LayerMask.GetMask("Monster")); // 아래쪽으로 광선 쏘기
             if (hit.collider != null)
             {
-                rb.AddForce(Vector2.up * 13f, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * 11f, ForceMode2D.Impulse);
                 isjump = true;
                
                 Destroy(hit.collider.gameObject);

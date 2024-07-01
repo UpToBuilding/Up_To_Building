@@ -10,12 +10,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject Dragon;
+    private float floorOffset;
 
     public GameObject spawner;
     public GameObject NextStage;
     public GameObject SavePoint;
-
+    public GameObject initPoint;
     [SerializeField]
     private int maxfloor;
 
@@ -32,14 +32,14 @@ public class GameManager : MonoBehaviour
             mapcount = value;
             if(mapcount == maxfloor)
             {
-                NextStage.transform.localPosition += new Vector3(0, -7.6f, 0);
+                NextStage.transform.localPosition = new Vector3(0, initPoint.transform.position.y, 0);
                 mapcount = 0;
                 backgrond[stageLevel++].gameObject.SetActive(false);
                 //backgrond.RemoveAt(0);
                 backgrond[stageLevel++].gameObject.SetActive(true);
                
             }
-            else { NextStage.transform.localPosition += new Vector3(0, 3.8f, 0); }
+            else { NextStage.transform.localPosition += new Vector3(0, 3.7f, 0); }
         }
     }
 
@@ -62,38 +62,18 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
         {
-            
             instance = this;
-            
             DontDestroyOnLoad(this.gameObject);
-        }
-
-     
+        }     
     }
 
-
-
-
-    private void DragonSys()
-    {
-        StartCoroutine(DrangonSpowner());
-    }
-
-    IEnumerator DrangonSpowner()
-    {
-        Dragon.transform.position = new Vector3(-12,PlayerTrans.position.y);
-        Dragon.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
-        Dragon.SetActive(false);
-        yield return null;
-    }
-
-    public void NextRocation(GameObject player)
+    public void NextLocation(GameObject player)
     {
         
         player.transform.position = spawner.transform.position;
-        spawner.transform.localPosition += MapCount <= 3 ? new Vector3(0, 3.8f, 0) : new Vector3(0, -7.6f, 0);
-
+        //spawner.transform.localPosition += MapCount <= 3 ? new Vector3(0, 3.7f, 0) : new Vector3(0, -14.8f, 0);
+        spawner.transform.position = mapcount < maxfloor? new Vector3(spawner.transform.position.x, initPoint.transform.position.y + (floorOffset * mapcount+1), 0)
+            :new Vector3(0,initPoint.transform.position.y,0);
 
     }
 
