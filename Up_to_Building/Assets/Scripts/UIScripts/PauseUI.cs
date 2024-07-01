@@ -24,17 +24,7 @@ public class PauseUI : MonoBehaviour
 
     public void home()
     {
-        pauseUIs.GetChild(3).gameObject.SetActive(true);
-    }
-
-    public void cancelHome()
-    {
-        pauseUIs.GetChild(3).gameObject.SetActive(false);
-    }
-
-    public void goHome()
-    {
-        SceneManager.LoadScene("Start_Scene");
+        SceneManager.LoadScene("HomeScene"); // 홈으로 갈 씬 구현해야 함
     }
 
     public void setting()
