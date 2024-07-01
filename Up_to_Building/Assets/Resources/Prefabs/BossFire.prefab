@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Firesprites:
-  - {fileID: 21300000, guid: 0d76591cfee74324c95ad405243672f9, type: 3}
+  - {fileID: 21300000, guid: d57bd187f05cfa44aae51c8005110bb3, type: 3}
   - {fileID: 21300000, guid: 2ef9fb5bdefd00f41ac5319eaafffc8d, type: 3}

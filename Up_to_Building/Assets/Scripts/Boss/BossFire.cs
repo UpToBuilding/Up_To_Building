@@ -23,12 +23,13 @@ public class BossFire : MonoBehaviour
     Sprite[] Firesprites = new Sprite[2];
 
     // Fire √ ±‚»≠
-    public void Initialize(BossAttackType _bossAttackType, float _attackDuration, int _sectionNumber, int _sectionSize = 1)
+    public void Initialize(BossAttackType _bossAttackType, float _attackDuration, float _attackSpeed, int _sectionNumber, int _sectionSize = 1)
     {
         bossAttackType = _bossAttackType;
         sectionNumber = _sectionNumber;
         sectionSize = _sectionSize;
         attackDuration = _attackDuration;
+        attackSpeed = _attackSpeed;
 
         CreateFire();
     }
@@ -53,11 +54,10 @@ public class BossFire : MonoBehaviour
                 collider.size = new Vector2(1.35f, 3.0f);
                 spriteRenderer.color = Color.magenta;
                 spriteRenderer.sprite = Firesprites[(int)BossAttackType.PersistantAttack];
-                attackSpeed = -3.0f;
                 break;
         }
 
-        gameObject.transform.position = new Vector3(-8.25f + 2.69f * (sectionNumber + sectionSize -1), -0.9f, 0f);
+        gameObject.transform.position = new Vector3(-8.25f + 2.69f * (sectionNumber + sectionSize -1), -2.4f, 0f);
     }
 
     void Update()
