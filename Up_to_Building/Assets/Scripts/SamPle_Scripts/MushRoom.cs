@@ -16,9 +16,9 @@ public class MushRoom : MonsterBase
         else rb.velocity = Vector2.zero;
     }
 
-    public override void Base_Movement()
+    public override void Base_Movement(float f)
     {
-        base.Base_Movement();
+        base.Base_Movement(1.0f);
         // 플레이어를 찾지 못했을 때 패트롤 이동
 
         if(math.abs(Player.PlayerTransform.position.x - this.transform.position.x) <= distance)

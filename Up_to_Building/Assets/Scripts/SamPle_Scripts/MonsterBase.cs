@@ -50,11 +50,11 @@ public abstract class MonsterBase : MonoBehaviour
 
     void Update()
     {
-        Base_Movement(); // 기본 이동 동작
+        Base_Movement(1.0f); // 기본 이동 동작
     }
 
     // 몬스터의 기본 이동 로직
-    public virtual void Base_Movement()
+    public virtual void Base_Movement(float findtime)
     {
         int x = rb.velocity.x >= 0 ? 1 : -1; // 이동 방향 결정
 
@@ -70,11 +70,11 @@ public abstract class MonsterBase : MonoBehaviour
         {
 
             t += Time.deltaTime; // 시간 증가
-            if (t <= 1.5f)
+            if (t <= findtime)
             {
                 rb.velocity = new Vector2(1, rb.velocity.y) * baseSpeed; // 오른쪽으로 이동
             }
-            else if (t <= 3.0f) rb.velocity = new Vector2(-1, rb.velocity.y) * baseSpeed; // 왼쪽으로 이동
+            else if (t <= findtime*2) rb.velocity = new Vector2(-1, rb.velocity.y) * baseSpeed; // 왼쪽으로 이동
             else t = 0; // 시간 초기화
         }
 
