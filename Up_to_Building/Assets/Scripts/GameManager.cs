@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     public GameObject SavePoint;
 
     [SerializeField]
+    private int maxfloor;
+
+    [SerializeField]
     private List<GameObject> backgrond;
     [SerializeField]
     private int mapcount = 0;
@@ -27,7 +30,7 @@ public class GameManager : MonoBehaviour
         set
         {
             mapcount = value;
-            if(mapcount == 3)
+            if(mapcount == maxfloor)
             {
                 NextStage.transform.localPosition += new Vector3(0, -7.6f, 0);
                 mapcount = 0;
@@ -89,7 +92,7 @@ public class GameManager : MonoBehaviour
     {
         
         player.transform.position = spawner.transform.position;
-        spawner.transform.localPosition += MapCount <= 1 ? new Vector3(0, 3.8f, 0) : new Vector3(0, -7.6f, 0);
+        spawner.transform.localPosition += MapCount <= 3 ? new Vector3(0, 3.8f, 0) : new Vector3(0, -7.6f, 0);
 
 
     }
