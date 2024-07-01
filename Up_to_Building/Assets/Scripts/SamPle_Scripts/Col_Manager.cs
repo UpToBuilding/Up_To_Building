@@ -24,8 +24,7 @@ public class Col_Manager : MonoBehaviour
         // 충돌한 객체가 체크포인트일 경우
         if (collision.gameObject.CompareTag("Stage"))
         {
-            GameManager.Instance.MapCount++;
-            GameManager.Instance.NextRocation(this.gameObject);
+   
         }
         else if (collision.gameObject.CompareTag("Check_Point"))
         {

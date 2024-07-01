@@ -24,19 +24,23 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         ShootBullet(dir);
+        Invoke("OndestroyThis", 3f);
     }
 
     public virtual void ShootBullet(bool dir)
     {
         spriteRenderer.flipX = dir;
-        if (!dir)
+        if (dir)
         {         
             rb.AddForce(Vector2.right * bulletSpeed,ForceMode2D.Impulse);
         }
         else  rb.AddForce( Vector2.left * bulletSpeed,ForceMode2D.Impulse);
     }
 
-
+    public void OndestroyThis()
+    {
+        Destroy(this.gameObject);
+    }
     
 
 

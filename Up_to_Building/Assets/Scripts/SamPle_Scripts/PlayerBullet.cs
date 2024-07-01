@@ -5,18 +5,13 @@ using UnityEngine;
 
 public class PlayerBullet : Bullet
 {
-
-
-
-    /*private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Monster")) Destroy(this.gameObject);
-        else if (collision.gameObject.CompareTag("Nomal_Obj"))
+        if (collision.gameObject.CompareTag("Monster"))
         {
-            this.gameObject.SetActive(false);
-            Destroy(collision.gameObject);
+            Destroy(this.gameObject);
+            MonsterBase m = collision.gameObject.GetComponent<MonsterBase>();
+            m.HP = -1;
         }
-    }*/
-
- 
+    }
 }

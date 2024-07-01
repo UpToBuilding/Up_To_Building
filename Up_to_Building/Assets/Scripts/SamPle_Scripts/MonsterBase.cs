@@ -25,6 +25,7 @@ public abstract class MonsterBase : MonoBehaviour
         set
         {
             hp += value; // 체력을 감소시킴
+            if (hp > 0) animator.SetTrigger("hit"); 
             if (hp <= 0)
             {
                 animator.SetTrigger("death"); // 체력이 0 이하가 되면 죽음 애니메이션 트리거
@@ -37,12 +38,16 @@ public abstract class MonsterBase : MonoBehaviour
     protected float t; // 시간 변수
    
     
-
+    private void InitInfo()
+    {
+        hp = 2;
+        baseSpeed = 3;
+    }
 
     private void Awake()
     {
         t = 0; // 초기 시간 설정
-        
+        InitInfo();
         sp = GetComponent<SpriteRenderer>(); // 스프라이트 렌더러 컴포넌트 가져오기
         rb = GetComponent<Rigidbody2D>(); // 리지드바디 컴포넌트 가져오기
         animator = GetComponent<Animator>(); // 애니메이터 컴포넌트 가져오기
@@ -85,11 +90,6 @@ public abstract class MonsterBase : MonoBehaviour
 
     
    
-
-
-
-
-
     // 죽음 트리거
     private void OntriggerDeath()
     {
