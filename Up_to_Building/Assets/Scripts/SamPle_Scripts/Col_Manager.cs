@@ -22,11 +22,14 @@ public class Col_Manager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // 충돌한 객체가 체크포인트일 경우
-        if (collision.gameObject.CompareTag(CheckPoint))
+        if (collision.gameObject.CompareTag("Stage"))
         {
-            // 게임 매니저의 체크포인트 설정 변수를 변경하고 위치를 저장
-            GameManager.Instance.isResponeCheck = true;
-            GameManager.Instance.Check_Pos = new Vector2(this.transform.position.x, -3.2725f);
+            GameManager.Instance.MapCount++;
+            GameManager.Instance.NextRocation(this.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Check_Point"))
+        {
+
         }
   
 
@@ -39,8 +42,7 @@ public class Col_Manager : MonoBehaviour
         // 충돌한 객체가 장애물일 경우
         if (collision.collider.gameObject.CompareTag(BarrierTag)|| (collision.gameObject.CompareTag("Monster")))
         {
-            // 플레이어의 체력감소
-            player.HP = 1;
+            player.HP = -1;
         }
     }
 }

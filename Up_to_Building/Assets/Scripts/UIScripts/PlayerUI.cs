@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerUI : MonoBehaviour
 {
     [SerializeField] private Player player;
+    [SerializeField]
     private Transform[] lifePoints;
     private bool isMoveLeft;
     public bool IsMoveLeft {  get { return isMoveLeft; } }
@@ -62,10 +63,10 @@ public class PlayerUI : MonoBehaviour
         player.sit();
     }*/
 
-    public void stand()
+    /*public void stand()
     {
         player.stand();
-    }
+    }*/
 
    /* public void attack()
     {

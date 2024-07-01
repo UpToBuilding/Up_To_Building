@@ -6,20 +6,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    //플레이어 위치를 저장하기 위한 컴포넌트
     public static Transform PlayerTransform;
 
 
-    [SerializeField] private bool isRight;
+    //mainUI 연결 컴포넌트
     [SerializeField] private PlayerUI playerUI;
-    private GameObject fire;
-    private bool enableJump;
-    private bool isDown;
-    private int maxFire; // 한번에 발사할 수 있는 최대 공격 횟수
-    private Vector3 playerDirection; // 플레이어 이동 방향
-    private float currentSpeed;
- 
-
-
+   
 
 
 
@@ -40,7 +33,7 @@ public class Player : MonoBehaviour
         get => hp;
         set
         {
-            hp -= value;
+            hp += value;
             playerUI.lostLife();
             /*if (GameManager.Instance.isResponeCheck)
             GameManager.Instance.Respone(this.transform);*/
@@ -102,11 +95,13 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        hp = 5; // 초기 체력 설정
-        jump_power = 15; // 초기 점프 힘 설정
+        hp = 4; // 초기 체력 설정
+        jump_power = 12; // 초기 점프 힘 설정
 
         PlayerTransform = this.transform;
       
+
+
         // 컴포넌트 초기화
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -141,12 +136,7 @@ public class Player : MonoBehaviour
     }
 
 
-    public void stand()
-    {
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-        transform.position += Vector3.up * (transform.localScale.y - transform.localScale.x) / 2;
-        isDown = false;
-    }
+
 
 
 
@@ -198,7 +188,7 @@ public class Player : MonoBehaviour
             RaycastHit2D hit = Physics2D.BoxCast(col.bounds.center, col.bounds.size, 0f,Vector2.down, 0.5f,LayerMask.GetMask("Monster")); // 아래쪽으로 광선 쏘기
             if (hit.collider != null)
             {
-                rb.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * 13f, ForceMode2D.Impulse);
                 isjump = true;
                
                 Destroy(hit.collider.gameObject);
@@ -213,4 +203,6 @@ public class Player : MonoBehaviour
 
 
   
+    
+
 }

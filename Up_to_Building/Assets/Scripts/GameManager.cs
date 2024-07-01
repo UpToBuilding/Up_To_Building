@@ -12,14 +12,38 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject Dragon;
 
+    public GameObject spawner;
+    public GameObject NextStage;
+    public GameObject SavePoint;
 
-   
-
+    [SerializeField]
+    private List<GameObject> backgrond;
+    [SerializeField]
+    private int mapcount = 0;
+    [SerializeField]
+    private int stageLevel = 0;
+    public int MapCount {
+        get { return mapcount; }
+        set
+        {
+            mapcount = value;
+            if(mapcount == 3)
+            {
+                NextStage.transform.localPosition += new Vector3(0, -7.6f, 0);
+                mapcount = 0;
+                backgrond[stageLevel++].gameObject.SetActive(false);
+                //backgrond.RemoveAt(0);
+                backgrond[stageLevel++].gameObject.SetActive(true);
+               
+            }
+            else { NextStage.transform.localPosition += new Vector3(0, 3.8f, 0); }
+        }
+    }
 
     [SerializeField]
     private Transform PlayerTrans;
 
-    public Vector2 Check_Pos;
+    
 
     public bool isResponeCheck;
 
@@ -61,14 +85,17 @@ public class GameManager : MonoBehaviour
         yield return null;
     }
 
-
-
-
-
-
-    public void Respone(Transform transform)
+    public void NextRocation(GameObject player)
     {
-        transform.localPosition = Check_Pos; 
+        
+        player.transform.position = spawner.transform.position;
+        spawner.transform.localPosition += MapCount <= 1 ? new Vector3(0, 3.8f, 0) : new Vector3(0, -7.6f, 0);
+
+
     }
 
+
+
+
+  
 }

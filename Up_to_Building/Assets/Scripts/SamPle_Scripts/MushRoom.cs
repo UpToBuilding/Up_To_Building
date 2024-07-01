@@ -36,10 +36,7 @@ public class MushRoom : MonsterBase
         if (collision.gameObject.CompareTag("Bullet"))
         {
             animator.Play("Hit");
-            //Rigidbody2D bulletdir = collision.gameObject.GetComponent<Rigidbody2D>();   
-
-            //rb.velocity = new Vector2(bulletdir.velocity.x>0?1:-1,0); // 속도 초기화
-            HP = -1; // 체력 감소
+            HP = -1;
         }
 
         if (collision.gameObject.CompareTag("Player"))
