@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+public enum BossAttackType
+{
+    SingleAttack,
+    PersistantAttack,
+}
 
 public class BossFire : MonoBehaviour
 {
-    public enum BossAttackType
-    {
-        SingleAttack,
-        PersistantAttack,
-    }
-
     BossAttackType  bossAttackType;         // 공격 타입
     int             sectionNumber;          // 5개로 나누어진 구역 번호
     float           attackDuration;         // 패턴 지속시간
@@ -25,12 +23,13 @@ public class BossFire : MonoBehaviour
     Sprite[] Firesprites = new Sprite[2];
 
     // Fire 초기화
-    public void Initialize(BossAttackType _bossAttackType, float _attackDuration, int _sectionNumber, int _sectionSize = 1)
+    public void Initialize(BossAttackType _bossAttackType, float _attackDuration, float _attackSpeed, int _sectionNumber, int _sectionSize = 1)
     {
         bossAttackType = _bossAttackType;
         sectionNumber = _sectionNumber;
         sectionSize = _sectionSize;
         attackDuration = _attackDuration;
+        attackSpeed = _attackSpeed;
 
         CreateFire();
     }
@@ -55,11 +54,10 @@ public class BossFire : MonoBehaviour
                 collider.size = new Vector2(1.35f, 3.0f);
                 spriteRenderer.color = Color.magenta;
                 spriteRenderer.sprite = Firesprites[(int)BossAttackType.PersistantAttack];
-                attackSpeed = -3.0f;
                 break;
         }
 
-        gameObject.transform.position = new Vector3(-8.25f + 2.69f * (sectionNumber + sectionSize -1), -0.9f, 0f);
+        gameObject.transform.position = new Vector3(-8.25f + 2.69f * (sectionNumber + sectionSize -1), -2.4f, 0f);
     }
 
     void Update()
