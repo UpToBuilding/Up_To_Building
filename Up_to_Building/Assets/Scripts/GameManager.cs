@@ -9,15 +9,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    
 
-    //public GameObject spawner;
-    //public GameObject NextStage;
+    public int maxFloor;
+    public int currentFloor;
+    public GameObject Background;
     public GameObject SavePoint;
+    public GameObject TileObj;
+    public GameObject initinfo;
 
-    
-
-
+    private Vector3 backinfo;
 
     
 
@@ -40,14 +40,26 @@ public class GameManager : MonoBehaviour
             
             DontDestroyOnLoad(this.gameObject);
         }
-
+        backinfo = Background.transform.position;
+        for (int i = 0; i < 21; i++)
+        {
+            GameObject gm =  Instantiate(TileObj,TileObj.transform.position,Quaternion.identity);
+            gm.gameObject.SetActive(false);
+            gm.transform.position +=  new Vector3(0, 4.1f*i, 0);
+            gm.gameObject.SetActive(true) ;
+        }
      
+    }
+
+    public void UpFloor()
+    {
+      //  Background.transform.position = backinfo;
+        Player.PlayerTransform.position = initinfo.transform.position+new Vector3(0,4.1f*currentFloor,0);
     }
 
 
 
-
-  
+    
 
    
 
