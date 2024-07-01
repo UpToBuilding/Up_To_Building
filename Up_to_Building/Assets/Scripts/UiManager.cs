@@ -7,6 +7,8 @@ public class UiManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject SettingPanel;
+    [SerializeField]
+    private GameObject CreditPanel;
 
     public void OnMainSence()
     {
@@ -23,4 +25,13 @@ public class UiManager : MonoBehaviour
         SettingPanel.SetActive(false);
     }
 
+    public void OnCreditPanel()
+    {
+        CreditPanel.SetActive(true);
+    }
+
+    public void OffCreditPanel()
+    {
+        CreditPanel.SetActive(false);
+    }
 }

@@ -22,12 +22,23 @@ public class PauseUI : MonoBehaviour
         pauseUIs.GetChild(1).gameObject.SetActive(true); // PausePanel
     }
 
-    public void home()
+    public void openHomeMenu()
     {
-        SceneManager.LoadScene("HomeScene"); // 홈으로 갈 씬 구현해야 함
+        pauseUIs.GetChild(3).gameObject.SetActive(true);
     }
 
-    public void setting()
+    public void closeHomeMenu()
+    {
+        pauseUIs.GetChild(3).gameObject.SetActive(false);
+    }
+
+    public void goHome()
+    {
+
+        SceneManager.LoadScene("Start_Scene");
+    }
+
+        public void setting()
     {
         pauseUIs.GetChild(1).gameObject.SetActive(false); // PausePanel
         pauseUIs.GetChild(2).gameObject.SetActive(true); // SettingPanel

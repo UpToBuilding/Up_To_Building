@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 10301fa11b8bc664f880a46883dba6a1
+guid: 4a7fca51b9c286641b9b3a6bcc2fbe84
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,22 +136,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: setting_plate_0
+      name: "\uC790\uC0B0 48@3x_0"
       rect:
         serializedVersion: 2
         x: 0
-        y: 55
-        width: 3523
-        height: 1971
+        y: 0
+        width: 207
+        height: 448
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33b74d6975b8c5f408563989cd778d2e
-      internalID: 1651376412
+      spriteID: e5f81157de93aa54f960b7b2ade80bdf
+      internalID: 1549811114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uC790\uC0B0 48@3x_1"
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 0
+        width: 1566
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 469cf5a1e2d59b34b995c9d023e6f59a
+      internalID: -500092953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uC790\uC0B0 48@3x_2"
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 207
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afb1102e3396f534dabd555318c7f56d
+      internalID: -477632351
       vertices: []
       indices: 
       edges: []
@@ -167,7 +209,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      setting_plate_0: 1651376412
+      "\uC790\uC0B0 48@3x_0": 1549811114
+      "\uC790\uC0B0 48@3x_1": -500092953
+      "\uC790\uC0B0 48@3x_2": -477632351
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

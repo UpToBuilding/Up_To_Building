@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 10301fa11b8bc664f880a46883dba6a1
+guid: 469d6901e5443d14bb5d637b65f87141
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -136,22 +136,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: setting_plate_0
+      name: Asset 16@3x_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 55
-        width: 3523
-        height: 1971
+        x: 45
+        y: 44
+        width: 346
+        height: 346
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33b74d6975b8c5f408563989cd778d2e
-      internalID: 1651376412
+      spriteID: 2407253045fd0e643b010f66695faea0
+      internalID: 1479535703
       vertices: []
       indices: 
       edges: []
@@ -167,7 +167,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      setting_plate_0: 1651376412
+      Asset 16@3x_0: 1479535703
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
