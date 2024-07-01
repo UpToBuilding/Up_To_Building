@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+public enum BossAttackType
+{
+    SingleAttack,
+    PersistantAttack,
+}
 
 public class BossFire : MonoBehaviour
 {
-    public enum BossAttackType
-    {
-        SingleAttack,
-        PersistantAttack,
-    }
-
     BossAttackType  bossAttackType;         // 공격 타입
     int             sectionNumber;          // 5개로 나누어진 구역 번호
     float           attackDuration;         // 패턴 지속시간
