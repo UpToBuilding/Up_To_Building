@@ -25,11 +25,11 @@ public class Col_Manager : MonoBehaviour
         if (collision.gameObject.CompareTag("Stage"))
         {
             GameManager.Instance.MapCount++;
-            GameManager.Instance.NextLocation(this.gameObject);
+            GameManager.Instance.NextRocation(this.gameObject);
         }
         else if (collision.gameObject.CompareTag("Check_Point"))
         {
-            player.issave = true;
+
         }
   
 

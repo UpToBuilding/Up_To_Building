@@ -7,17 +7,16 @@ public class PlayerBullet : Bullet
 {
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Nomal_Obj")||collision.gameObject.CompareTag("Monster"))
+        if (collision.gameObject.CompareTag("Monster")) Destroy(this.gameObject);
+        else if (collision.gameObject.CompareTag("Nomal_Obj"))
         {
-            Destroy(this.gameObject);
-            collision.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
+            Destroy(collision.gameObject);
         }
-    }
+    }*/
 
-
-
-
-
+ 
 }

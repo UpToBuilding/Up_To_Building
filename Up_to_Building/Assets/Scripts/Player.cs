@@ -6,28 +6,28 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //ÇÃ·¹ÀÌ¾î À§Ä¡¸¦ ÀúÀåÇÏ±â À§ÇÑ ÄÄÆ÷³ÍÆ®
+    //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     public static Transform PlayerTransform;
 
 
-    //mainUI ¿¬°á ÄÄÆ÷³ÍÆ®
+    //mainUI ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     [SerializeField] private PlayerUI playerUI;
-    
-    
+   
 
 
-    //ÄÄÆ÷³ÍÆ®
-    public SpriteRenderer sprite; // ÇÃ·¹ÀÌ¾î ½ºÇÁ¶óÀÌÆ® ·»´õ·¯
-    public Rigidbody2D rb; // ÇÃ·¹ÀÌ¾î Rigidbody2D
-    public BoxCollider2D col; // ÇÃ·¹ÀÌ¾î ¹Ú½º ÄÝ¶óÀÌ´õ
-    public Animator ani; // ÇÃ·¹ÀÌ¾î ¾Ö´Ï¸ÞÀÌÅÍ
+
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+    public SpriteRenderer sprite; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public Rigidbody2D rb; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ Rigidbody2D
+    public BoxCollider2D col; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ú½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½
+    public Animator ani; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½
 
     [SerializeField]
-    private GameObject fireball; // ¹ß»çÃ¼ ÇÁ¸®ÆÕ
+    private GameObject fireball; // ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     
    
-    private int hp; // ÇÃ·¹ÀÌ¾î Ã¼·Â
+    private int hp; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ Ã¼ï¿½ï¿½
     public int HP
     {
         get => hp;
@@ -43,43 +43,53 @@ public class Player : MonoBehaviour
             if (hp <= 0)
             {
                 
-                IsSave = false;
-                ani.SetTrigger("death"); // »ç¸Á Æ®¸®°Å ¼³Á¤
+                ani.SetTrigger("death"); // ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             }
         }
     }
 
-    //Ä³¸¯ÅÍ ÀÌµ¿ º¯¼ö
+    //Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
     [SerializeField]
-    private float speed; // ÀÌµ¿ ¼Óµµ
+    private float speed; // ï¿½Ìµï¿½ ï¿½Óµï¿½
     [SerializeField]
-    private float jump_power; // Á¡ÇÁ Èû
+    private float jump_power; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 
-    private bool isjump; // Á¡ÇÁ »óÅÂ
+    private bool isjump; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public bool Isjump
     {
         get => isjump;
         set
         {
             isjump = value;
-            if (isjump) ani.SetBool("jump", true); // Á¡ÇÁ ¾Ö´Ï¸ÞÀÌ¼Ç ¼³Á¤
-            else ani.SetBool("jump", false); // Á¡ÇÁ ¾Ö´Ï¸ÞÀÌ¼Ç ÇØÁ¦
+            if (isjump) ani.SetBool("jump", true); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+            else ani.SetBool("jump", false); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
     }
 
-  
-
-    [SerializeField]
-    private Vector2 dir; // ÀÌµ¿ ¹æÇâ
-    public bool issave;
-    public bool IsSave
+    private bool isCrouch; // ï¿½ï¿½ï¿½å¸² ï¿½ï¿½ï¿½ï¿½
+    public bool IsCrouch
     {
-        get;
-        set;
+        get => isCrouch;
+        set
+        {
+            isCrouch = value;
+            if (isCrouch)
+            {
+                speed = 1f; // ï¿½ï¿½ï¿½å¸± ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
+                ani.SetBool("Crouch", true); // ï¿½ï¿½ï¿½å¸®ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+            }
+            else
+            {
+                speed = 3f; // ï¿½Ï¾î¼³ ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
+                ani.SetBool("Crouch", false); // ï¿½ï¿½ï¿½å¸®ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+            }
+        }
     }
 
+    [SerializeField]
+    private Vector2 dir; // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    private float x; // ¼öÆò ÀÔ·Â °ª
+    private float x; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½
 
     public GameObject Right_pos;
  
@@ -87,14 +97,14 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        hp = 4; // ÃÊ±â Ã¼·Â ¼³Á¤
-        jump_power = 12; // ÃÊ±â Á¡ÇÁ Èû ¼³Á¤
+        hp = 4; // ï¿½Ê±ï¿½ Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        jump_power = 12; // ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         PlayerTransform = this.transform;
       
 
 
-        // ÄÄÆ÷³ÍÆ® ÃÊ±âÈ­
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ê±ï¿½È­
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
@@ -104,27 +114,27 @@ public class Player : MonoBehaviour
     void Update()
     {
         Debug.DrawRay(this.gameObject.transform.position, Vector2.down, Color.red, 1.0f);
-        MoveManager(); // ÀÌµ¿ °ü¸®
-        if (Input.GetKeyDown(KeyCode.V)) { Debug.Log(HP); HP = 1; } // Ã¼·Â È¸º¹ Å° ÀÔ·Â °¨Áö
-        Shooting(); // ¹ß»çÃ¼ ¹ß»ç
-        Jump_Attack(); // Á¡ÇÁ °ø°Ý
+        MoveManager(); // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
+        if (Input.GetKeyDown(KeyCode.V)) { Debug.Log(HP); HP = 1; } // Ã¼ï¿½ï¿½ È¸ï¿½ï¿½ Å° ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½
+        Shooting(); // ï¿½ß»ï¿½Ã¼ ï¿½ß»ï¿½
+        Jump_Attack(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Debug.DrawRay(transform.position, Vector2.down, new Color(0, 1, 0));
     }
 
     private void MoveManager()
     {
-        // °È±â
+        // ï¿½È±ï¿½
         Walk();
 
      
 
-        // ¾þµå¸®±â
-        /*if (Input.GetKeyDown(KeyCode.Z)) IsCrouch = true; // ¾þµå¸®´Â Å° ÀÔ·Â °¨Áö
-        else if (Input.GetKeyUp(KeyCode.Z)) IsCrouch = false; // ¾þµå¸®±â ÇØÁ¦ Å° ÀÔ·Â °¨Áö*/
+        // ï¿½ï¿½ï¿½å¸®ï¿½ï¿½
+        if (Input.GetKeyDown(KeyCode.Z)) IsCrouch = true; // ï¿½ï¿½ï¿½å¸®ï¿½ï¿½ Å° ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½
+        else if (Input.GetKeyUp(KeyCode.Z)) IsCrouch = false; // ï¿½ï¿½ï¿½å¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å° ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        // ´Þ¸®±â
-        //if (Input.GetKeyDown(KeyCode.LeftShift)) speed = 6f; // ´Þ¸®±â Å° ÀÔ·Â °¨Áö
-        //else if (Input.GetKeyUp(KeyCode.LeftShift)) speed = 3; // ´Þ¸®±â ÇØÁ¦ Å° ÀÔ·Â °¨Áö
+        // ï¿½Þ¸ï¿½ï¿½ï¿½
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !IsCrouch) speed = 6f; // ï¿½Þ¸ï¿½ï¿½ï¿½ Å° ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½
+        else if (Input.GetKeyUp(KeyCode.LeftShift)) speed = 3; // ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å° ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
 
@@ -136,23 +146,22 @@ public class Player : MonoBehaviour
 
     private void Walk()
     {
-        x = Input.GetAxisRaw("Horizontal"); // ¼öÆò ÀÔ·Â °ª °¨Áö
-        dir = new Vector2(x * speed, rb.velocity.y); // ÀÌµ¿ ¹æÇâ ¼³Á¤
-        rb.velocity = dir; // Rigidbody¿¡ ÀÌµ¿ ¹æÇâ Àû¿ë
+        x = Input.GetAxisRaw("Horizontal"); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        dir = new Vector2(x * speed, rb.velocity.y); // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        rb.velocity = dir; // Rigidbodyï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        if (x != 0) ani.SetBool("run", true); // ÀÌµ¿ ÁßÀÏ ¶§ ¾Ö´Ï¸ÞÀÌ¼Ç ¼³Á¤
-        else ani.SetBool("run", false); // ÀÌµ¿ ÁßÀÌ ¾Æ´Ò ¶§ ¾Ö´Ï¸ÞÀÌ¼Ç ÇØÁ¦
+        if (x != 0) ani.SetBool("run", true); // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+        else ani.SetBool("run", false); // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        if (x > 0) sprite.flipX = true; // ¿À¸¥ÂÊ ¹æÇâÀ¸·Î ÀÌµ¿ÇÒ ¶§ ½ºÇÁ¶óÀÌÆ® ¹æÇâ ¼³Á¤
-        else if (x < 0) sprite.flipX = false; // ¿ÞÂÊ ¹æÇâÀ¸·Î ÀÌµ¿ÇÒ ¶§ ½ºÇÁ¶óÀÌÆ® ¹æÇâ ¼³Á¤
+        if (x > 0) sprite.flipX = false; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        else if (x < 0) sprite.flipX = true; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
 
     private void Shooting()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K)&&!isCrouch)
         {
-            ani.SetTrigger("attack");
             Bull_Dir(sprite.flipX);
         }
     }
@@ -160,28 +169,28 @@ public class Player : MonoBehaviour
     public void Bull_Dir(bool isdir)
     {
         
-            Bullet bulletdir = isdir ? Instantiate(fireball.GetComponent<Bullet>(), Right_pos.transform.position, Quaternion.Euler(0, 0, 0))
-                : Instantiate(fireball.GetComponent<Bullet>(), Left_pos.transform.position, Quaternion.Euler(0, 0, 0));// ¹ß»çÃ¼ »ý¼º;
+            Bullet bulletdir = !isdir ? Instantiate(fireball.GetComponent<Bullet>(), Right_pos.transform.position, Quaternion.Euler(0, 0, 0))
+                : Instantiate(fireball.GetComponent<Bullet>(), Left_pos.transform.position, Quaternion.Euler(0, 0, 0));// ï¿½ß»ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½;
         bulletdir.dir = isdir;
     }
 
        public void Jump_Attack()
     {
-        // Á¡ÇÁ
-        if (rb.velocity.y == 0) Isjump = false; // Á¡ÇÁ ÁßÀÌ ¾Æ´Ò ¶§¸¸ Á¡ÇÁ °¡´ÉÇÏµµ·Ï ¼³Á¤
-        if (Input.GetButton("Jump") && !Isjump)
+        // ï¿½ï¿½ï¿½ï¿½
+        if (rb.velocity.y == 0) Isjump = false; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        if (Input.GetButton("Jump") && !Isjump && !IsCrouch)
         {
             Isjump = true;
-            rb.AddForce(Vector2.up * jump_power, ForceMode2D.Impulse); // Á¡ÇÁ Èû Àû¿ë
+            rb.AddForce(Vector2.up * jump_power, ForceMode2D.Impulse); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
 
         if (this.rb.velocity.y < 0)
         {
             
-            RaycastHit2D hit = Physics2D.BoxCast(col.bounds.center, col.bounds.size, 0f,Vector2.down, 0.5f,LayerMask.GetMask("Monster")); // ¾Æ·¡ÂÊÀ¸·Î ±¤¼± ½î±â
+            RaycastHit2D hit = Physics2D.BoxCast(col.bounds.center, col.bounds.size, 0f,Vector2.down, 0.5f,LayerMask.GetMask("Monster")); // ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             if (hit.collider != null)
             {
-                rb.AddForce(Vector2.up * 11f, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * 13f, ForceMode2D.Impulse);
                 isjump = true;
                
                 Destroy(hit.collider.gameObject);
@@ -191,7 +200,7 @@ public class Player : MonoBehaviour
 
     public void OnDeath()
     {
-        this.gameObject.SetActive(false); // °ÔÀÓ ¿ÀºêÁ§Æ® ºñÈ°¼ºÈ­
+        this.gameObject.SetActive(false); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È°ï¿½ï¿½È­
     }
 
 
