@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     // 플레이어 위치를 저장하는 정적 변수
     public static Transform PlayerTransform;
-
+    
     // UI 업데이트를 위한 PlayerUI 컴포넌트
     [SerializeField] private PlayerUI playerUI;
 
@@ -98,13 +98,28 @@ public class Player : MonoBehaviour
     {
         x = Input.GetAxisRaw("Horizontal"); // 입력 값 받기
         dir = new Vector2(x * speed, rb.velocity.y); // 이동 방향 설정
-        rb.velocity = dir; // Rigidbody 이동 설정
 
+        
+        
+            
+        
+        
+        rb.velocity = dir; // Rigidbody 이동 설정
+       
         if (x != 0) ani.SetBool("run", true); // 이동 애니메이션 재생
         else ani.SetBool("run", false); // 이동 애니메이션 종료
 
-        if (x > 0) sprite.flipX = true; // 오른쪽 이동 시 스프라이트 뒤집기
-        else if (x < 0) sprite.flipX = false; // 왼쪽 이동 시 스프라이트 뒤집기
+        if (x > 0){ sprite.flipX = true; 
+            
+                //if (this.transform.position.x < 10.6)
+                  //  GameManager.Instance.Background.transform.Translate(new Vector3(x, 0, 0) * Time.deltaTime*speed);
+            }// 오른쪽 이동 시 스프라이트 뒤집기
+        else if (x < 0)
+        {
+            sprite.flipX = false; // 왼쪽 이동 시 스프라이트 뒤집기
+                //if (this.transform.position.x > -11)
+                  //  GameManager.Instance.Background.transform.Translate(new Vector3(x, 0, 0) * Time.deltaTime*speed);
+            }
     }
 
     private void Shooting()
@@ -127,7 +142,7 @@ public class Player : MonoBehaviour
     {
         // 점프 상태 확인
         if (rb.velocity.y == 0) Isjump = false; // 땅에 있을 때 점프 상태 해제
-        if (Input.GetButton("Jump") && !Isjump)
+        if (Input.GetButtonDown("Jump") && Isjump == false)
         {
             Isjump = true; // 점프 상태 설정
             rb.AddForce(Vector2.up * jump_power, ForceMode2D.Impulse); // 점프

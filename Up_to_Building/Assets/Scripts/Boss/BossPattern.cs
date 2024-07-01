@@ -5,7 +5,6 @@ using UnityEngine;
 [Serializable]
 public class FireInformation
 {
-    
     public BossAttackType attackType;     // 공격 타입
     public float attackDuration; // 공격 지속 시간
     public float attackSpeed;    // 브레스 속도
@@ -16,13 +15,12 @@ public class FireInformation
     public int attackOrder;    // 공격 순서 (0번의 공격이 가장 빠르다)
 }
 
-
 [CreateAssetMenu(fileName ="New Pattern Data")]
 public class BossPattern : ScriptableObject
 {
-    
-
     [SerializeField]
-    private List<FireInformation> fireInformations = new List<FireInformation>();
+    public List<FireInformation> fireInformations = new List<FireInformation>();
     public int patternNumber;
+    public float patternTime;
+    public int numOfOrder;
 }

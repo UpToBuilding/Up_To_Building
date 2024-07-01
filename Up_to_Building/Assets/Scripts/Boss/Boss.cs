@@ -12,30 +12,43 @@ public class Boss : MonoBehaviour
     }
 
     [SerializeField]
-    float MaxHp;
+    float MaxHp = 100f;
     float CurrentHp;
-    int nextPatternNum = 1;
+    int nextPatternNum = 0;
     BossPhase bossPhase = BossPhase.NormalPhase;
+    public bool attackEnabled = true;
+
+
+    BossCombat combat;
 
     void Start()
     {
         CurrentHp = MaxHp;
+        combat = gameObject.GetComponent<BossCombat>();
     }
 
     void Update()
     {
+        if (!attackEnabled) return;
+
         switch(bossPhase)
         {
             case BossPhase.NormalPhase:
-
+                attackEnabled = false;
+                combat.OperatePattern(nextPatternNum);
+                nextPatternNum = 0 + (nextPatternNum + 1) % 5;
                 break;
 
             case BossPhase.AngerPhase:
-
+                attackEnabled = false;
+                combat.OperatePattern(nextPatternNum);
+                nextPatternNum = 3 + (nextPatternNum + 1) % 3;
                 break;
 
             case BossPhase.FinalPhase:
-
+                attackEnabled = false;
+                combat.OperatePattern(nextPatternNum);
+                nextPatternNum = 3 + (nextPatternNum + 1) % 5;
                 break;
         }
     }
@@ -47,12 +60,11 @@ public class Boss : MonoBehaviour
         if(CurrentHp < MaxHp * 0.6f)
         {
             bossPhase = BossPhase.AngerPhase;
-            nextPatternNum = 3;
+            nextPatternNum = 0;
         }
         if(CurrentHp < MaxHp * 0.3f)
         {
             bossPhase = BossPhase.FinalPhase;
-            nextPatternNum = 6;
         }
         if(CurrentHp <= 0.0f)
         {

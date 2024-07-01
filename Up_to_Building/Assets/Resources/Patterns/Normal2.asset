@@ -77,4 +77,6 @@ MonoBehaviour:
     sectionNumber: 3
     sectionLength: 1
     attackOrder: 2
-  patternNumber: 1
+  patternNumber: 2
+  patternTime: 2.5
+  numOfOrder: 3
