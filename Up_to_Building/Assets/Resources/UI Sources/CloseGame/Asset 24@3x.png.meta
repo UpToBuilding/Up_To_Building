@@ -139,9 +139,9 @@ TextureImporter:
       name: Asset 24@3x_0
       rect:
         serializedVersion: 2
-        x: 184
-        y: 18
-        width: 7012
+        x: 189
+        y: 36
+        width: 7011
         height: 1908
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -152,6 +152,27 @@ TextureImporter:
       bones: []
       spriteID: b5d725b612bfc87439c1fe4fca71f100
       internalID: -1541304803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Asset 24@3x_1
+      rect:
+        serializedVersion: 2
+        x: 7204
+        y: 1269
+        width: 30
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a09af3e8be70acc40be039cc1238ed4f
+      internalID: 1429361792
       vertices: []
       indices: 
       edges: []
@@ -168,6 +189,8 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Asset 24@3x_0: -1541304803
+      Asset 24@3x_1: 1429361792
+      Asset 24@3x_2: -869857917
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
