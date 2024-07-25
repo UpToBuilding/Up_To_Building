@@ -12,6 +12,8 @@ public class Col_Manager : MonoBehaviour
     private string CheckPoint; // 체크포인트 태그
     [SerializeField]
     private Player player; // 플레이어 객체
+       
+ 
 
     private void Awake()
     {
@@ -29,6 +31,16 @@ public class Col_Manager : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Check_Point"))
+        {
+            player.checkpoint = collision.gameObject;
+            GameManager.Instance.TempFloor = GameManager.Instance.currentFloor;
+        }
+    }
+
+
     // 일반 충돌 감지
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -44,6 +56,7 @@ public class Col_Manager : MonoBehaviour
     {
         if (collision.collider.gameObject.CompareTag("Nomal_Obj"))
         {
+            
             player.Isjump = true;
         }
     }

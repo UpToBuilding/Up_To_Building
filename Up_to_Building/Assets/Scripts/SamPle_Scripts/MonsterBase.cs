@@ -42,6 +42,7 @@ public abstract class MonsterBase : MonoBehaviour
     {
         hp = 2;
         baseSpeed = 3;
+        
     }
 
     private void Awake()
@@ -61,7 +62,11 @@ public abstract class MonsterBase : MonoBehaviour
     // 몬스터의 기본 이동 로직
     public virtual void Base_Movement()
     {
-        int x = rb.velocity.x >= 0 ? 1 : -1; // 이동 방향 결정
+        int x = rb.velocity.x > 0 ? -1 : 1; // 이동 방향 결정
+
+
+
+
 
         // 스프라이트 방향 설정
         if (x > 0) sp.flipX = false;
@@ -71,9 +76,9 @@ public abstract class MonsterBase : MonoBehaviour
         if (x != 0) animator.SetBool("run", true);
         if(rb.velocity.x ==0) animator.SetBool("run", false);
 
-        if (math.abs(Player.PlayerTransform.position.x - this.transform.position.x) > distance)
+        if (Physics2D.OverlapBox(this.gameObject.transform.position, new Vector2(distance, 2.5f), 0.0f, LayerMask.GetMask("Player")) == null)
         {
-
+            
             t += Time.deltaTime; // 시간 증가
             if (t <= 1.5f)
             {
@@ -85,6 +90,9 @@ public abstract class MonsterBase : MonoBehaviour
 
     }
 
+
+
+
     // 공격 메서드 (추상 메서드로 자식 클래스에서 구현 필요)
     public abstract void Attack();
 
@@ -93,7 +101,7 @@ public abstract class MonsterBase : MonoBehaviour
     // 죽음 트리거
     private void OntriggerDeath()
     {
-        this.gameObject.SetActive(false); // 객체 비활성화
+        Destroy(this.gameObject); // 객체 비활성화
     }
 
    private void Startdeath()
