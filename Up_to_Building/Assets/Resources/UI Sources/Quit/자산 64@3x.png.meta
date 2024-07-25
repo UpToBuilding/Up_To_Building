@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9210ca7ded03d0848a5828179d6e3931
+guid: 1cff6b56c44dbcc478574c2e0003f1f5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -49,7 +49,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 185, y: 0, z: 185, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Asset 24@3x_0
+      name: "\uC790\uC0B0 64@3x_0"
       rect:
         serializedVersion: 2
         x: 183
@@ -144,14 +144,14 @@ TextureImporter:
         width: 7011
         height: 1908
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5d725b612bfc87439c1fe4fca71f100
-      internalID: -1541304803
+      spriteID: dde356b62bce6484f99506d32000aa7d
+      internalID: 29669202
       vertices: []
       indices: 
       edges: []
@@ -160,14 +160,14 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Asset 24@3x_0: -1541304803
+      "\uC790\uC0B0 64@3x_0": 29669202
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

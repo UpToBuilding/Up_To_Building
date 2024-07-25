@@ -22,7 +22,6 @@ public class FireGenerator : MonoBehaviour
 
         if (TimeAfter > 1)
         {
-            Debug.Log("Section : " + section + "번 패턴 실행");
             TimeAfter -= 1.0f;
             GameObject fireInstance = Instantiate(firePrefeb, transform.position, Quaternion.identity);
             fireInstance.GetComponent<BossFire>().Initialize(BossAttackType.SingleAttack, 0.1f, 0f, section);

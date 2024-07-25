@@ -10,17 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f85704e8cc080b742950f020a3103063, type: 3}
-  m_Name: Anger0
+  m_Name: Anger2
   m_EditorClassIdentifier: 
   fireInformations:
   - attackType: 1
     attackDuration: 2
-    attackSpeed: 6
+    attackSpeed: 5
     timeNextAttack: 2.5
-    fireHead: 1
+    fireHead: 0
     sectionNumber: 1
-    sectionLength: 3
+    sectionLength: 1
     attackOrder: 0
-  patternNumber: 3
+  - attackType: 1
+    attackDuration: 2
+    attackSpeed: 5
+    timeNextAttack: 2.5
+    fireHead: 2
+    sectionNumber: 3
+    sectionLength: 1
+    attackOrder: 0
+  patternNumber: 5
   patternTime: 2.5
   numOfOrder: 1
