@@ -33,11 +33,13 @@ public class AudioMixController : MonoBehaviour
     {
         audioMixer.SetFloat("BGM", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("BGMVolume", volume);
+        PlayerPrefs.Save();
     }
 
     public void setSfxVolume(float volume)
     {
         audioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("SFXVolume", volume);
+        PlayerPrefs.Save();
     }
 }

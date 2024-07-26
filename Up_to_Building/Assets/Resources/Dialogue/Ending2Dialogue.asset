@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49685552116ea754dbf1da06dc7282cb, type: 3}
+  m_Name: Ending2Dialogue
+  m_EditorClassIdentifier: 
+  dialogueLines:
+  - speaker: 
+    line: "\uCC3E\uC558\uB2E4! \uC5EC\uAE30 \uC788\uC5C8\uAD6C\uB098 "
+  - speaker: 
+    line: "\uAD1C\uCC2E\uC544? \uB2E4\uCE5C\uB370\uB294 \uC5C6\uC5B4? \uAE08\uBC29
+      \uAEBC\uB0B4\uC904\uAC8C \uC7A0\uC2DC\uB9CC..! "
+  - speaker: 
+    line: "(\uC5F4\uC1E0\uB85C \uAC10\uC625\uBB38\uC744 \uB530 \uAD6C\uCD9C\uD55C\uB2E4) "
+  - speaker: 
+    line: "\uBB34\uC0AC\uD574\uC11C \uB2E4\uD589\uC774\uC57C.. \uC774\uC81C \uB3CC\uC544\uAC00\uC790 "
