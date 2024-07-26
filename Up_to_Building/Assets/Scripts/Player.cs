@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public Rigidbody2D rb; // Rigidbody2D
     public BoxCollider2D col; // 박스 콜라이더
     public Animator ani; // 애니메이터
+    public GameObject checkpoint;
+
 
     [SerializeField]
     private GameObject fireball; // 발사체 프리팹
@@ -29,9 +31,22 @@ public class Player : MonoBehaviour
         {
             hp += value;
             playerUI.lostLife(); // 체력 감소 UI 업데이트
+            
 
-            if (hp <= 0)
+            if(hp > 0)
             {
+                if (checkpoint != null)
+                {
+                    this.transform.position = checkpoint.transform.position;
+                    GameManager.Instance.currentFloor = GameManager.Instance.TempFloor;
+                }
+                else { this.transform.position = GameManager.Instance.initinfo.transform.position;
+                    GameManager.Instance.currentFloor = 1;
+                }
+            }
+            else
+            {
+                GameManager.Instance.currentFloor = 1;
                 ani.SetTrigger("death"); // 사망 애니메이션 재생
             }
         }

@@ -10,7 +10,7 @@ public class MushRoom : MonsterBase
 
     public override void Attack()
     {
-        sp.flipX = (Player.PlayerTransform.position.x - this.transform.position.x) > 0 ? false : true;
+        sp.flipX = (Player.PlayerTransform.position.x - this.transform.position.x) > 0 ? true : false;
         if (math.abs(Player.PlayerTransform.transform.position.x - this.transform.position.x) != 0 && !isCol)
             rb.velocity = new Vector2(Player.PlayerTransform.transform.position.x - this.transform.position.x, rb.velocity.y) * overSpeed;
         else rb.velocity = Vector2.zero;
@@ -21,7 +21,7 @@ public class MushRoom : MonsterBase
         base.Base_Movement();
         // 플레이어를 찾지 못했을 때 패트롤 이동
 
-        if(math.abs(Player.PlayerTransform.position.x - this.transform.position.x) <= distance)
+        if (Physics2D.OverlapBox(new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), new Vector2(distance, 2f ), 0.0f, LayerMask.GetMask("Player")) != null)
         {
             t = 0;
             rb.velocity = Vector2.zero;

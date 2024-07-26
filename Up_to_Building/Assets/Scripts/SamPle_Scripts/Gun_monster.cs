@@ -17,22 +17,21 @@ public class Gun_monster : MonsterBase
     public override void Base_Movement()
     {
         base.Base_Movement();
-        if (math.abs(Player.PlayerTransform.position.x - this.transform.position.x) <= distance)
+        if (Physics2D.OverlapBox(this.gameObject.transform.position, new Vector2(distance, 0), 0.0f, LayerMask.GetMask("Player")) != null)
         {
             t = 0;
-            sp.flipX = (Player.PlayerTransform.position.x - this.transform.position.x) > 0 ? false : true;
-
+            sp.flipX = (Player.PlayerTransform.position.x - this.transform.position.x) > 0 ? true : false;
+            animator.SetBool("attack",true);
             if (!attack) {
                 StartCoroutine("rateShooting");
             }
-            
-            
         }
+        
     }
 
     public override void Attack()
     {
-        MonsterBullet b = !sp.flipX ? Instantiate(bullet.GetComponent<MonsterBullet>(), this.Right.position, Quaternion.Euler(0, 0, 0)) : Instantiate(bullet.GetComponent<MonsterBullet>(), this.Left.position, Quaternion.Euler(0, 0, 0)); ;
+        MonsterBullet b = sp.flipX ? Instantiate(bullet.GetComponent<MonsterBullet>(), this.Right.position, Quaternion.Euler(0, 0, 0)) : Instantiate(bullet.GetComponent<MonsterBullet>(), this.Left.position, Quaternion.Euler(0, 0, 0)); ;
         b.dir = sp.flipX;
     }
 
