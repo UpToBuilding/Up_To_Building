@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using TMPro;
 
 public class Tutorial : MonoBehaviour
 {
@@ -30,8 +30,11 @@ public class Tutorial : MonoBehaviour
         if (++textIdx == maxIdx) SceneManager.LoadScene("MainScence");
         else
         {
-            tutorialTexts.GetChild(textIdx).gameObject.SetActive(true);
-            printText.printText(tutorialTexts.GetChild(textIdx).GetChild(0).GetComponent<Text>());
+            Transform targetText = tutorialTexts.GetChild(textIdx);
+            TextMeshProUGUI targetTmp = tutorialTexts.GetChild(textIdx).GetChild(0).GetComponent<TextMeshProUGUI>();
+
+            targetText.gameObject.SetActive(true);
+            printText.printText(targetTmp, targetTmp.text);
         }
     }
 }

@@ -1,50 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class PrintText : MonoBehaviour
 {
     private string text;
-    private Text targetText;
+    private TextMeshProUGUI targetText;
     private float delayTime;
-    private bool isRunning;
+    private Coroutine printingCoroutine;
 
     // Start is called before the first frame update
     void Start()
     {
-        isRunning = false;
+        //isRunning = false;
         delayTime = 0.1f;
     }
 
-    public void printText(Text t)
+    public void printText(TextMeshProUGUI t, string txt)
     {
-        text = t.text.ToString();
+        text = txt;
         targetText = t;
         targetText.text = "";
-        StartCoroutine("Print");
+        printingCoroutine = StartCoroutine(Print());
     }
     
     IEnumerator Print()
     {
-        isRunning = true;
         int count = 0;
-
         while (count < text.Length)
         {
             targetText.text += text[count++];
             yield return new WaitForSeconds(delayTime);
         }
-        isRunning = false;
+        printingCoroutine = null;
     }
 
     public bool checkCoroutine()
     {
-        if (isRunning)
+        if (printingCoroutine != null)
         {
-            isRunning = false;
             targetText.text = text;
-            StopCoroutine("Print");
+            StopCoroutine(printingCoroutine);
+            printingCoroutine = null;
             return true;
         }
         return false;
