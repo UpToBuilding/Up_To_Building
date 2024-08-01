@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Player_Save : MonoBehaviour
 {
-    //체크 포인트 목숨 추가 안함??
+    
 
     private void OnEnable()
     {
