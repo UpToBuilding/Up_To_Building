@@ -12,6 +12,9 @@ public class PlayerBullet : Bullet
             Destroy(this.gameObject);
             MonsterBase m = collision.gameObject.GetComponent<MonsterBase>();
             m.HP = -1;
+        }else if (collision.gameObject.CompareTag("Nomal_Obj"))
+        {
+            Destroy(this.gameObject);
         }
     }
 }

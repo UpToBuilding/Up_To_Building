@@ -17,8 +17,8 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        fail();
-        setStageText();
+        //fail();
+        //setStageText();
         //pauseUIs = GameObject.Find("PauseUIs").transform;
     }
 

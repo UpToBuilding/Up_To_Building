@@ -178,7 +178,7 @@ MonoBehaviour:
   baseSpeed: 3
   distance: 10
   t: 0
-  bullet: {fileID: 5079589698609367244, guid: f82749485ddb7e9409109d0b182c8319, type: 3}
+  bullet: {fileID: 7258571304251812307, guid: 1d64c2d5774b9fe48a56c037b13467a9, type: 3}
   Right: {fileID: 4577543488239990836}
   Left: {fileID: 5849402660690927987}
   attack: 0

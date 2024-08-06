@@ -11,6 +11,10 @@ public class MonsterBullet : Bullet
         {
             Destroy(this.gameObject);
         }
+        else if (collision.gameObject.CompareTag("Nomal_Obj"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 }

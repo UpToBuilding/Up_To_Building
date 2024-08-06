@@ -14,7 +14,7 @@ public class PlayerUI : MonoBehaviour
 
     private void Awake()
     {
-        lifePoints = GameObject.Find("LifePanel").GetComponentsInChildren<Transform>()[1..]; // 자기 자신은 제외
+        //lifePoints = GameObject.Find("LifePanel").GetComponentsInChildren<Transform>()[1..]; // 자기 자신은 제외
     }
 
     private void Update()

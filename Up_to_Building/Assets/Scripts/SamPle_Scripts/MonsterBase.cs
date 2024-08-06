@@ -80,11 +80,11 @@ public abstract class MonsterBase : MonoBehaviour
         {
             
             t += Time.deltaTime; // 시간 증가
-            if (t <= 1.5f)
+            if (t <= 1.0f)
             {
                 rb.velocity = new Vector2(1, rb.velocity.y) * baseSpeed; // 오른쪽으로 이동
             }
-            else if (t <= 3.0f) rb.velocity = new Vector2(-1, rb.velocity.y) * baseSpeed; // 왼쪽으로 이동
+            else if (t <= 2.0f) rb.velocity = new Vector2(-1, rb.velocity.y) * baseSpeed; // 왼쪽으로 이동
             else t = 0; // 시간 초기화
         }
 
