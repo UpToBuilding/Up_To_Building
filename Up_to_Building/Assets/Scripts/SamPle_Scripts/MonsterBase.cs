@@ -36,7 +36,8 @@ public abstract class MonsterBase : MonoBehaviour
  
     [SerializeField]
     protected float t; // 시간 변수
-   
+
+    private bool isStop;
     
     private void InitInfo()
     {
@@ -48,6 +49,7 @@ public abstract class MonsterBase : MonoBehaviour
     private void Awake()
     {
         t = 0; // 초기 시간 설정
+        isStop = false;
         InitInfo();
         sp = GetComponent<SpriteRenderer>(); // 스프라이트 렌더러 컴포넌트 가져오기
         rb = GetComponent<Rigidbody2D>(); // 리지드바디 컴포넌트 가져오기
@@ -76,9 +78,9 @@ public abstract class MonsterBase : MonoBehaviour
         if (x != 0) animator.SetBool("run", true);
         if(rb.velocity.x ==0) animator.SetBool("run", false);
 
-        if (Physics2D.OverlapBox(this.gameObject.transform.position, new Vector2(distance, 2.5f), 0.0f, LayerMask.GetMask("Player")) == null)
+        if (Physics2D.OverlapBox(this.gameObject.transform.position, new Vector2(distance, 2.5f), 0.0f, LayerMask.GetMask("Player")) == null&&!isStop)
         {
-            
+
             t += Time.deltaTime; // 시간 증가
             if (t <= 1.0f)
             {
@@ -86,11 +88,12 @@ public abstract class MonsterBase : MonoBehaviour
             }
             else if (t <= 2.0f) rb.velocity = new Vector2(-1, rb.velocity.y) * baseSpeed; // 왼쪽으로 이동
             else t = 0; // 시간 초기화
+            //StartCoroutine(FIndPlayer());
         }
 
     }
 
-
+    
 
 
     // 공격 메서드 (추상 메서드로 자식 클래스에서 구현 필요)
@@ -110,4 +113,23 @@ public abstract class MonsterBase : MonoBehaviour
     }
 
 
+    IEnumerator FIndPlayer()
+    {
+        rb.velocity = new Vector2(1, rb.velocity.y) * baseSpeed;
+        yield return new WaitForSeconds(1.0f);
+        rb.velocity = new Vector2(-1, rb.velocity.y) * baseSpeed; // 왼쪽으로 이동
+        yield return null;
+    }
+
+    public void StopEvent()
+    {
+        baseSpeed = 0;
+        isStop = true;
+    }
+
+    public void RestartEvent()
+    {
+        baseSpeed = 3;
+        isStop = false;
+    }
 }

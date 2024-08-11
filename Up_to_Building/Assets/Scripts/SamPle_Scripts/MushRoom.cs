@@ -7,6 +7,7 @@ public class MushRoom : MonsterBase
 {
     public float overSpeed;
     private bool isCol;
+    private float temp;
 
     public override void Attack()
     {
@@ -30,7 +31,15 @@ public class MushRoom : MonsterBase
         }
     }
 
-
+    public void Initinfo()
+    {
+        temp = overSpeed;
+        overSpeed = 0;
+    }
+    public void reinfo()
+    {
+        overSpeed = temp;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))

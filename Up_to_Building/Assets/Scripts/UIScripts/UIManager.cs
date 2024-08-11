@@ -4,16 +4,22 @@ using System.Security.Cryptography;
 using TMPro;
 using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private Transform pauseUis; // 0 : PauseButton, 1 : PausePanel, 2 : SettingPanel
+    [SerializeField]
+    private Transform pauseUis;
+    public GameObject[] StateButton; // 0 : PauseButton, 1 : PausePanel, 2 : SettingPanel
     [SerializeField] private Transform progressBar;
     [SerializeField] private TextMeshProUGUI stageText;
     private int process = 2;
+
+    public UnityEvent GameStop;
+    public UnityEvent GameStart;
 
     private void Awake()
     {
@@ -30,9 +36,14 @@ public class UIManager : MonoBehaviour
 
     public void pause()
     {
-        Time.timeScale = 0;
-        pauseUis.GetChild(0).gameObject.SetActive(false); // PauseButton
-        pauseUis.GetChild(1).gameObject.SetActive(true); // PausePanel
+        
+        
+        StateButton[0].gameObject.SetActive(true);
+         
+            
+
+        //pauseUis.GetChild(0).gameObject.SetActive(false); // PauseButton
+        //sta.gameObject.SetActive(true); // PausePanel
     }
 
     public void openHomeMenu()
