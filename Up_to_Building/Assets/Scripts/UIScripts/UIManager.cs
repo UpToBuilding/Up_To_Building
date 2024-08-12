@@ -19,7 +19,6 @@ public class UIManager : MonoBehaviour
     {
         fail();
         setStageText();
-        //pauseUIs = GameObject.Find("PauseUIs").transform;
     }
 
     public void closePanel()

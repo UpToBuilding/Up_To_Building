@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -72,4 +75,21 @@ public class PlayerUI : MonoBehaviour
     {
         player.attack();
     }*/
+
+    public void Clicked()
+    {
+        ChangeImg(1);
+    }
+
+    public void Unclick()
+    {
+        ChangeImg(2);
+    }
+
+    private void ChangeImg(int type) // 1 = on -> off, 2 = off -> on
+    {
+        GameObject clickObject = EventSystem.current.currentSelectedGameObject;
+        string name = clickObject.name;
+        clickObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("UI Sources/Hud/" + name.Substring(0, -6) + type);
+    }
 }
