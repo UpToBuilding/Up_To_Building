@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Net.NetworkInformation;
 
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
     // 플레이어 위치를 저장하는 정적 변수
     public static Transform PlayerTransform;
-    
+
     // UI 업데이트를 위한 PlayerUI 컴포넌트
     [SerializeField] private PlayerUI playerUI;
+    
 
     // 컴포넌트 참조 변수들
     public SpriteRenderer sprite; // 스프라이트 렌더러
@@ -18,6 +20,8 @@ public class Player : MonoBehaviour
     public BoxCollider2D col; // 박스 콜라이더
     public Animator ani; // 애니메이터
     public GameObject checkpoint;
+
+    public UnityEvent DeathSystem;
 
 
     [SerializeField]

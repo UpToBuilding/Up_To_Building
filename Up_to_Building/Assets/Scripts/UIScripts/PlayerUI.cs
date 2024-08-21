@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField]
-    private Transform[] lifePoints;
+    private Image[] lifePoints;
+
+    [SerializeField]
+    private int hpIndex;
+    
+
     private bool isMoveLeft;
     public bool IsMoveLeft {  get { return isMoveLeft; } }
     private bool isMoveRight;
@@ -14,7 +20,7 @@ public class PlayerUI : MonoBehaviour
 
     private void Awake()
     {
-        //lifePoints = GameObject.Find("LifePanel").GetComponentsInChildren<Transform>()[1..]; // 자기 자신은 제외
+        hpIndex = lifePoints.Length-1;
     }
 
     private void Update()
@@ -24,13 +30,7 @@ public class PlayerUI : MonoBehaviour
 
     public void lostLife()
     {
-        lifePoints[player.HP].gameObject.SetActive(false);
-        if (player.HP == 0)
-        {
-            Debug.Log("GameOver!");
-            Time.timeScale = 0;
-            return;
-        }
+        lifePoints[hpIndex--].gameObject.SetActive(false);
     }
 
     public void moveLeft()

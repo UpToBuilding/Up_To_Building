@@ -37,7 +37,7 @@ public abstract class MonsterBase : MonoBehaviour
     [SerializeField]
     protected float t; // 시간 변수
 
-    private bool isStop;
+ 
     
     private void InitInfo()
     {
@@ -49,7 +49,7 @@ public abstract class MonsterBase : MonoBehaviour
     private void Awake()
     {
         t = 0; // 초기 시간 설정
-        isStop = false;
+     
         InitInfo();
         sp = GetComponent<SpriteRenderer>(); // 스프라이트 렌더러 컴포넌트 가져오기
         rb = GetComponent<Rigidbody2D>(); // 리지드바디 컴포넌트 가져오기
@@ -78,7 +78,7 @@ public abstract class MonsterBase : MonoBehaviour
         if (x != 0) animator.SetBool("run", true);
         if(rb.velocity.x ==0) animator.SetBool("run", false);
 
-        if (Physics2D.OverlapBox(this.gameObject.transform.position, new Vector2(distance, 2.5f), 0.0f, LayerMask.GetMask("Player")) == null&&!isStop)
+        if (Physics2D.OverlapBox(this.gameObject.transform.position, new Vector2(distance, 2.5f), 0.0f, LayerMask.GetMask("Player")) == null)
         {
 
             t += Time.deltaTime; // 시간 증가
@@ -121,15 +121,5 @@ public abstract class MonsterBase : MonoBehaviour
         yield return null;
     }
 
-    public void StopEvent()
-    {
-        baseSpeed = 0;
-        isStop = true;
-    }
 
-    public void RestartEvent()
-    {
-        baseSpeed = 3;
-        isStop = false;
-    }
 }

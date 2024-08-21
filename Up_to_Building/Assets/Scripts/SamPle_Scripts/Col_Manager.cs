@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Col_Manager : MonoBehaviour
 {
@@ -12,8 +13,9 @@ public class Col_Manager : MonoBehaviour
     private string CheckPoint; // 체크포인트 태그
     [SerializeField]
     private Player player; // 플레이어 객체
-       
- 
+
+
+    //public UnityEvent EffectSystem;
 
     private void Awake()
     {
@@ -35,7 +37,9 @@ public class Col_Manager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Check_Point"))
         {
+           // EffectSystem.Invoke();
             player.checkpoint = collision.gameObject;
+            
             GameManager.Instance.TempFloor = GameManager.Instance.currentFloor;
         }
     }

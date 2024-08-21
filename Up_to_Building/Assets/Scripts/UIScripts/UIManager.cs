@@ -20,7 +20,8 @@ public class UIManager : MonoBehaviour
 
     public UnityEvent GameStop;
     public UnityEvent GameStart;
-
+    [SerializeField]
+    private float temp;
     private void Awake()
     {
         //fail();
@@ -36,24 +37,38 @@ public class UIManager : MonoBehaviour
 
     public void pause()
     {
+        temp = Time.deltaTime;
         
-        
+        Time.timeScale = 0;
+        Time.fixedDeltaTime = 0f;
         StateButton[0].gameObject.SetActive(true);
-         
-            
-
         //pauseUis.GetChild(0).gameObject.SetActive(false); // PauseButton
         //sta.gameObject.SetActive(true); // PausePanel
     }
 
-    public void openHomeMenu()
+    public void Resume()
     {
-        pauseUis.GetChild(3).gameObject.SetActive(true);
+        
+        
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
+        StateButton[0].gameObject.SetActive(false);
+
+        //pauseUis.GetChild(0).gameObject.SetActive(true); // PauseButton
+        //pauseUis.GetChild(1).gameObject.SetActive(false); // PausePanel
+    }
+
+    public void OpenHomeMenu()
+    {
+        //StateButton[0].gameObject.SetActive(false);
+        StateButton[2].gameObject.SetActive(true);
+        //pauseUis.GetChild(3).gameObject.SetActive(true);
     }
 
     public void closeHomeMenu()
     {
-        pauseUis.GetChild(3).gameObject.SetActive(false);
+        StateButton[2].gameObject.SetActive(false) ;
+        //pauseUis.GetChild(3).gameObject.SetActive(false);
     }
 
     public void goHome()
@@ -64,22 +79,21 @@ public class UIManager : MonoBehaviour
 
     public void setting()
     {
-        pauseUis.GetChild(1).gameObject.SetActive(false); // PausePanel
-        pauseUis.GetChild(2).gameObject.SetActive(true); // SettingPanel
+        StateButton[3].gameObject.SetActive(false);
+        StateButton[1].gameObject.SetActive(true);
+        //pauseUis.GetChild(1).gameObject.SetActive(false); // PausePanel
+        //pauseUis.GetChild(2).gameObject.SetActive(true); // SettingPanel
     }
 
     public void closeSetting()
     {
-        pauseUis.GetChild(1).gameObject.SetActive(true); // PausePanel
-        pauseUis.GetChild(2).gameObject.SetActive(false); // SettingPanel
+
+        StateButton[3].gameObject.SetActive(true);
+        StateButton[1].gameObject.SetActive(false);
+        // pauseUis.GetChild(1).gameObject.SetActive(true); // PausePanel
+        //pauseUis.GetChild(2).gameObject.SetActive(false); // SettingPanel
     }
 
-    public void resume()
-    {
-        Time.timeScale = 1;
-        pauseUis.GetChild(0).gameObject.SetActive(true); // PauseButton
-        pauseUis.GetChild(1).gameObject.SetActive(false); // PausePanel
-    }
 
     public void fail() // 실패 후 진행바 표시
     {
