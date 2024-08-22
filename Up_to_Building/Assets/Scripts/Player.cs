@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
@@ -27,6 +28,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject fireball; // 발사체 프리팹
 
+    public Action playerDead;
+
     private int hp; // 플레이어의 체력
     public int HP
     {
@@ -35,10 +38,11 @@ public class Player : MonoBehaviour
         {
             hp += value;
             playerUI.lostLife(); // 체력 감소 UI 업데이트
-            
+            playerDead();
 
-            if(hp > 0)
+            if (hp > 0)
             {
+                
                 if (checkpoint != null)
                 {
                     this.transform.position = checkpoint.transform.position;
@@ -175,7 +179,7 @@ public class Player : MonoBehaviour
             {
                 rb.AddForce(Vector2.up * 13f, ForceMode2D.Impulse); // 몬스터를 밟았을 때 다시 점프
                 isjump = true;
-                Destroy(hit.collider.gameObject); // 몬스터 파괴
+                hit.collider.gameObject.SetActive(false); // 몬스터 파괴
             }
         }
     }

@@ -6,26 +6,26 @@ using UnityEngine.Events;
 public class Col_Manager : MonoBehaviour
 {
     [SerializeField]
-    private string BarrierTag; // Àå¾Ö¹° ÅÂ±×
+    private string BarrierTag; // ï¿½ï¿½Ö¹ï¿½ ï¿½Â±ï¿½
     [SerializeField]
-    private string Nomal; // ÀÏ¹Ý ÅÂ±×
+    private string Nomal; // ï¿½Ï¹ï¿½ ï¿½Â±ï¿½
     [SerializeField]
-    private string CheckPoint; // Ã¼Å©Æ÷ÀÎÆ® ÅÂ±×
+    private string CheckPoint; // Ã¼Å©ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Â±ï¿½
     [SerializeField]
-    private Player player; // ÇÃ·¹ÀÌ¾î °´Ã¼
+    private Player player; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ã¼
 
 
     //public UnityEvent EffectSystem;
 
     private void Awake()
     {
-        player = GetComponent<Player>(); // ÇÃ·¹ÀÌ¾î ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
+        player = GetComponent<Player>(); // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     }
 
-    // Æ®¸®°Å Ãæµ¹ °¨Áö
+    // Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½
     private void OnTriggerStay2D(Collider2D collision)
     {
-        // Ãæµ¹ÇÑ °´Ã¼°¡ Ã¼Å©Æ÷ÀÎÆ®ÀÏ °æ¿ì
+        // ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ Ã¼Å©ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½
         if (collision.gameObject.CompareTag("Stage"))
         {
             GameManager.Instance.UpFloor();
@@ -41,20 +41,27 @@ public class Col_Manager : MonoBehaviour
             player.checkpoint = collision.gameObject;
             
             GameManager.Instance.TempFloor = GameManager.Instance.currentFloor;
+        }   
+        else if (collision.gameObject.CompareTag(BarrierTag) || (collision.gameObject.CompareTag("Monster")))
+        {
+            player.HP = -1;
+
         }
     }
 
 
-    // ÀÏ¹Ý Ãæµ¹ °¨Áö
+    // ï¿½Ï¹ï¿½ ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Ãæµ¹ÇÑ °´Ã¼°¡ Àå¾Ö¹°ÀÏ °æ¿ì
+        // ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         if (collision.collider.gameObject.CompareTag(BarrierTag) || (collision.gameObject.CompareTag("Monster")))
         {
             player.HP = -1;
 
         }
     }
+    
+
 
     private void OnCollisionStay2D(Collision2D collision)
     {

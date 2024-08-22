@@ -16,5 +16,11 @@ public class MonsterBullet : Bullet
             Destroy(this.gameObject);
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Nomal_Obj")){ 
+            Destroy(this.gameObject);
+        }
+    }
 
 }

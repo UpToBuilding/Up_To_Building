@@ -49,7 +49,8 @@ public abstract class MonsterBase : MonoBehaviour
     private void Awake()
     {
         t = 0; // 초기 시간 설정
-     
+        Player player = FindObjectOfType<Player>();
+        player.playerDead += MonsterObjSetActivation;
         InitInfo();
         sp = GetComponent<SpriteRenderer>(); // 스프라이트 렌더러 컴포넌트 가져오기
         rb = GetComponent<Rigidbody2D>(); // 리지드바디 컴포넌트 가져오기
@@ -104,7 +105,7 @@ public abstract class MonsterBase : MonoBehaviour
     // 죽음 트리거
     private void OntriggerDeath()
     {
-        Destroy(this.gameObject); // 객체 비활성화
+        this.gameObject.SetActive(false);// 객체 비활성화
     }
 
    private void Startdeath()
@@ -121,5 +122,13 @@ public abstract class MonsterBase : MonoBehaviour
         yield return null;
     }
 
+    public void MonsterObjSetActivation()
+    {
+        if (!this.gameObject.activeSelf)
+        {
+            this.gameObject.SetActive(true);
+            InitInfo(); 
+        }
+    }
 
 }
