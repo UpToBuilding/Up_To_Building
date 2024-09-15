@@ -2,9 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
-
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.Audio;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 
 public class Player : MonoBehaviour
 {
@@ -13,6 +16,7 @@ public class Player : MonoBehaviour
 
     // UI 업데이트를 위한 PlayerUI 컴포넌트
     [SerializeField] private PlayerUI playerUI;
+    [SerializeField] private UIManager uiManager;
     
 
     // 컴포넌트 참조 변수들
@@ -38,19 +42,12 @@ public class Player : MonoBehaviour
         {
             hp += value;
             playerUI.lostLife(); // 체력 감소 UI 업데이트
+            hitSound.Play();
             playerDead();
 
             if (hp > 0)
             {
-                
-                if (checkpoint != null)
-                {
-                    this.transform.position = checkpoint.transform.position;
-                    GameManager.Instance.currentFloor = GameManager.Instance.TempFloor;
-                }
-                else { this.transform.position = GameManager.Instance.initinfo.transform.position;
-                    GameManager.Instance.currentFloor = 1;
-                }
+                Invoke("Revive", 1);
             }
             else
             {
@@ -86,6 +83,15 @@ public class Player : MonoBehaviour
     public GameObject Right_pos; // 발사체 오른쪽 위치
     public GameObject Left_pos; // 발사체 왼쪽 위치
 
+    // 플레이어 사운드
+    [SerializeField] private AudioSource jumpSound; // 플레이어 점프 사운드
+    [SerializeField] private AudioSource hitSound; // 플레이어 피격 사운드
+    [SerializeField] private AudioSource reviveSound; // 플레이어 부활 사운드
+    [SerializeField] private AudioSource runSound1; // 플레이어 이동 사운드 -> 1, 2 번갈아가며 runSound에 저장
+    [SerializeField] private AudioSource runSound2;
+
+    private AudioSource runSound; // 플래이어 이동 사운드 저장 변수
+
     private void Awake()
     {
         hp = 4; // 초기 체력 설정
@@ -98,6 +104,12 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
         ani = GetComponent<Animator>();
+
+        runSound = runSound2;
+    }
+
+    private void Start()
+    {
     }
 
     void Update()
@@ -106,9 +118,25 @@ public class Player : MonoBehaviour
         Debug.DrawRay(this.gameObject.transform.position, Vector2.down, Color.red, 1.0f);
         MoveManager(); // 이동 관리
         if (Input.GetKeyDown(KeyCode.V)) { Debug.Log(HP); HP = 1; } // 체력 감소 테스트
-        Shooting(); // 발사체 발사
+        if (Input.GetKey(KeyCode.Space)) Jump(); // 점프
+        if (Input.GetKeyDown(KeyCode.Z)) Shooting(); // 발사체 발사
         Jump_Attack(); // 점프 공격
         Debug.DrawRay(transform.position, Vector2.down, new Color(0, 1, 0));
+    }
+
+    private void Revive()
+    {
+        if (checkpoint != null)
+        {
+            this.transform.position = checkpoint.transform.position;
+            GameManager.Instance.currentFloor = GameManager.Instance.TempFloor;
+        }
+        else
+        {
+            this.transform.position = GameManager.Instance.initinfo.transform.position;
+            GameManager.Instance.currentFloor = 1;
+        }
+        reviveSound.Play();
     }
 
     private void MoveManager()
@@ -119,18 +147,30 @@ public class Player : MonoBehaviour
 
     private void Walk()
     {
-        x = Input.GetAxisRaw("Horizontal"); // 입력 값 받기
-        dir = new Vector2(x * speed, rb.velocity.y); // 이동 방향 설정
+        if (playerUI.IsMoveRight) x = 1;
+        else if (playerUI.IsMoveLeft) x = -1;
+        else x = Input.GetAxisRaw("Horizontal");
 
-        
-        
-            
-        
+        dir = new Vector2(x * speed, rb.velocity.y); // 이동 방향 설정
         
         rb.velocity = dir; // Rigidbody 이동 설정
-       
-        if (x != 0) ani.SetBool("run", true); // 이동 애니메이션 재생
-        else ani.SetBool("run", false); // 이동 애니메이션 종료
+
+        if (rb.velocity.x != 0)
+        {
+            ani.SetBool("run", true); // 이동 애니메이션 재생
+            
+            if (!runSound.isPlaying && rb.velocity.y == 0)
+            {
+                if (runSound == runSound1) runSound = runSound2;
+                else if (runSound == runSound2) runSound = runSound1;
+                runSound.Play();
+            }
+        }
+        else
+        {
+            ani.SetBool("run", false); // 이동 애니메이션 종료
+            if (!runSound.isPlaying) runSound = runSound2;
+        }
 
         if (x > 0){ sprite.flipX = true; 
             
@@ -145,13 +185,10 @@ public class Player : MonoBehaviour
             }
     }
 
-    private void Shooting()
+    public void Shooting()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            ani.SetTrigger("attack"); // 공격 애니메이션 재생
-            Bull_Dir(sprite.flipX); // 발사체 방향 설정
-        }
+        ani.SetTrigger("attack"); // 공격 애니메이션 재생
+        Bull_Dir(sprite.flipX); // 발사체 방향 설정
     }
 
     public void Bull_Dir(bool isdir)
@@ -161,31 +198,44 @@ public class Player : MonoBehaviour
         bulletdir.dir = isdir; // 발사체 방향 설정
     }
 
-    public void Jump_Attack()
+    public void Jump()
     {
         // 점프 상태 확인
         if (rb.velocity.y == 0) Isjump = false; // 땅에 있을 때 점프 상태 해제
-        if (Input.GetButtonDown("Jump") && Isjump == false)
+        if (Isjump == false)
         {
-            Isjump = true; // 점프 상태 설정
-            rb.AddForce(Vector2.up * jump_power, ForceMode2D.Impulse); // 점프
+            DoJump();
         }
+    }
 
+    public void Jump_Attack()
+    {
         if (this.rb.velocity.y < 0)
         {
             // 아래로 떨어질 때 몬스터와 충돌 검사
             RaycastHit2D hit = Physics2D.BoxCast(col.bounds.center, col.bounds.size, 0f, Vector2.down, 0.5f, LayerMask.GetMask("Monster"));
             if (hit.collider != null)
             {
-                rb.AddForce(Vector2.up * 13f, ForceMode2D.Impulse); // 몬스터를 밟았을 때 다시 점프
-                isjump = true;
+                DoJump(false);
                 hit.collider.gameObject.SetActive(false); // 몬스터 파괴
             }
+        }
+    }
+
+    public void DoJump(bool playSound = true)
+    {
+        Isjump = true; // 점프 상태 설정
+        rb.AddForce(Vector2.up * jump_power, ForceMode2D.Impulse); // 점프
+
+        if (playSound)
+        {
+            jumpSound.Play();
         }
     }
 
     public void OnDeath()
     {
         this.gameObject.SetActive(false); // 사망 시 게임 오브젝트 비활성화
+        uiManager.fail();
     }
 }

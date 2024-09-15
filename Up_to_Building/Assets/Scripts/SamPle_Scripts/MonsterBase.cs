@@ -37,7 +37,7 @@ public abstract class MonsterBase : MonoBehaviour
     [SerializeField]
     protected float t; // 시간 변수
 
- 
+    private AudioSource dieSound; // 죽는 사운드
     
     private void InitInfo()
     {
@@ -55,6 +55,7 @@ public abstract class MonsterBase : MonoBehaviour
         sp = GetComponent<SpriteRenderer>(); // 스프라이트 렌더러 컴포넌트 가져오기
         rb = GetComponent<Rigidbody2D>(); // 리지드바디 컴포넌트 가져오기
         animator = GetComponent<Animator>(); // 애니메이터 컴포넌트 가져오기
+        dieSound = GetComponent<AudioSource>(); // 몬스터 죽는 사운드 가져오기
     }
 
     void Update()
@@ -105,13 +106,14 @@ public abstract class MonsterBase : MonoBehaviour
     // 죽음 트리거
     private void OntriggerDeath()
     {
+        dieSound.Play();
         this.gameObject.SetActive(false);// 객체 비활성화
     }
 
    private void Startdeath()
-    {
+   {
         rb.velocity = Vector2.zero;
-    }
+   }
 
 
     IEnumerator FIndPlayer()

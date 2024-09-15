@@ -2,10 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-//<<<<<<< HEAD
-//
 using UnityEngine.EventSystems;
-//>>>>>>> e07439b0b7e4c9c791efa2c73247e16158a887e3
 using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
@@ -58,25 +55,15 @@ public class PlayerUI : MonoBehaviour
         isMoveRight = false;
     }
 
-  /*  public void jump()
+    public void jump()
     {
-        player.jump();
+        player.Jump();
     }
 
-    public void sit()
+    public void attack()
     {
-        player.sit();
-    }*/
-
-    /*public void stand()
-    {
-        player.stand();
-    }*/
-
-   /* public void attack()
-    {
-        player.attack();
-    }*/
+        player.Shooting();
+    }
 
     public void Clicked()
     {

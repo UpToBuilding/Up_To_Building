@@ -11,11 +11,9 @@ using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField]
-    private Transform pauseUis;
-    public GameObject[] StateButton; // 0 : PauseButton, 1 : PausePanel, 2 : SettingPanel
+    [SerializeField] private GameObject[] StateObject; // 0 : BackgroundPanel, 1 : PausePanel, 2 : SettingPanel, 3 : FailPanel, 4 : HomePanel, 5 : QuitPanel
     [SerializeField] private Transform progressBar;
-    [SerializeField] private TextMeshProUGUI stageText;
+    [SerializeField] private TextMeshProUGUI[] stageText;
     private int process = 2;
 
     public UnityEvent GameStop;
@@ -29,11 +27,6 @@ public class UIManager : MonoBehaviour
         //pauseUIs = GameObject.Find("PauseUIs").transform;
     }
 
-    public void closePanel()
-    {
-        GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
-        clickedObject.transform.parent.gameObject.SetActive(false);
-    }
 
     public void pause()
     {
@@ -41,57 +34,44 @@ public class UIManager : MonoBehaviour
         
         Time.timeScale = 0;
         Time.fixedDeltaTime = 0f;
-        StateButton[0].gameObject.SetActive(true);
-        //pauseUis.GetChild(0).gameObject.SetActive(false); // PauseButton
-        //sta.gameObject.SetActive(true); // PausePanel
+        StateObject[0].SetActive(true);
+        StateObject[1].SetActive(true);
     }
 
     public void Resume()
     {
-        
-        
         Time.timeScale = 1;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
-        StateButton[0].gameObject.SetActive(false);
-
-        //pauseUis.GetChild(0).gameObject.SetActive(true); // PauseButton
-        //pauseUis.GetChild(1).gameObject.SetActive(false); // PausePanel
+        StateObject[0].SetActive(false);
+        StateObject[1].SetActive(false);
     }
 
     public void OpenHomeMenu()
     {
-        //StateButton[0].gameObject.SetActive(false);
-        StateButton[2].gameObject.SetActive(true);
-        //pauseUis.GetChild(3).gameObject.SetActive(true);
+        StateObject[4].SetActive(true);
     }
 
     public void closeHomeMenu()
     {
-        StateButton[2].gameObject.SetActive(false) ;
-        //pauseUis.GetChild(3).gameObject.SetActive(false);
+        StateObject[4].SetActive(false);
     }
 
     public void goHome()
     {
-
         SceneManager.LoadScene("Start_Scene");
     }
 
     public void setting()
     {
-        StateButton[3].gameObject.SetActive(false);
-        StateButton[1].gameObject.SetActive(true);
-        //pauseUis.GetChild(1).gameObject.SetActive(false); // PausePanel
-        //pauseUis.GetChild(2).gameObject.SetActive(true); // SettingPanel
+        StateObject[1].SetActive(false);
+        StateObject[2].SetActive(true);
     }
 
     public void closeSetting()
     {
 
-        StateButton[3].gameObject.SetActive(true);
-        StateButton[1].gameObject.SetActive(false);
-        // pauseUis.GetChild(1).gameObject.SetActive(true); // PausePanel
-        //pauseUis.GetChild(2).gameObject.SetActive(false); // SettingPanel
+        StateObject[1].gameObject.SetActive(true);
+        StateObject[2].gameObject.SetActive(false);
     }
 
 
@@ -105,12 +85,27 @@ public class UIManager : MonoBehaviour
         {
             progressBar.GetChild(i).GetChild(0).gameObject.SetActive(true);
         }
-        progressBar.gameObject.SetActive(true);
+        StateObject[0].SetActive(true);
+        StateObject[3].SetActive(true);
+    }
+
+    public void OpenQuitPanel()
+    {
+        StateObject[5].SetActive(true);
+    }
+
+    public void CloseQuitPanel()
+    {
+        StateObject[5].SetActive(false);
     }
 
     public void setStageText()
     {
-        stageText.text = "스테이지 1-" + process;
+        foreach (TextMeshProUGUI txt in stageText)
+        {
+            if (txt == null) break;
+            txt.text = "스테이지 1-" + process;
+        }
     }
 
     public void gameExit()
