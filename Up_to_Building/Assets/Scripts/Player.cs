@@ -34,12 +34,17 @@ public class Player : MonoBehaviour
 
     public Action playerDead;
 
+    private bool isHIt;
+
     private int hp; // 플레이어의 체력
     public int HP
     {
         get => hp;
         set
         {
+            if (isHIt) return; // 이미 맞은 상태인지 여부 확인
+            isHIt = true;
+
             hp += value;
             playerUI.lostLife(); // 체력 감소 UI 업데이트
             hitSound.Play();
@@ -96,6 +101,7 @@ public class Player : MonoBehaviour
     {
         hp = 4; // 초기 체력 설정
         jump_power = 12; // 초기 점프 파워 설정
+        isHIt = false;
 
         PlayerTransform = this.transform; // 플레이어 위치 설정
 
@@ -124,7 +130,7 @@ public class Player : MonoBehaviour
         Debug.DrawRay(transform.position, Vector2.down, new Color(0, 1, 0));
     }
 
-    private void Revive()
+    public void Revive()
     {
         if (checkpoint != null)
         {
@@ -136,6 +142,7 @@ public class Player : MonoBehaviour
             this.transform.position = GameManager.Instance.initinfo.transform.position;
             GameManager.Instance.currentFloor = 1;
         }
+        isHIt = false;
         reviveSound.Play();
     }
 
@@ -237,5 +244,10 @@ public class Player : MonoBehaviour
     {
         this.gameObject.SetActive(false); // 사망 시 게임 오브젝트 비활성화
         uiManager.fail();
+    }
+
+    public void Heal()
+    {
+        hp = 4;
     }
 }

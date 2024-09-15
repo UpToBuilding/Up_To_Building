@@ -32,7 +32,21 @@ public class PlayerUI : MonoBehaviour
 
     public void lostLife()
     {
+        if (hpIndex < 0) return;
         lifePoints[hpIndex--].gameObject.SetActive(false);
+    }
+
+    public void HealHp()
+    {
+        hpIndex = lifePoints.Length - 1;
+        foreach (Image img in lifePoints)
+        {
+            img.gameObject.SetActive(true);
+        }
+        player.checkpoint = null;
+        player.Heal();
+        player.gameObject.SetActive(true);
+        player.Revive();
     }
 
     public void moveLeft()

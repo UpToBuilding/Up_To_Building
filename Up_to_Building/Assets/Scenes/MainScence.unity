@@ -1702,10 +1702,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1759464041}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 450, y: -350}
-  m_SizeDelta: {x: 474, y: 126}
+  m_AnchorMin: {x: 0.611, y: 0.11800001}
+  m_AnchorMax: {x: 0.85800004, y: 0.23333336}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &216285726
 MonoBehaviour:
@@ -1753,7 +1753,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1494061357}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: goHome
+        m_MethodName: OpenQuitPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3593,7 +3593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.257}
   m_AnchorMax: {x: 1, y: 0.74500006}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &456783222
@@ -6545,7 +6545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &679508060
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7449,10 +7449,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1759464041}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.39285475, y: 0.8437038}
+  m_AnchorMin: {x: 0.39285475, y: 0.836}
   m_AnchorMax: {x: 0.6067095, y: 0.897185}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.039093018}
+  m_SizeDelta: {x: 0, y: 0.078300476}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &803401631
 MonoBehaviour:
@@ -7501,10 +7501,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.6
+  m_fontSize: 51.25
   m_fontSizeBase: 51.6
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -13239,10 +13239,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1759464041}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -450, y: -350}
-  m_SizeDelta: {x: 474, y: 126}
+  m_AnchorMin: {x: 0.14247917, y: 0.117000006}
+  m_AnchorMax: {x: 0.38920897, y: 0.23425929}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1286392540
 MonoBehaviour:
@@ -13288,9 +13288,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1494061353}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: 
+      - m_Target: {fileID: 1494061357}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: RetryGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15448,9 +15448,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1494061357}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: GameExit
+        m_MethodName: gameExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15460,7 +15460,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1007818538}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
         m_Mode: 1
@@ -15629,7 +15629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 184648268}
   lifePoints:
-  - {fileID: 636804300}
+  - {fileID: 884162133}
   - {fileID: 637207375}
   - {fileID: 193157823}
   - {fileID: 1243314259}
@@ -15646,12 +15646,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896ed24b4e4d7fa4aa645b33b5cd6797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerUI: {fileID: 1494061356}
   StateObject:
   - {fileID: 679508059}
   - {fileID: 2137683233}
   - {fileID: 665683201}
   - {fileID: 1759464040}
   - {fileID: 456783220}
+  - {fileID: 123160803}
   progressBar: {fileID: 1871454423}
   stageText:
   - {fileID: 0}
@@ -16032,9 +16034,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1494061357}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: closePanel
+        m_MethodName: CloseQuitPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16044,7 +16046,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1007818538}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
         m_Mode: 1
@@ -18075,7 +18077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1759464041
 RectTransform:
   m_ObjectHideFlags: 0

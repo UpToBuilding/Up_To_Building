@@ -11,6 +11,7 @@ using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private PlayerUI playerUI;
     [SerializeField] private GameObject[] StateObject; // 0 : BackgroundPanel, 1 : PausePanel, 2 : SettingPanel, 3 : FailPanel, 4 : HomePanel, 5 : QuitPanel
     [SerializeField] private Transform progressBar;
     [SerializeField] private TextMeshProUGUI[] stageText;
@@ -87,6 +88,13 @@ public class UIManager : MonoBehaviour
         }
         StateObject[0].SetActive(true);
         StateObject[3].SetActive(true);
+    }
+
+    public void RetryGame()
+    {
+        StateObject[3].SetActive(false);
+        StateObject[0].SetActive(false);
+        playerUI.HealHp();
     }
 
     public void OpenQuitPanel()
