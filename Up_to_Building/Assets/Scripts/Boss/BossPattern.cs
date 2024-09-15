@@ -5,14 +5,14 @@ using UnityEngine;
 [Serializable]
 public class FireInformation
 {
-    public BossAttackType attackType;     // 공격 타입
-    public float attackDuration; // 공격 지속 시간
-    public float attackSpeed;    // 브레스 속도
-    public float timeNextAttack; // 공격하는데 걸리는 시간
-    public int fireHead;       // 공격하는 머리 0, 1, 2
-    public int sectionNumber;  // 섹션 넘버
-    public int sectionLength;  // 섹션 길이
-    public int attackOrder;    // 공격 순서 (0번의 공격이 가장 빠르다)
+    public BossAttackType attackType;     // ???? ???
+    public float attackDuration; // ???? ???? ?ð?
+    public float attackSpeed;    // ?극?? ???
+    public float timeNextAttack; // ???????? ????? ?ð?
+    public int fireHead;       // ??????? ??? 0, 1, 2
+    public int sectionNumber;  // ???? ???
+    public int sectionLength;  // ???? ????
+    public int attackOrder;    // ???? ???? (0???? ?????? ???? ??????)
 }
 
 [CreateAssetMenu(fileName ="New Pattern Data")]

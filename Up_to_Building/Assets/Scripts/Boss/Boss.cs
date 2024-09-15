@@ -36,7 +36,7 @@ public class Boss : MonoBehaviour
             case BossPhase.NormalPhase:
                 attackEnabled = false;
                 combat.OperatePattern(nextPatternNum);
-                nextPatternNum = 0 + (nextPatternNum + 1) % 5;
+                nextPatternNum = 0 + (nextPatternNum + 1) % 3;
                 break;
 
             case BossPhase.AngerPhase:
@@ -74,6 +74,6 @@ public class Boss : MonoBehaviour
 
     void BossSetDead()
     {
-
+        // Game Clear?
     }
 }

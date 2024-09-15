@@ -26,7 +26,7 @@ using UnityEngine;
         
     }
 
-    public void OperateFireOrder(int orderNum)
+    void OperateFireOrder(int orderNum)
     {
         float fireTime = 0f;
         foreach(FireInformation info in currentPattern.fireInformations)
@@ -57,7 +57,7 @@ using UnityEngine;
     }
 
 
-    // FIreInfo »ç¿ëÇÏ¿© ÁöÁ¤µÈ À§Ä¡¿¡ ºÒ »ý¼º
+    // FIreInfo ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     void MakeFire(FireInformation fireInfo)
     {
         GameObject fireInstance = Instantiate(firePrefeb, transform.position, Quaternion.identity);
