@@ -10,19 +10,19 @@ public enum BossAttackType
 
 public class BossFire : MonoBehaviour
 {
-    BossAttackType  bossAttackType;         // °ø°Ý Å¸ÀÔ
-    int             sectionNumber;          // 5°³·Î ³ª´©¾îÁø ±¸¿ª ¹øÈ£
-    float           attackDuration;         // ÆÐÅÏ Áö¼Ó½Ã°£
-    float           timeAfterCreation;       // »ý¼ºµÈ ÈÄ Áö³­ ½Ã°£
+    BossAttackType  bossAttackType;         // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½
+    int             sectionNumber;          // 5ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+    float           attackDuration;         // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ó½Ã°ï¿½
+    float           timeAfterCreation;       // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
 
-    // ¾Æ·¡ º¯¼ö´Â Persistant Attack¸¸ ÇØ´ç
-    int             sectionSize;            // Persistant Attack¿¡¼­ÀÇ °ø°Ý ¹üÀ§
-    float           attackSpeed;            // ºÒ±æ ÀÌµ¿ÇÏ´Â ¼Óµµ
+    // ï¿½Æ·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Persistant Attackï¿½ï¿½ ï¿½Ø´ï¿½
+    int             sectionSize;            // Persistant Attackï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    float           attackSpeed;            // ï¿½Ò±ï¿½ ï¿½Ìµï¿½ï¿½Ï´ï¿½ ï¿½Óµï¿½
 
     [SerializeField]
     Sprite[] Firesprites = new Sprite[2];
 
-    // Fire ÃÊ±âÈ­
+    // Fire ï¿½Ê±ï¿½È­
     public void Initialize(BossAttackType _bossAttackType, float _attackDuration, float _attackSpeed, int _sectionNumber, int _sectionSize = 1)
     {
         bossAttackType = _bossAttackType;
@@ -34,7 +34,7 @@ public class BossFire : MonoBehaviour
         CreateFire();
     }
 
-    // Fire »ý¼º
+    // Fire ï¿½ï¿½ï¿½ï¿½
     void CreateFire()
     {
         BoxCollider2D collider = gameObject.AddComponent<BoxCollider2D>();
@@ -48,28 +48,29 @@ public class BossFire : MonoBehaviour
                 collider.size = new Vector2(2.69f, 3.0f);
                 spriteRenderer.color = Color.red;
                 spriteRenderer.sprite = Firesprites[(int)BossAttackType.SingleAttack];
+                gameObject.transform.position = new Vector3(-8.25f + 2.69f * (sectionNumber + sectionSize - 1), -3.55f, 0f);
                 break;
 
             case BossAttackType.PersistantAttack:
                 collider.size = new Vector2(1.35f, 3.0f);
                 spriteRenderer.color = Color.magenta;
                 spriteRenderer.sprite = Firesprites[(int)BossAttackType.PersistantAttack];
+                gameObject.transform.position = new Vector3(-8.25f + 2.69f * (sectionNumber + sectionSize - 1), -3.1f, 0f);
                 break;
         }
 
-        gameObject.transform.position = new Vector3(-8.25f + 2.69f * (sectionNumber + sectionSize -1), -2.4f, 0f);
     }
 
     void Update()
     {
-        // Áö¼Ó½Ã°£ÀÌ Áö³ª¸é »ç¶óÁø´Ù
+        // ï¿½ï¿½ï¿½Ó½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         timeAfterCreation += Time.deltaTime;
         if(timeAfterCreation > attackDuration)
         {
             Destroy(gameObject);
         }
 
-        // °ø°Ý Å¸ÀÔ¿¡ ´ëÇØ °¢°¢ µ¶¸³ ÇÔ¼ö ½ÇÇà
+        // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ô¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½
         switch(bossAttackType)
         {
             case BossAttackType.SingleAttack:
@@ -115,7 +116,7 @@ public class BossFire : MonoBehaviour
 
         if(player != null)
         {
-            // Ä³¸¯ÅÍ µ¥¹ÌÁö ¹Þ´Â ÇÔ¼ö È£ÃâÇÑ´Ù
+            // Damage Player
         }
     }
 }
