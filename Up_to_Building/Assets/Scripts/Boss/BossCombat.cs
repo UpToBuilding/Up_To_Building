@@ -57,7 +57,7 @@ using UnityEngine;
     }
 
 
-    // FIreInfo ����Ͽ� ������ ��ġ�� �� ����
+    // FIreInfo -> Make
     void MakeFire(FireInformation fireInfo)
     {
         GameObject fireInstance = Instantiate(firePrefeb, transform.position, Quaternion.identity);
@@ -72,6 +72,5 @@ using UnityEngine;
     private void Update()
     {
         patternTimer += Time.deltaTime;
-
     }
 }
