@@ -12,6 +12,9 @@ public class Boss : MonoBehaviour
     }
 
     [SerializeField]
+    public Transform[] HeadTransform;
+
+    [SerializeField]
     float MaxHp = 100f;
     float CurrentHp;
     int nextPatternNum = 0;

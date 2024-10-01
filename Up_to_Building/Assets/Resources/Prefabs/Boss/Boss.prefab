@@ -81,6 +81,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a6219b62240004a8221a9ca4d2ac3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HeadTransform:
+  - {fileID: 430462061441128518}
+  - {fileID: 675006301668600444}
+  - {fileID: 4166640494739405449}
   MaxHp: 0
   attackEnabled: 1
 --- !u!114 &6540176599811598025
@@ -102,6 +106,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 30ab6faec05e714418a4ca27c2cf4f63, type: 2}
   - {fileID: 11400000, guid: 98aea5bc97323844d9873af1d899dad5, type: 2}
   firePrefeb: {fileID: 4546972479387800772, guid: cb5dc66aa86b7ea48a72c35722ee66bd, type: 3}
+  fireProjectilePrefab: {fileID: 0}
 --- !u!212 &8825553284082682183
 SpriteRenderer:
   m_ObjectHideFlags: 0

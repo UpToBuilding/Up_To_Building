@@ -86,7 +86,7 @@ MonoBehaviour:
     sectionLength: 1
     attackOrder: 2
   patternNumber: 0
-  patternTime: 2.5
+  patternTime: 5
   numOfOrder: 3
   fireHeadString:
   - 111
