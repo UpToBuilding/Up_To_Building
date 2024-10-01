@@ -23,12 +23,13 @@ using UnityEngine;
         OperateFireOrder(0);
 
         StartCoroutine(PatternTimer(currentPattern.patternTime));
-        
     }
 
     void OperateFireOrder(int orderNum)
     {
         float fireTime = 0f;
+        string patternAnimString = currentPattern.fireHeadString[orderNum] + "Attack";
+        gameObject.GetComponent<Animator>().Play(patternAnimString);
         foreach(FireInformation info in currentPattern.fireInformations)
         {
             if(info.attackOrder == orderNum)

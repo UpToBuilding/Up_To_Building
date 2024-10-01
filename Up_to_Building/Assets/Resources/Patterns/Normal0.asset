@@ -88,3 +88,7 @@ MonoBehaviour:
   patternNumber: 0
   patternTime: 2.5
   numOfOrder: 3
+  fireHeadString:
+  - 111
+  - 111
+  - 111
