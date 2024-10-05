@@ -4,15 +4,15 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
-// Ãß»ó Å¬·¡½º MonsterBase: ¸ó½ºÅÍÀÇ ±âº» µ¿ÀÛÀ» Á¤ÀÇ
+// ì¶”ìƒ í´ë˜ìŠ¤ MonsterBase: ëª¬ìŠ¤í„°ì˜ ê¸°ë³¸ ë™ì‘ì„ ì •ì˜
 public abstract class MonsterBase : MonoBehaviour
 {
-    protected Animator animator; // ¸ó½ºÅÍÀÇ ¾Ö´Ï¸ŞÀÌÅÍ
-    protected Rigidbody2D rb; // ¸ó½ºÅÍÀÇ ¸®Áöµå¹Ùµğ
-    protected SpriteRenderer sp; // ¸ó½ºÅÍÀÇ ½ºÇÁ¶óÀÌÆ® ·»´õ·¯
-    //public GameObject playerObj; // ÇÃ·¹ÀÌ¾î °´Ã¼¸¦ ÂüÁ¶ÇÏ´Â º¯¼ö
+    protected Animator animator; // ëª¬ìŠ¤í„°ì˜ ì• ë‹ˆë©”ì´í„°
+    protected Rigidbody2D rb; // ëª¬ìŠ¤í„°ì˜ ë¦¬ì§€ë“œë°”ë””
+    protected SpriteRenderer sp; // ëª¬ìŠ¤í„°ì˜ ìŠ¤í”„ë¼ì´íŠ¸ ë Œë”ëŸ¬
+    //public GameObject playerObj; // í”Œë ˆì´ì–´ ê°ì²´ë¥¼ ì°¸ì¡°í•˜ëŠ” ë³€ìˆ˜
     [SerializeField]
-    protected int hp; // ¸ó½ºÅÍÀÇ Ã¼·Â
+    protected int hp; // ëª¬ìŠ¤í„°ì˜ ì²´ë ¥
 
     [SerializeField]
     protected float baseSpeed;
@@ -24,20 +24,20 @@ public abstract class MonsterBase : MonoBehaviour
         get { return hp; }
         set
         {
-            hp += value; // Ã¼·ÂÀ» °¨¼Ò½ÃÅ´
+            hp += value; // ì²´ë ¥ì„ ê°ì†Œì‹œí‚´
             if (hp > 0) animator.SetTrigger("hit"); 
             if (hp <= 0)
             {
-                animator.SetTrigger("death"); // Ã¼·ÂÀÌ 0 ÀÌÇÏ°¡ µÇ¸é Á×À½ ¾Ö´Ï¸ŞÀÌ¼Ç Æ®¸®°Å
+                animator.SetTrigger("death"); // ì²´ë ¥ì´ 0 ì´í•˜ê°€ ë˜ë©´ ì£½ìŒ ì• ë‹ˆë©”ì´ì…˜ íŠ¸ë¦¬ê±°
             }
         }
     }
 
  
     [SerializeField]
-    protected float t; // ½Ã°£ º¯¼ö
+    protected float t; // ì‹œê°„ ë³€ìˆ˜
 
-    private AudioSource dieSound; // Á×´Â »ç¿îµå
+    private AudioSource dieSound; // ì£½ëŠ” ì‚¬ìš´ë“œ
     
     private void InitInfo()
     {
@@ -48,48 +48,56 @@ public abstract class MonsterBase : MonoBehaviour
 
     private void Awake()
     {
-        t = 0; // ÃÊ±â ½Ã°£ ¼³Á¤
+        t = 0; // ì´ˆê¸° ì‹œê°„ ì„¤ì •
         Player player = FindObjectOfType<Player>();
         player.playerDead += MonsterObjSetActivation;
-        InitInfo();
-        sp = GetComponent<SpriteRenderer>(); // ½ºÇÁ¶óÀÌÆ® ·»´õ·¯ ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
-        rb = GetComponent<Rigidbody2D>(); // ¸®Áöµå¹Ùµğ ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
-        animator = GetComponent<Animator>(); // ¾Ö´Ï¸ŞÀÌÅÍ ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
-        dieSound = GetComponent<AudioSource>(); // ¸ó½ºÅÍ Á×´Â »ç¿îµå °¡Á®¿À±â
+     
+        sp = GetComponent<SpriteRenderer>(); // ìŠ¤í”„ë¼ì´íŠ¸ ë Œë”ëŸ¬ ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ê¸°
+        rb = GetComponent<Rigidbody2D>(); // ë¦¬ì§€ë“œë°”ë”” ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ê¸°
+        animator = GetComponent<Animator>(); // ì• ë‹ˆë©”ì´í„° ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ê¸°
+        dieSound = GetComponent<AudioSource>(); // ëª¬ìŠ¤í„° ì£½ëŠ” ì‚¬ìš´ë“œ ê°€ì ¸ì˜¤ê¸°
+    }
+
+    private void Start()
+    {
+        if (this.transform.localPosition.y < Player.PlayerTransform.localPosition.y - 1f)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     void Update()
     {
-        Base_Movement(); // ±âº» ÀÌµ¿ µ¿ÀÛ
+        Base_Movement(); // ê¸°ë³¸ ì´ë™ ë™ì‘
     }
 
-    // ¸ó½ºÅÍÀÇ ±âº» ÀÌµ¿ ·ÎÁ÷
+    // ëª¬ìŠ¤í„°ì˜ ê¸°ë³¸ ì´ë™ ë¡œì§
     public virtual void Base_Movement()
     {
-        int x = rb.velocity.x > 0 ? -1 : 1; // ÀÌµ¿ ¹æÇâ °áÁ¤
+        int x = rb.velocity.x > 0 ? -1 : 1; // ì´ë™ ë°©í–¥ ê²°ì •
 
 
 
 
 
-        // ½ºÇÁ¶óÀÌÆ® ¹æÇâ ¼³Á¤
+        // ìŠ¤í”„ë¼ì´íŠ¸ ë°©í–¥ ì„¤ì •
         if (x > 0) sp.flipX = false;
         else if (x < 0) sp.flipX = true;
 
-        // ´Ş¸®´Â ¾Ö´Ï¸ŞÀÌ¼Ç ¼³Á¤
+        // ë‹¬ë¦¬ëŠ” ì• ë‹ˆë©”ì´ì…˜ ì„¤ì •
         if (x != 0) animator.SetBool("run", true);
         if(rb.velocity.x ==0) animator.SetBool("run", false);
 
         if (Physics2D.OverlapBox(this.gameObject.transform.position, new Vector2(distance, 2.5f), 0.0f, LayerMask.GetMask("Player")) == null)
         {
 
-            t += Time.deltaTime; // ½Ã°£ Áõ°¡
+            t += Time.deltaTime; // ì‹œê°„ ì¦ê°€
             if (t <= 1.0f)
             {
-                rb.velocity = new Vector2(1, rb.velocity.y) * baseSpeed; // ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿
+                rb.velocity = new Vector2(1, rb.velocity.y) * baseSpeed; // ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™
             }
-            else if (t <= 2.0f) rb.velocity = new Vector2(-1, rb.velocity.y) * baseSpeed; // ¿ŞÂÊÀ¸·Î ÀÌµ¿
-            else t = 0; // ½Ã°£ ÃÊ±âÈ­
+            else if (t <= 2.0f) rb.velocity = new Vector2(-1, rb.velocity.y) * baseSpeed; // ì™¼ìª½ìœ¼ë¡œ ì´ë™
+            else t = 0; // ì‹œê°„ ì´ˆê¸°í™”
             //StartCoroutine(FIndPlayer());
         }
 
@@ -98,16 +106,16 @@ public abstract class MonsterBase : MonoBehaviour
     
 
 
-    // °ø°İ ¸Ş¼­µå (Ãß»ó ¸Ş¼­µå·Î ÀÚ½Ä Å¬·¡½º¿¡¼­ ±¸Çö ÇÊ¿ä)
+    // ê³µê²© ë©”ì„œë“œ (ì¶”ìƒ ë©”ì„œë“œë¡œ ìì‹ í´ë˜ìŠ¤ì—ì„œ êµ¬í˜„ í•„ìš”)
     public abstract void Attack();
 
     
    
-    // Á×À½ Æ®¸®°Å
+    // ì£½ìŒ íŠ¸ë¦¬ê±°
     private void OntriggerDeath()
     {
         dieSound.Play();
-        this.gameObject.SetActive(false);// °´Ã¼ ºñÈ°¼ºÈ­
+        this.gameObject.SetActive(false);// ê°ì²´ ë¹„í™œì„±í™”
     }
 
    private void Startdeath()
@@ -120,7 +128,7 @@ public abstract class MonsterBase : MonoBehaviour
     {
         rb.velocity = new Vector2(1, rb.velocity.y) * baseSpeed;
         yield return new WaitForSeconds(1.0f);
-        rb.velocity = new Vector2(-1, rb.velocity.y) * baseSpeed; // ¿ŞÂÊÀ¸·Î ÀÌµ¿
+        rb.velocity = new Vector2(-1, rb.velocity.y) * baseSpeed; // ì™¼ìª½ìœ¼ë¡œ ì´ë™
         yield return null;
     }
 
@@ -134,3 +142,13 @@ public abstract class MonsterBase : MonoBehaviour
     }
 
 }
+
+
+public class MonsterData
+{
+    public int hp = 2;
+    public Vector3 monsterPostion;
+
+}
+
+

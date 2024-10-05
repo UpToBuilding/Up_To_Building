@@ -12,9 +12,15 @@ public class UiManager : MonoBehaviour
 
     public void OnMainSence()
     {
+        SaveManager.Instance.newGame_DeleteJson();
         SceneManager.LoadScene(1);
     }
 
+    public void OnReLoad()
+    {
+        SaveManager.Instance.LoadData();
+        SceneManager.LoadScene(1);
+    }
 
     public void OnSettingPanel()
     {

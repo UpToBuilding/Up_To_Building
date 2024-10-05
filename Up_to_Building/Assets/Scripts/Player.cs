@@ -42,8 +42,8 @@ public class Player : MonoBehaviour
         get => hp;
         set
         {
-            if (isHIt) return; // 이미 맞은 상태인지 여부 확인
-            isHIt = true;
+            //if (isHIt) return; // 이미 맞은 상태인지 여부 확인
+            //isHIt = true;
 
             hp += value;
             playerUI.lostLife(); // 체력 감소 UI 업데이트
@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
 
             if (hp > 0)
             {
-                Invoke("Revive", 1);
+               Revive();
             }
             else
             {
@@ -69,13 +69,15 @@ public class Player : MonoBehaviour
     private float jump_power; // 점프 파워
 
     private bool isjump; // 점프 상태
-    public bool Isjump
+   public bool Isjump
     {
         get => isjump;
         set
         {
-            isjump = value;
-            if (isjump) ani.SetBool("jump", true); // 점프 애니메이션 재생
+            isjump = value;// 점프 애니메이션 재생
+            if (isjump) { ani.SetBool("jump", true);
+                DoJump();
+            } 
             else ani.SetBool("jump", false); // 점프 애니메이션 종료
         }
     }
@@ -100,7 +102,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         hp = 4; // 초기 체력 설정
-        jump_power = 12; // 초기 점프 파워 설정
+        //jump_power = 12; // 초기 점프 파워 설정
         isHIt = false;
 
         PlayerTransform = this.transform; // 플레이어 위치 설정
@@ -116,6 +118,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        if (SaveManager.Instance.playerData.player_position != Vector3.zero) this.transform.localPosition = SaveManager.Instance.playerData.player_position;
+        hp = SaveManager.Instance.playerData.hp;
     }
 
     void Update()
@@ -142,7 +146,7 @@ public class Player : MonoBehaviour
             this.transform.position = GameManager.Instance.initinfo.transform.position;
             GameManager.Instance.currentFloor = 1;
         }
-        isHIt = false;
+        //isHIt = false;
         reviveSound.Play();
     }
 
@@ -215,24 +219,48 @@ public class Player : MonoBehaviour
         }
     }
 
+    
+
     public void Jump_Attack()
     {
+        // 점프 상태 확인
+        if (rb.velocity.y == 0) Isjump = false; // 땅에 있을 때 점프 상태 해제
+        if (Input.GetButtonDown("Jump") && Isjump == false)
+        {
+            Isjump = true; // 점프 상태 설정
+            rb.AddForce(Vector2.up * jump_power, ForceMode2D.Impulse); // 점프
+        }
+
         if (this.rb.velocity.y < 0)
         {
             // 아래로 떨어질 때 몬스터와 충돌 검사
             RaycastHit2D hit = Physics2D.BoxCast(col.bounds.center, col.bounds.size, 0f, Vector2.down, 0.5f, LayerMask.GetMask("Monster"));
             if (hit.collider != null)
             {
-                DoJump(false);
-                hit.collider.gameObject.SetActive(false); // 몬스터 파괴
+                rb.AddForce(Vector2.up * 13f, ForceMode2D.Impulse); // 몬스터를 밟았을 때 다시 점프
+                isjump = true;
+             
+                hit.collider.gameObject.GetComponent<MonsterBase>().HP = -100;
+     
             }
         }
     }
 
+
+
+    public void SavePlayerInfo()
+    {
+        SaveManager.Instance.playerData.hp = HP;
+        Debug.Log(SaveManager.Instance.playerData.hp);
+        SaveManager.Instance.playerData.player_position = this.gameObject.transform.localPosition;
+    }
+
+
+
     public void DoJump(bool playSound = true)
     {
-        Isjump = true; // 점프 상태 설정
-        rb.AddForce(Vector2.up * jump_power, ForceMode2D.Impulse); // 점프
+        //Isjump = true; // 점프 상태 설정
+        //rb.AddForce(Vector2.up * jump_power, ForceMode2D.Impulse); // 점프
 
         if (playSound)
         {
@@ -250,4 +278,13 @@ public class Player : MonoBehaviour
     {
         hp = 4;
     }
+}
+
+
+
+[System.Serializable]
+public class PlayerData
+{
+    public int hp = 4;
+    public Vector3 player_position;
 }

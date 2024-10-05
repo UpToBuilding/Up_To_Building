@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-
+using System.IO;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Progress;
 
 
 
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] Stage;
 
-    public List<GameObject> WallManager = new List<GameObject>();
+ 
 
     [SerializeField]
     private int currentfloor;
@@ -30,16 +31,12 @@ public class GameManager : MonoBehaviour
             currentfloor = value;
             if (maxfloor == currentfloor)
             {
-                Stage[0].SetActive(false);
-                Stage[1].SetActive(true);
 
-                TileObj = null;
-                TileObj = GameObject.Find("BaseWall");
-                DestoryObj();
-                WallManager.Clear();
-                
-                createObj();
-                ReloactionWall(4.5f);
+
+
+                stageNum++;
+                ChangeStage(stageNum);
+
                 currentFloor = 1;
       
                 Player.PlayerTransform.GetComponent<Player>().gameObject.transform.position = initinfo.transform.position;
@@ -56,7 +53,7 @@ public class GameManager : MonoBehaviour
     private int tempfloor;
     public int TempFloor { get; set; }
 
-
+    public int stageNum = 0;
 
     public bool isResponeCheck;
 
@@ -75,67 +72,55 @@ public class GameManager : MonoBehaviour
         {
             
             instance = this;
-            
-            DontDestroyOnLoad(this.gameObject);
+      
         }
 
-        Stage[0].SetActive(true);
-        Stage[1].SetActive(false);
+        stageNum = SaveManager.Instance.GameData.Stage;
+        ChangeStage(stageNum);
+        currentfloor = SaveManager.Instance.GameData.currentfloor;
         backinfo = Background.transform.position;
-        createObj();
-        ReloactionWall(4.1f);
+       
     }
 
-    private  void createObj()
+    public void SaveGameinfo()
     {
-        for (int i = 0; i < maxfloor; i++)
-        {
-            WallManager.Add(initiativeWall());
-        }
+        SaveManager.Instance.GameData.currentfloor =currentFloor;
+        SaveManager.Instance.GameData.Stage = stageNum;
     }
 
 
-    private GameObject initiativeWall()
-    {
-     
-            GameObject gm = Instantiate(TileObj, TileObj.transform.position, Quaternion.identity);
-            gm.gameObject.SetActive(false);
-            //gm.transform.position += new Vector3(0, offset , 0);
-            
+ 
 
-        return gm;
-    }
 
-    private void ReloactionWall(float offset)
-    {
-        for (int i = 1; i < maxfloor; i++)
-        {
-            WallManager[i-1].transform.localPosition += new Vector3(0, offset * i, 0);
-            WallManager[i-1].SetActive(true);
-        }
-    }
     public void UpFloor()
     {
       //  Background.transform.position = backinfo;
         Player.PlayerTransform.position = Stage[1].activeSelf ? initinfo.transform.position+new Vector3(0,STAGE2_OFFSET*currentFloor,0): initinfo.transform.position + new Vector3(0, STAGE1_OFFSET * currentFloor, 0);
     }
 
-    private void DestoryObj()
+
+    public void ChangeStage(int num)
     {
-        foreach (GameObject item in WallManager)
+        if (num == 0)
         {
-            Destroy(item);
+           
+            Stage[0].SetActive(true);
+            Stage[1].SetActive(false);
+        }
+        else
+        {
+            Stage[0].SetActive(false);
+            Stage[1].SetActive(true);
         }
     }
 
-    
-
-   
-
-  
 
 
 
+}
 
-  
+public class GameManagerData
+{
+    public int Stage = 0;
+    public int currentfloor = 1;
 }

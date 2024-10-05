@@ -8,6 +8,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Transform progressBar;
     [SerializeField] private TextMeshProUGUI[] stageText;
     private int process = 2;
+
+    public Action JsonSaveinfo;
 
     public UnityEvent GameStop;
     public UnityEvent GameStart;
@@ -27,7 +30,13 @@ public class UIManager : MonoBehaviour
         //setStageText();
         //pauseUIs = GameObject.Find("PauseUIs").transform;
     }
+    private void Start()
+    {
+        Player player = FindObjectOfType<Player>();
 
+        JsonSaveinfo += player.SavePlayerInfo;
+        
+    }
 
     public void pause()
     {
@@ -59,6 +68,12 @@ public class UIManager : MonoBehaviour
 
     public void goHome()
     {
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
+
+        GameManager.Instance.SaveGameinfo();
+        JsonSaveinfo();
+        SaveManager.Instance.SaveJson();
         SceneManager.LoadScene("Start_Scene");
     }
 
@@ -76,13 +91,13 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void fail() // ½ÇÆĞ ÈÄ ÁøÇà¹Ù Ç¥½Ã
+    public void fail() // ì‹¤íŒ¨ í›„ ì§„í–‰ë°” í‘œì‹œ
     {
-        foreach (Transform processUi in progressBar.GetComponentInChildren<Transform>()) // ÁøÇàµµ ÃÊ±âÈ­
+        foreach (Transform processUi in progressBar.GetComponentInChildren<Transform>()) // ì§„í–‰ë„ ì´ˆê¸°í™”
         {
             processUi.GetChild(0).gameObject.SetActive(false);
         }
-        for (int i = 0; i < process; i++) // ÇöÀç ÁøÇàµµ±îÁö ºÒ ¹àÈ÷±â
+        for (int i = 0; i < process; i++) // í˜„ì¬ ì§„í–‰ë„ê¹Œì§€ ë¶ˆ ë°íˆê¸°
         {
             progressBar.GetChild(i).GetChild(0).gameObject.SetActive(true);
         }
@@ -112,7 +127,7 @@ public class UIManager : MonoBehaviour
         foreach (TextMeshProUGUI txt in stageText)
         {
             if (txt == null) break;
-            txt.text = "½ºÅ×ÀÌÁö 1-" + process;
+            txt.text = "ìŠ¤í…Œì´ì§€ 1-" + process;
         }
     }
 
