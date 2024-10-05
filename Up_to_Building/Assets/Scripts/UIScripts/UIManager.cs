@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject[] StateObject; // 0 : BackgroundPanel, 1 : PausePanel, 2 : SettingPanel, 3 : FailPanel, 4 : HomePanel, 5 : QuitPanel
     [SerializeField] private Transform progressBar;
     [SerializeField] private TextMeshProUGUI[] stageText;
-    private int process = 2;
+    private int process;
 
     public UnityEvent GameStop;
     public UnityEvent GameStart;
@@ -76,13 +76,13 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void fail() // ½ÇÆĞ ÈÄ ÁøÇà¹Ù Ç¥½Ã
+    public void fail() // ì‹¤íŒ¨ í›„ ì§„í–‰ë°” í‘œì‹œ
     {
-        foreach (Transform processUi in progressBar.GetComponentInChildren<Transform>()) // ÁøÇàµµ ÃÊ±âÈ­
+        foreach (Transform processUi in progressBar.GetComponentInChildren<Transform>()) // ì§„í–‰ë„ ì´ˆê¸°í™”
         {
             processUi.GetChild(0).gameObject.SetActive(false);
         }
-        for (int i = 0; i < process; i++) // ÇöÀç ÁøÇàµµ±îÁö ºÒ ¹àÈ÷±â
+        for (int i = 0; i < process; i++) // í˜„ì¬ ì§„í–‰ë„ê¹Œì§€ ë¶ˆ ë°íˆê¸°
         {
             progressBar.GetChild(i).GetChild(0).gameObject.SetActive(true);
         }
@@ -112,7 +112,7 @@ public class UIManager : MonoBehaviour
         foreach (TextMeshProUGUI txt in stageText)
         {
             if (txt == null) break;
-            txt.text = "½ºÅ×ÀÌÁö 1-" + process;
+            txt.text = "ìŠ¤í…Œì´ì§€ 1-" + process;
         }
     }
 
