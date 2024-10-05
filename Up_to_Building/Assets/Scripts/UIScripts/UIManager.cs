@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject[] StateObject; // 0 : BackgroundPanel, 1 : PausePanel, 2 : SettingPanel, 3 : FailPanel, 4 : HomePanel, 5 : QuitPanel
     [SerializeField] private Transform progressBar;
     [SerializeField] private TextMeshProUGUI[] stageText;
-    private int process = 2;
+    private int process;
 
     public Action JsonSaveinfo;
 
