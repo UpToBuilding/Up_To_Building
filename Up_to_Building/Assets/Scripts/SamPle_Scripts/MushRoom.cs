@@ -11,6 +11,8 @@ public class MushRoom : MonsterBase
 
     public override void Attack()
     {
+        animator.SetBool("run", true);
+        
         sp.flipX = (Player.PlayerTransform.position.x - this.transform.position.x) > 0 ? true : false;
         if (math.abs(Player.PlayerTransform.transform.position.x - this.transform.position.x) != 0 && !isCol)
             rb.velocity = new Vector2(Player.PlayerTransform.transform.position.x - this.transform.position.x, rb.velocity.y) * overSpeed;
@@ -20,7 +22,7 @@ public class MushRoom : MonsterBase
     public override void Base_Movement()
     {
         base.Base_Movement();
-        // ÇÃ·¹ÀÌ¾î¸¦ Ã£Áö ¸øÇßÀ» ¶§ ÆĞÆ®·Ñ ÀÌµ¿
+        // í”Œë ˆì´ì–´ë¥¼ ì°¾ì§€ ëª»í–ˆì„ ë•Œ íŒ¨íŠ¸ë¡¤ ì´ë™
 
         if (Physics2D.OverlapBox(new Vector2(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), new Vector2(distance, 2f ), 0.0f, LayerMask.GetMask("Player")) != null)
         {
@@ -28,6 +30,10 @@ public class MushRoom : MonsterBase
             rb.velocity = Vector2.zero;
             Attack();
 
+        }
+        else
+        {
+            animator.SetBool("run", false);
         }
     }
 

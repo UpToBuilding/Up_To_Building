@@ -11,6 +11,7 @@ public abstract class MonsterBase : MonoBehaviour
     protected Rigidbody2D rb; // 몬스터의 리지드바디
     protected SpriteRenderer sp; // 몬스터의 스프라이트 렌더러
     //public GameObject playerObj; // 플레이어 객체를 참조하는 변수
+    protected int x;
     [SerializeField]
     protected int hp; // 몬스터의 체력
 
@@ -74,7 +75,7 @@ public abstract class MonsterBase : MonoBehaviour
     // 몬스터의 기본 이동 로직
     public virtual void Base_Movement()
     {
-        int x = rb.velocity.x > 0 ? -1 : 1; // 이동 방향 결정
+        x = rb.velocity.x > 0 ? -1 : 1; // 이동 방향 결정
 
 
 
@@ -85,8 +86,8 @@ public abstract class MonsterBase : MonoBehaviour
         else if (x < 0) sp.flipX = true;
 
         // 달리는 애니메이션 설정
-        if (x != 0) animator.SetBool("run", true);
-        if(rb.velocity.x ==0) animator.SetBool("run", false);
+        //if (x != 0) animator.SetBool("run", true);
+        //if(rb.velocity.x ==0) animator.SetBool("run", false);
 
         if (Physics2D.OverlapBox(this.gameObject.transform.position, new Vector2(distance, 2.5f), 0.0f, LayerMask.GetMask("Player")) == null)
         {
