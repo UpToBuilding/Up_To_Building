@@ -37,9 +37,14 @@ public class Col_Manager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Check_Point"))
         {
-           // EffectSystem.Invoke();
-            player.checkpoint = collision.gameObject;
-            
+            // EffectSystem.Invoke();
+            GameObject checkPoint = collision.gameObject;
+            if (player.checkpoint != checkPoint)
+            {
+                player.checkpoint = checkPoint;
+                checkPoint.GetComponent<CheckPointEffect>().PlayCheckPointSound();
+            }
+
             GameManager.Instance.TempFloor = GameManager.Instance.currentFloor;
         }   
         else if (collision.gameObject.CompareTag(BarrierTag) || (collision.gameObject.CompareTag("Monster")))
