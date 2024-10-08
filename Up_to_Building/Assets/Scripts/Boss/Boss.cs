@@ -32,9 +32,23 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TestAttack();
+            Debug.Log("Input A Attack!");
+        }
+
+        BossAttack();
+
+        Debug.Log($"Current HP : {CurrentHp}");
+    }
+
+
+    void BossAttack()
+    {
         if (!attackEnabled) return;
 
-        switch(bossPhase)
+        switch (bossPhase)
         {
             case BossPhase.NormalPhase:
                 attackEnabled = false;
@@ -45,7 +59,7 @@ public class Boss : MonoBehaviour
             case BossPhase.AngerPhase:
                 attackEnabled = false;
                 combat.OperatePattern(nextPatternNum);
-                nextPatternNum = 3 + (nextPatternNum + 1) % 3;
+                nextPatternNum = 3 + (nextPatternNum + 1) % 2;
                 break;
 
             case BossPhase.FinalPhase:
@@ -55,7 +69,6 @@ public class Boss : MonoBehaviour
                 break;
         }
     }
-
     void BossTakeDamage(float damage)
     {
         CurrentHp -= damage;
@@ -63,7 +76,6 @@ public class Boss : MonoBehaviour
         if(CurrentHp < MaxHp * 0.6f)
         {
             bossPhase = BossPhase.AngerPhase;
-            nextPatternNum = 0;
         }
         if(CurrentHp < MaxHp * 0.3f)
         {
@@ -73,6 +85,11 @@ public class Boss : MonoBehaviour
         {
             BossSetDead();
         }
+    }
+
+    public void TestAttack()
+    {
+        BossTakeDamage(10.0f);
     }
 
     void BossSetDead()

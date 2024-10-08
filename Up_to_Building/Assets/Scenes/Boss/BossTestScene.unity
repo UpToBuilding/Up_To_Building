@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 716759312}
   - component: {fileID: 716759311}
   m_Layer: 0
-  m_Name: 1920_Background
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -307,6 +307,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 348135562422168623, guid: 29aba670415af354c9f6eaa2d2a6f101, type: 3}
+      propertyPath: MaxHp
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 925684348314989634, guid: 29aba670415af354c9f6eaa2d2a6f101, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.2
