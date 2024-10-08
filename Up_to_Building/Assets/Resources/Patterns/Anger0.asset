@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: Anger0
   m_EditorClassIdentifier: 
   fireInformations:
-  - attackType: 1
+  - attackType: 0
     attackDuration: 2
     attackSpeed: 6
-    timeNextAttack: 2.5
+    timeNextAttack: 0
     fireHead: 1
     sectionNumber: 1
     sectionLength: 3
     attackOrder: 0
   patternNumber: 3
-  patternTime: 2.5
+  patternTime: 5
   numOfOrder: 1
+  fireHeadString:
+  - 010
