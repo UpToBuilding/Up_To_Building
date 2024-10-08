@@ -103,14 +103,15 @@ public class GameManager : MonoBehaviour
     {
         if (num == 0)
         {
-           
             Stage[0].SetActive(true);
             Stage[1].SetActive(false);
+            BGMManager.Instance.ChangeBGM("Company");
         }
         else
         {
             Stage[0].SetActive(false);
             Stage[1].SetActive(true);
+            BGMManager.Instance.ChangeBGM("Dungeon");
         }
     }
 
