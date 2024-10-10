@@ -40,7 +40,7 @@ public class BossFire : MonoBehaviour
         BoxCollider2D collider = gameObject.AddComponent<BoxCollider2D>();
         collider.isTrigger = true;
         SpriteRenderer spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-        spriteRenderer.sortingOrder = 1;
+        spriteRenderer.sortingOrder = 5;
 
         switch(bossAttackType)
         {

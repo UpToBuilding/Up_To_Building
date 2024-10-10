@@ -85,7 +85,7 @@ MonoBehaviour:
   - {fileID: 430462061441128518}
   - {fileID: 675006301668600444}
   - {fileID: 4166640494739405449}
-  MaxHp: 0
+  MaxHp: 100
   attackEnabled: 1
 --- !u!114 &6540176599811598025
 MonoBehaviour:
@@ -105,8 +105,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eacfe04358c50df448bd87471ee8f53a, type: 2}
   - {fileID: 11400000, guid: 30ab6faec05e714418a4ca27c2cf4f63, type: 2}
   - {fileID: 11400000, guid: 98aea5bc97323844d9873af1d899dad5, type: 2}
+  - {fileID: 11400000, guid: 05de6589123aabf4d8cefcec81baeebc, type: 2}
+  - {fileID: 11400000, guid: a5936dd1dc6e2dd44b8d26f5718ea07b, type: 2}
+  - {fileID: 11400000, guid: dc6f98e2c980f52438f9baae6712acb5, type: 2}
   firePrefeb: {fileID: 4546972479387800772, guid: cb5dc66aa86b7ea48a72c35722ee66bd, type: 3}
-  fireProjectilePrefab: {fileID: 0}
+  fireProjectilePrefab: {fileID: 3061651716038776827, guid: b970c6f37fef6074bbb37146ca1164b5, type: 3}
 --- !u!212 &8825553284082682183
 SpriteRenderer:
   m_ObjectHideFlags: 0

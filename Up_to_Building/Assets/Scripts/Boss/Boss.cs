@@ -18,6 +18,7 @@ public class Boss : MonoBehaviour
     float MaxHp = 100f;
     float CurrentHp;
     int nextPatternNum = 0;
+    int nextPatternTemp = 0;
     BossPhase bossPhase = BossPhase.NormalPhase;
     public bool attackEnabled = true;
 
@@ -35,12 +36,9 @@ public class Boss : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TestAttack();
-            Debug.Log("Input A Attack!");
         }
 
         BossAttack();
-
-        Debug.Log($"Current HP : {CurrentHp}");
     }
 
 
@@ -53,31 +51,32 @@ public class Boss : MonoBehaviour
             case BossPhase.NormalPhase:
                 attackEnabled = false;
                 combat.OperatePattern(nextPatternNum);
-                nextPatternNum = 0 + (nextPatternNum + 1) % 3;
+                nextPatternNum = 0 + (nextPatternTemp++) % 3;
                 break;
 
             case BossPhase.AngerPhase:
                 attackEnabled = false;
                 combat.OperatePattern(nextPatternNum);
-                nextPatternNum = 3 + (nextPatternNum + 1) % 2;
+                nextPatternNum = 3 + (nextPatternTemp++) % 3;
                 break;
 
             case BossPhase.FinalPhase:
                 attackEnabled = false;
                 combat.OperatePattern(nextPatternNum);
-                nextPatternNum = 3 + (nextPatternNum + 1) % 5;
+                nextPatternNum = 3 + (nextPatternTemp++) % 5;
                 break;
         }
+        Debug.Log(nextPatternNum);
     }
     void BossTakeDamage(float damage)
     {
         CurrentHp -= damage;
 
-        if(CurrentHp < MaxHp * 0.6f)
+        if(CurrentHp < MaxHp * 0.65f)
         {
             bossPhase = BossPhase.AngerPhase;
         }
-        if(CurrentHp < MaxHp * 0.3f)
+        if(CurrentHp < MaxHp * 0.31f)
         {
             bossPhase = BossPhase.FinalPhase;
         }
