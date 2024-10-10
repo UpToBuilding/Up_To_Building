@@ -76,10 +76,14 @@ public class GameManager : MonoBehaviour
         }
 
         stageNum = SaveManager.Instance.GameData.Stage;
-        ChangeStage(stageNum);
         currentfloor = SaveManager.Instance.GameData.currentfloor;
         backinfo = Background.transform.position;
        
+    }
+
+    void Start()
+    {
+        ChangeStage(stageNum);
     }
 
     public void SaveGameinfo()

@@ -1,21 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 using System;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private PlayerUI playerUI;
     [SerializeField] private GameObject[] StateObject; // 0 : BackgroundPanel, 1 : PausePanel, 2 : SettingPanel, 3 : FailPanel, 4 : HomePanel, 5 : QuitPanel
     [SerializeField] private Transform progressBar;
-    [SerializeField] private TextMeshProUGUI[] stageText;
+    [SerializeField] private Text stageText;
+    [SerializeField] private TextMeshProUGUI stageTextTMP;
     private int process;
 
     public Action JsonSaveinfo;
@@ -124,11 +122,12 @@ public class UIManager : MonoBehaviour
 
     public void setStageText()
     {
-        foreach (TextMeshProUGUI txt in stageText)
-        {
-            if (txt == null) break;
-            txt.text = "스테이지 1-" + process;
-        }
+        stageText.text = "스테이지 1-" + process;
+    }
+
+    public void setStageTextTMP()
+    {
+        stageTextTMP.text = "스테이지 1-" + process;
     }
 
     public void gameExit()
