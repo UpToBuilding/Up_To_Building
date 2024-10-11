@@ -10,6 +10,8 @@ using static UnityEditor.Progress;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] UIManager uiManager;
+
     [SerializeField]
     private int maxfloor;
 
@@ -55,6 +57,8 @@ public class GameManager : MonoBehaviour
 
     public int stageNum = 0;
 
+    public int process = 0;
+
     public bool isResponeCheck;
 
     private static GameManager instance;
@@ -76,6 +80,7 @@ public class GameManager : MonoBehaviour
         }
 
         stageNum = SaveManager.Instance.GameData.Stage;
+        process = SaveManager.Instance.GameData.process;
         currentfloor = SaveManager.Instance.GameData.currentfloor;
         backinfo = Background.transform.position;
        
@@ -84,11 +89,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ChangeStage(stageNum);
+        uiManager.SetStageText();
     }
 
     public void SaveGameinfo()
     {
-        SaveManager.Instance.GameData.currentfloor =currentFloor;
+        SaveManager.Instance.GameData.currentfloor = currentFloor;
+        SaveManager.Instance.GameData.process = process;
         SaveManager.Instance.GameData.Stage = stageNum;
     }
 
@@ -127,5 +134,6 @@ public class GameManager : MonoBehaviour
 public class GameManagerData
 {
     public int Stage = 0;
+    public int process = 0;
     public int currentfloor = 1;
 }

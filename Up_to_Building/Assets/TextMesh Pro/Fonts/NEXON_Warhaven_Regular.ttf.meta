@@ -3,7 +3,7 @@ guid: a185c099147ccbe4a839e9c5766f892f
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 256
+  fontSize: 50
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
@@ -12,7 +12,7 @@ TrueTypeFontImporter:
   - Warhaven
   fallbackFontReferences:
   - {fileID: 12800000, guid: 908f26cdc45343d4d95a5cebede5f26d, type: 3}
-  customCharacters: 
+  customCharacters: 32-16,40598
   fontRenderingMode: 2
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0

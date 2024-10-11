@@ -2457,7 +2457,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1494061357}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: goHome
+        m_MethodName: GoHome
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7246,7 +7246,7 @@ PrefabInstance:
       objectReference: {fileID: 1007818538}
     - target: {fileID: 4209800343077342878, guid: 58a3200ca537c4b4da19dd4a5cf148ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: closeSetting
+      value: CloseSetting
       objectReference: {fileID: 0}
     - target: {fileID: 4209800343077342878, guid: 58a3200ca537c4b4da19dd4a5cf148ae, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -11448,7 +11448,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1494061357}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: setting
+        m_MethodName: Setting
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13161,7 +13161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.5999756, y: 7.5999756}
+  m_AnchoredPosition: {x: 5.6000977, y: 7.5999756}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1186920263
@@ -13577,7 +13577,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1494061357}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: pause
+        m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14520,7 +14520,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1494061357}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: closeHomeMenu
+        m_MethodName: CloseHomeMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18714,6 +18714,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5503952994046480635, guid: 66ca9bbd15870f84bb6893eb86799d8b, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 1494061357}
+    - target: {fileID: 5503952994046480635, guid: 66ca9bbd15870f84bb6893eb86799d8b, type: 3}
       propertyPath: EffectSystem.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -19734,8 +19738,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 170, y: -47}
-  m_SizeDelta: {x: 281.67468, y: 64.92221}
+  m_AnchoredPosition: {x: 187.96423, y: -47}
+  m_SizeDelta: {x: 320, y: 64.9222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1667292878
 MonoBehaviour:
@@ -21775,6 +21779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9185c15da9f9c0a40835685e967606c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 1494061357}
   maxfloor: 23
   Stage:
   - {fileID: 552825431}
@@ -21785,6 +21790,7 @@ MonoBehaviour:
   TileObj: {fileID: 105978287}
   initinfo: {fileID: 720004217}
   stageNum: 0
+  process: 0
   isResponeCheck: 0
 --- !u!4 &1856659459
 Transform:

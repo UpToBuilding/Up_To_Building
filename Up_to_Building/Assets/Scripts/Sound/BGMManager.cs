@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 
 public class BGMManager : MonoBehaviour
@@ -42,6 +43,12 @@ public class BGMManager : MonoBehaviour
         else if (name == "Ending") clip = endingBGM;
         else if (name == "Company") clip = companyBGM;
         else if (name == "Dungeon") clip = dungeonBGM;
+        else clip = null;
+        if (clip == null)
+        {
+            audioSource.Stop();
+            return;
+        }
         audioSource.clip = clip;
         audioSource.Play();
     }

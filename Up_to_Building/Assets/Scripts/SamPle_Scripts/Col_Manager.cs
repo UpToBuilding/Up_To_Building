@@ -13,6 +13,7 @@ public class Col_Manager : MonoBehaviour
     private string CheckPoint; // üũ����Ʈ �±�
     [SerializeField]
     private Player player; // �÷��̾� ��ü
+    [SerializeField] private UIManager uiManager;
 
 
     //public UnityEvent EffectSystem;
@@ -43,6 +44,8 @@ public class Col_Manager : MonoBehaviour
             {
                 player.checkpoint = checkPoint;
                 checkPoint.GetComponent<CheckPointEffect>().PlayCheckPointSound();
+                GameManager.Instance.process++;
+                uiManager.SetStageText();
             }
 
             GameManager.Instance.TempFloor = GameManager.Instance.currentFloor;

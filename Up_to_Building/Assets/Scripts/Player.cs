@@ -249,12 +249,14 @@ public class Player : MonoBehaviour
     public void OnDeath()
     {
         this.gameObject.SetActive(false); // 사망 시 게임 오브젝트 비활성화
-        uiManager.fail();
+        uiManager.Fail();
     }
 
-    public void Heal()
+    public void ResetData()
     {
         hp = 4;
+        GameManager.Instance.process = 0;
+        uiManager.SetStageText();
     }
 }
 
