@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     private const float STAGE1_OFFSET = 4.1f;
     private const float STAGE2_OFFSET = 4.5f;
+    public bool ischangeMap;
 
     public GameObject[] Stage;
 
@@ -112,6 +113,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeStage(int num)
     {
+
         if (num == 0)
         {
             Stage[0].SetActive(true);

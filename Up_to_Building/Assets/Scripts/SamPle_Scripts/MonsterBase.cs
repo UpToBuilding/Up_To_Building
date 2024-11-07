@@ -34,6 +34,7 @@ public abstract class MonsterBase : MonoBehaviour
         }
     }
 
+    private Vector2 initPostion;
  
     [SerializeField]
     protected float t; // 시간 변수
@@ -42,6 +43,7 @@ public abstract class MonsterBase : MonoBehaviour
     
     private void InitInfo()
     {
+        this.transform.localPosition = initPostion;
         hp = 2;
         baseSpeed = 3;
         
@@ -52,7 +54,7 @@ public abstract class MonsterBase : MonoBehaviour
         t = 0; // 초기 시간 설정
         Player player = FindObjectOfType<Player>();
         player.playerDead += MonsterObjSetActivation;
-     
+        
         sp = GetComponent<SpriteRenderer>(); // 스프라이트 렌더러 컴포넌트 가져오기
         rb = GetComponent<Rigidbody2D>(); // 리지드바디 컴포넌트 가져오기
         animator = GetComponent<Animator>(); // 애니메이터 컴포넌트 가져오기
@@ -61,10 +63,11 @@ public abstract class MonsterBase : MonoBehaviour
 
     private void Start()
     {
-        if (this.transform.localPosition.y < Player.PlayerTransform.localPosition.y - 1f)
-        {
-            this.gameObject.SetActive(false);
-        }
+       initPostion =  new Vector2(this.transform.localPosition.x,this.transform.localPosition.y);
+       
+        StartCoroutine(activeterm());
+          
+        
     }
 
     void Update()
@@ -104,6 +107,15 @@ public abstract class MonsterBase : MonoBehaviour
 
     }
 
+    IEnumerator activeterm()
+    {
+
+        yield return new WaitForSeconds(0.3f);
+        if (this.transform.position.y < Player.PlayerTransform.position.y - 1f)
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
     
 
 

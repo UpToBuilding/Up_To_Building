@@ -83,10 +83,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Vector2 dir; // 이동 방향
 
+    private bool isCool;
     private float x; // 입력 값
 
     public GameObject Right_pos; // 발사체 오른쪽 위치
     public GameObject Left_pos; // 발사체 왼쪽 위치
+
 
     // 플레이어 사운드
     [SerializeField] private AudioSource jumpSound; // 플레이어 점프 사운드
@@ -103,7 +105,7 @@ public class Player : MonoBehaviour
         hp = 4; // 초기 체력 설정
         //jump_power = 12; // 초기 점프 파워 설정
         isHIt = false;
-
+        isCool = false;
         PlayerTransform = this.transform; // 플레이어 위치 설정
 
         // 컴포넌트 초기화
@@ -128,7 +130,13 @@ public class Player : MonoBehaviour
         MoveManager(); // 이동 관리
         CheckJump(); // 점프 관리
         if (Input.GetKeyDown(KeyCode.V)) { Debug.Log(HP); HP = 1; } // 체력 감소 테스트
-        if (Input.GetKeyDown(KeyCode.Z)) Shooting(); // 발사체 발사
+        if (Input.GetKeyDown(KeyCode.Z) && !isCool) {
+            isCool = true;
+            Shooting();
+            StartCoroutine(CoolTime());
+            
+
+        }// 발사체 발사
         Debug.DrawRay(transform.position, Vector2.down, new Color(0, 1, 0));
     }
 
@@ -197,7 +205,9 @@ public class Player : MonoBehaviour
     public void Shooting()
     {
         ani.SetTrigger("attack"); // 공격 애니메이션 재생
+        ani.SetBool("jump", false);
         Bull_Dir(sprite.flipX); // 발사체 방향 설정
+        
     }
 
     public void Bull_Dir(bool isdir)
@@ -258,6 +268,16 @@ public class Player : MonoBehaviour
         GameManager.Instance.process = 0;
         uiManager.SetStageText();
     }
+
+    IEnumerator CoolTime()
+    {
+        
+            
+        yield return new WaitForSeconds(0.4f);
+        isCool = false;
+    }
+
+
 }
 
 

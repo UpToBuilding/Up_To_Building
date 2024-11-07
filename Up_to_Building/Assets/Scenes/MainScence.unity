@@ -19684,11 +19684,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0848bff101191904ead4bb831f7084db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BlurFactor: 1
-  m_Style: 3
-  m_EffectColor: {r: 0.59999996, g: 0.51, b: 0.83, a: 0.6666667}
-  m_EffectDistance: {x: 1, y: -1}
-  m_UseGraphicAlpha: 1
 --- !u!114 &1667292879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19701,11 +19696,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0848bff101191904ead4bb831f7084db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BlurFactor: 0.45
-  m_Style: 3
-  m_EffectColor: {r: 0.76576746, g: 0.61339533, b: 0.84, a: 0.49019608}
-  m_EffectDistance: {x: 0.1, y: -0.1}
-  m_UseGraphicAlpha: 1
 --- !u!114 &1667292880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19718,13 +19708,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b2ed11d675446c5a49da1ea296d490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectFactor: 1
-  m_ColorFactor: 1
-  m_BlurFactor: 0
-  m_EffectMode: 0
-  m_ColorMode: 0
-  m_BlurMode: 3
-  m_AdvancedBlur: 1
 --- !u!114 &1667292881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21769,6 +21752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiManager: {fileID: 1494061357}
   maxfloor: 23
+  ischangeMap: 0
   Stage:
   - {fileID: 552825431}
   - {fileID: 2077440157}
