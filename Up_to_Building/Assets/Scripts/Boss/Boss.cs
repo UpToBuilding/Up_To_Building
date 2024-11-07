@@ -15,13 +15,13 @@ public class Boss : MonoBehaviour
     public Transform[] HeadTransform;
 
     [SerializeField]
-    float MaxHp = 100f;
-    float CurrentHp;
+    public float MaxHp = 100f;
+    public float CurrentHp;
     int nextPatternNum = 0;
     int nextPatternTemp = 0;
     BossPhase bossPhase = BossPhase.NormalPhase;
     public bool attackEnabled = true;
-
+    private bool isBossAlive = true;
 
     BossCombat combat;
 
@@ -33,19 +33,23 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
+        // 테스트용 코드. 나중에 없애야 함
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TestAttack();
         }
 
-        BossAttack();
+        if (isBossAlive)
+        {
+            BossAttack();
+        }
     }
 
 
     void BossAttack()
     {
         if (!attackEnabled) return;
-
+        
         switch (bossPhase)
         {
             case BossPhase.NormalPhase:
@@ -82,6 +86,8 @@ public class Boss : MonoBehaviour
         }
         if(CurrentHp <= 0.0f)
         {
+            CurrentHp = 0.0f;
+            
             BossSetDead();
         }
     }
@@ -93,6 +99,7 @@ public class Boss : MonoBehaviour
 
     void BossSetDead()
     {
-        // Game Clear?
+        isBossAlive = false;
+        Debug.Log("보스 사망");
     }
 }
