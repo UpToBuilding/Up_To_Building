@@ -75,9 +75,7 @@ public class Player : MonoBehaviour
         set
         {
             isjump = value;// 점프 애니메이션 재생
-            if (isjump) { ani.SetBool("jump", true);
-                DoJump();
-            } 
+            if (isjump) ani.SetBool("jump", true);
             else ani.SetBool("jump", false); // 점프 애니메이션 종료
         }
     }
@@ -96,6 +94,7 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource reviveSound; // 플레이어 부활 사운드
     [SerializeField] private AudioSource runSound1; // 플레이어 이동 사운드 -> 1, 2 번갈아가며 runSound에 저장
     [SerializeField] private AudioSource runSound2;
+    [SerializeField] private AudioSource fireSound;
 
     private AudioSource runSound; // 플래이어 이동 사운드 저장 변수
 
@@ -127,10 +126,9 @@ public class Player : MonoBehaviour
         // 디버그 레이 그리기
         Debug.DrawRay(this.gameObject.transform.position, Vector2.down, Color.red, 1.0f);
         MoveManager(); // 이동 관리
+        CheckJump(); // 점프 관리
         if (Input.GetKeyDown(KeyCode.V)) { Debug.Log(HP); HP = 1; } // 체력 감소 테스트
-        if (Input.GetKey(KeyCode.Space)) Jump(); // 점프
         if (Input.GetKeyDown(KeyCode.Z)) Shooting(); // 발사체 발사
-        Jump_Attack(); // 점프 공격
         Debug.DrawRay(transform.position, Vector2.down, new Color(0, 1, 0));
     }
 
@@ -207,29 +205,14 @@ public class Player : MonoBehaviour
         Bullet bulletdir = isdir ? Instantiate(fireball.GetComponent<Bullet>(), Right_pos.transform.position, Quaternion.Euler(0, 0, 0))
                 : Instantiate(fireball.GetComponent<Bullet>(), Left_pos.transform.position, Quaternion.Euler(0, 0, 0)); // 발사체 생성
         bulletdir.dir = isdir; // 발사체 방향 설정
+        fireSound.Play();
     }
 
-    public void Jump()
+    private void CheckJump()
     {
         // 점프 상태 확인
         if (rb.velocity.y == 0) Isjump = false; // 땅에 있을 때 점프 상태 해제
-        if (Isjump == false)
-        {
-            DoJump();
-        }
-    }
-
-    
-
-    public void Jump_Attack()
-    {
-        // 점프 상태 확인
-        if (rb.velocity.y == 0) Isjump = false; // 땅에 있을 때 점프 상태 해제
-        if (Input.GetButtonDown("Jump") && Isjump == false)
-        {
-            Isjump = true; // 점프 상태 설정
-            rb.AddForce(Vector2.up * jump_power, ForceMode2D.Impulse); // 점프
-        }
+        if (Input.GetKeyDown(KeyCode.Space)) Jump();
 
         if (this.rb.velocity.y < 0)
         {
@@ -239,14 +222,22 @@ public class Player : MonoBehaviour
             {
                 rb.AddForce(Vector2.up * 13f, ForceMode2D.Impulse); // 몬스터를 밟았을 때 다시 점프
                 isjump = true;
-             
+
                 hit.collider.gameObject.GetComponent<MonsterBase>().HP = -100;
-     
+
             }
         }
     }
 
-
+    public void Jump()
+    {
+        if (Isjump == false)
+        {
+            Isjump = true; // 점프 상태 설정
+            rb.AddForce(Vector2.up * jump_power, ForceMode2D.Impulse); // 점프
+            if (!jumpSound.isPlaying) jumpSound.Play(); // 점프 소리 재생
+        }
+    }
 
     public void SavePlayerInfo()
     {
@@ -255,28 +246,17 @@ public class Player : MonoBehaviour
         SaveManager.Instance.playerData.player_position = this.gameObject.transform.localPosition;
     }
 
-
-
-    public void DoJump(bool playSound = true)
-    {
-        //Isjump = true; // 점프 상태 설정
-        //rb.AddForce(Vector2.up * jump_power, ForceMode2D.Impulse); // 점프
-
-        if (playSound)
-        {
-            jumpSound.Play();
-        }
-    }
-
     public void OnDeath()
     {
         this.gameObject.SetActive(false); // 사망 시 게임 오브젝트 비활성화
-        uiManager.fail();
+        uiManager.Fail();
     }
 
-    public void Heal()
+    public void ResetData()
     {
         hp = 4;
+        GameManager.Instance.process = 0;
+        uiManager.SetStageText();
     }
 }
 

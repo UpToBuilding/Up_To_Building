@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class BossProjectile : MonoBehaviour
 {
-    [SerializeField]
-    Sprite[] Projectilesprites = new Sprite[2];
-
     public float fireSpeed;
     public GameObject firePrefab;
 
@@ -21,11 +19,14 @@ public class BossProjectile : MonoBehaviour
         TargetLocation = new Vector3(-8.25f + 2.69f * (info.sectionNumber + info.sectionLength - 1), -3.55f, 0f);
 
         float distStartEnd = Vector3.Distance(StartLocation, TargetLocation);
-        speedMagnification = distStartEnd / 12.0f;
+        speedMagnification = (distStartEnd / 12.0f);
 
         Vector2 newPos = TargetLocation - StartLocation;
         float rotZ = Mathf.Atan2(newPos.y, newPos.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotZ + 180);
+
+        Animator anim = GetComponent<Animator>();
+        anim.SetInteger("ProjectileType", (int)info.attackType);
     }
 
     void Update()

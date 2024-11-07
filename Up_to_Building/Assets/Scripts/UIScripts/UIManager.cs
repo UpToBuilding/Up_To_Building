@@ -1,22 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 using System;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private PlayerUI playerUI;
     [SerializeField] private GameObject[] StateObject; // 0 : BackgroundPanel, 1 : PausePanel, 2 : SettingPanel, 3 : FailPanel, 4 : HomePanel, 5 : QuitPanel
     [SerializeField] private Transform progressBar;
-    [SerializeField] private TextMeshProUGUI[] stageText;
-    private int process;
+    [SerializeField] private Text stageText;
+    [SerializeField] private TextMeshProUGUI stageTextTMP;
 
     public Action JsonSaveinfo;
 
@@ -33,12 +30,12 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         Player player = FindObjectOfType<Player>();
-
+        
         JsonSaveinfo += player.SavePlayerInfo;
         
     }
 
-    public void pause()
+    public void Pause()
     {
         temp = Time.deltaTime;
         
@@ -61,12 +58,12 @@ public class UIManager : MonoBehaviour
         StateObject[4].SetActive(true);
     }
 
-    public void closeHomeMenu()
+    public void CloseHomeMenu()
     {
         StateObject[4].SetActive(false);
     }
 
-    public void goHome()
+    public void GoHome()
     {
         Time.timeScale = 1f;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
@@ -75,15 +72,16 @@ public class UIManager : MonoBehaviour
         JsonSaveinfo();
         SaveManager.Instance.SaveJson();
         SceneManager.LoadScene("Start_Scene");
+        BGMManager.Instance.ChangeBGM(null);
     }
 
-    public void setting()
+    public void Setting()
     {
         StateObject[1].SetActive(false);
         StateObject[2].SetActive(true);
     }
 
-    public void closeSetting()
+    public void CloseSetting()
     {
 
         StateObject[1].gameObject.SetActive(true);
@@ -91,16 +89,17 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void fail() // 실패 후 진행바 표시
+    public void Fail() // 실패 후 진행바 표시
     {
         foreach (Transform processUi in progressBar.GetComponentInChildren<Transform>()) // 진행도 초기화
         {
             processUi.GetChild(0).gameObject.SetActive(false);
         }
-        for (int i = 0; i < process; i++) // 현재 진행도까지 불 밝히기
+        for (int i = 0; i < GameManager.Instance.process; i++) // 현재 진행도까지 불 밝히기
         {
             progressBar.GetChild(i).GetChild(0).gameObject.SetActive(true);
         }
+        SetStageTextTMP();
         StateObject[0].SetActive(true);
         StateObject[3].SetActive(true);
     }
@@ -122,13 +121,19 @@ public class UIManager : MonoBehaviour
         StateObject[5].SetActive(false);
     }
 
-    public void setStageText()
+    private string GetStageText()
     {
-        foreach (TextMeshProUGUI txt in stageText)
-        {
-            if (txt == null) break;
-            txt.text = "스테이지 1-" + process;
-        }
+        return "스테이지 " + (GameManager.Instance.stageNum + 1) + "-" + (GameManager.Instance.process + 1);
+    }
+
+    public void SetStageText()
+    {
+        stageText.text = GetStageText();
+    }
+
+    public void SetStageTextTMP()
+    {
+        stageTextTMP.text = GetStageText();
     }
 
     public void gameExit()

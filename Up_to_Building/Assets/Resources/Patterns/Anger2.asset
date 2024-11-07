@@ -16,7 +16,7 @@ MonoBehaviour:
   - attackType: 1
     attackDuration: 2
     attackSpeed: 5
-    timeNextAttack: 2.5
+    timeNextAttack: 0
     fireHead: 0
     sectionNumber: 1
     sectionLength: 1
@@ -24,11 +24,13 @@ MonoBehaviour:
   - attackType: 1
     attackDuration: 2
     attackSpeed: 5
-    timeNextAttack: 2.5
+    timeNextAttack: 0
     fireHead: 2
     sectionNumber: 3
     sectionLength: 1
     attackOrder: 0
   patternNumber: 5
-  patternTime: 2.5
+  patternTime: 5
   numOfOrder: 1
+  fireHeadString:
+  - 101

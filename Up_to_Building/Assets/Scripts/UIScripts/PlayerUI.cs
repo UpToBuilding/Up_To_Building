@@ -44,7 +44,7 @@ public class PlayerUI : MonoBehaviour
             img.gameObject.SetActive(true);
         }
         player.checkpoint = null;
-        player.Heal();
+        player.ResetData();
         player.gameObject.SetActive(true);
         player.Revive();
     }

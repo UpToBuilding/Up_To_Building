@@ -119,5 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d69f00d997df5469b2c7e82d8bc112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ProjectileAnims:
+  - {fileID: 9100000, guid: 189f23538698b354ba7cf8f3e837f259, type: 2}
+  - {fileID: 9100000, guid: 1ff1407fb24b34f49a20a7237fb888e1, type: 2}
   fireSpeed: 20
   firePrefab: {fileID: 4546972479387800772, guid: cb5dc66aa86b7ea48a72c35722ee66bd, type: 3}

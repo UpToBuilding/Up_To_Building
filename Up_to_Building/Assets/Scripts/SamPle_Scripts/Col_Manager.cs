@@ -13,6 +13,7 @@ public class Col_Manager : MonoBehaviour
     private string CheckPoint; // üũ����Ʈ �±�
     [SerializeField]
     private Player player; // �÷��̾� ��ü
+    [SerializeField] private UIManager uiManager;
 
 
     //public UnityEvent EffectSystem;
@@ -37,9 +38,16 @@ public class Col_Manager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Check_Point"))
         {
-           // EffectSystem.Invoke();
-            player.checkpoint = collision.gameObject;
-            
+            // EffectSystem.Invoke();
+            GameObject checkPoint = collision.gameObject;
+            if (player.checkpoint != checkPoint)
+            {
+                player.checkpoint = checkPoint;
+                checkPoint.GetComponent<CheckPointEffect>().PlayCheckPointSound();
+                GameManager.Instance.process++;
+                uiManager.SetStageText();
+            }
+
             GameManager.Instance.TempFloor = GameManager.Instance.currentFloor;
         }   
         else if (collision.gameObject.CompareTag(BarrierTag) || (collision.gameObject.CompareTag("Monster")))
