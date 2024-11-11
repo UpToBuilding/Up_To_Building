@@ -23,12 +23,15 @@ public class Boss : MonoBehaviour
     public bool attackEnabled = true;
     private bool isBossAlive = true;
 
-    BossCombat combat;
+    private BossCombat combat;
+    private SpriteRenderer spriteRenderer;
+    private static readonly int TintFloat = Shader.PropertyToID("_TintFloat");
 
     void Start()
     {
         CurrentHp = MaxHp;
-        combat = gameObject.GetComponent<BossCombat>();
+        combat = GetComponent<BossCombat>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -74,6 +77,10 @@ public class Boss : MonoBehaviour
     }
     void BossTakeDamage(float damage)
     {
+        if (!isBossAlive) return;
+
+        StartCoroutine(WhiteFlash());
+        
         CurrentHp -= damage;
 
         if(CurrentHp < MaxHp * 0.65f)
@@ -92,9 +99,16 @@ public class Boss : MonoBehaviour
         }
     }
 
+    IEnumerator WhiteFlash()
+    {
+        spriteRenderer.material.SetFloat(TintFloat, 0.2f);
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.material.SetFloat(TintFloat, 0f);
+    }
+    
     public void TestAttack()
     {
-        BossTakeDamage(10.0f);
+        BossTakeDamage(1.0f);
     }
 
     void BossSetDead()
