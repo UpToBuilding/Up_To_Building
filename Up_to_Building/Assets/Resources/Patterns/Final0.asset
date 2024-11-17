@@ -16,7 +16,7 @@ MonoBehaviour:
   - attackType: 0
     attackDuration: 0.1
     attackSpeed: 0
-    timeNextAttack: 0.7
+    timeNextAttack: 1
     fireHead: 0
     sectionNumber: 0
     sectionLength: 1
@@ -24,7 +24,7 @@ MonoBehaviour:
   - attackType: 0
     attackDuration: 0.1
     attackSpeed: 0
-    timeNextAttack: 0.7
+    timeNextAttack: 1
     fireHead: 1
     sectionNumber: 2
     sectionLength: 1
@@ -32,7 +32,7 @@ MonoBehaviour:
   - attackType: 0
     attackDuration: 0.1
     attackSpeed: 0
-    timeNextAttack: 0.7
+    timeNextAttack: 1
     fireHead: 2
     sectionNumber: 3
     sectionLength: 1
@@ -40,7 +40,7 @@ MonoBehaviour:
   - attackType: 0
     attackDuration: 0.1
     attackSpeed: 0
-    timeNextAttack: 0.7
+    timeNextAttack: 1
     fireHead: 0
     sectionNumber: 1
     sectionLength: 1
@@ -48,7 +48,7 @@ MonoBehaviour:
   - attackType: 0
     attackDuration: 0.1
     attackSpeed: 0
-    timeNextAttack: 0.7
+    timeNextAttack: 1
     fireHead: 1
     sectionNumber: 3
     sectionLength: 1
@@ -56,7 +56,7 @@ MonoBehaviour:
   - attackType: 0
     attackDuration: 0.1
     attackSpeed: 0
-    timeNextAttack: 0.7
+    timeNextAttack: 1
     fireHead: 0
     sectionNumber: 0
     sectionLength: 1
@@ -64,7 +64,7 @@ MonoBehaviour:
   - attackType: 0
     attackDuration: 0.1
     attackSpeed: 0
-    timeNextAttack: 0.7
+    timeNextAttack: 1
     fireHead: 1
     sectionNumber: 2
     sectionLength: 1
@@ -72,7 +72,7 @@ MonoBehaviour:
   - attackType: 0
     attackDuration: 0.1
     attackSpeed: 0
-    timeNextAttack: 0.7
+    timeNextAttack: 1
     fireHead: 2
     sectionNumber: 4
     sectionLength: 1
@@ -80,13 +80,13 @@ MonoBehaviour:
   - attackType: 0
     attackDuration: 0.1
     attackSpeed: 0
-    timeNextAttack: 0.7
+    timeNextAttack: 1
     fireHead: 2
     sectionNumber: 4
     sectionLength: 1
     attackOrder: 1
   patternNumber: 6
-  patternTime: 4
+  patternTime: 5
   numOfOrder: 3
   fireHeadString:
   - 111
