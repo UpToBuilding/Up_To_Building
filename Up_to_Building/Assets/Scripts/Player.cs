@@ -239,6 +239,22 @@ public class Player : MonoBehaviour
         }
     }
 
+    private IEnumerator LoadingFloor()
+    {
+        sprite.sortingOrder = 0;
+        float temp = speed;
+        speed = 0;
+        yield return new WaitForSeconds(2f);
+        sprite.sortingOrder = 4;
+        speed = temp;
+        yield return null;
+    }
+
+    public void PlayerUpFloor()
+    {
+        StartCoroutine(LoadingFloor());
+    }
+
     public void Jump()
     {
         if (Isjump == false)
@@ -276,6 +292,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         isCool = false;
     }
+
 
 
 }

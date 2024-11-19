@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    public GameObject DoorTrigger;
     public GameObject Background;
     public GameObject SavePoint;
     public GameObject TileObj;
@@ -101,13 +102,25 @@ public class GameManager : MonoBehaviour
     }
 
 
- 
+    IEnumerator FloorTime()
+    {
+        yield return new WaitForSeconds(2f);
+        Upact();
+        yield return new WaitForSeconds(0.3f);
+        currentFloor++;
+        yield return null;
+    }
 
+    private void Upact()
+    {
+        Player.PlayerTransform.position = Stage[1].activeSelf ? initinfo.transform.position + new Vector3(0, STAGE2_OFFSET * currentFloor, 0) : initinfo.transform.position + new Vector3(0, STAGE1_OFFSET * currentFloor, 0);
+       
+    }
 
     public void UpFloor()
     {
       //  Background.transform.position = backinfo;
-        Player.PlayerTransform.position = Stage[1].activeSelf ? initinfo.transform.position+new Vector3(0,STAGE2_OFFSET*currentFloor,0): initinfo.transform.position + new Vector3(0, STAGE1_OFFSET * currentFloor, 0);
+       StartCoroutine(FloorTime());
     }
 
 

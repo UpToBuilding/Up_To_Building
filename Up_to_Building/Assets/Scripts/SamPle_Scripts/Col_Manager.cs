@@ -23,16 +23,8 @@ public class Col_Manager : MonoBehaviour
         player = GetComponent<Player>(); // �÷��̾� ������Ʈ ��������
     }
 
-    // Ʈ���� �浹 ����
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        // �浹�� ��ü�� üũ����Ʈ�� ���
-        if (collision.gameObject.CompareTag("Stage"))
-        {
-            GameManager.Instance.UpFloor();
-            GameManager.Instance.currentFloor++;
-        }
-    }
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -54,6 +46,12 @@ public class Col_Manager : MonoBehaviour
         {
             player.HP = -1;
 
+        }
+        else if (collision.gameObject.CompareTag("Stage"))
+        {
+            GameManager.Instance.UpFloor();
+            player.PlayerUpFloor();
+            //GameManager.Instance.currentFloor++;
         }
     }
 
