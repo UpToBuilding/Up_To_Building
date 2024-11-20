@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
                 ChangeStage(stageNum);
 
                 currentFloor = 1;
-      
+                //StartCoroutine(NextStageTerm());    
                 Player.PlayerTransform.GetComponent<Player>().gameObject.transform.position = initinfo.transform.position;
             }
         }
@@ -101,12 +101,18 @@ public class GameManager : MonoBehaviour
         SaveManager.Instance.GameData.Stage = stageNum;
     }
 
+    IEnumerator NextStageTerm()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Player.PlayerTransform.GetComponent<Player>().gameObject.transform.position = initinfo.transform.position;
+        yield return null;
+    }
 
     IEnumerator FloorTime()
     {
         yield return new WaitForSeconds(2f);
         Upact();
-        yield return new WaitForSeconds(0.3f);
+        //yield return new WaitForSeconds(0.3f);
         currentFloor++;
         yield return null;
     }

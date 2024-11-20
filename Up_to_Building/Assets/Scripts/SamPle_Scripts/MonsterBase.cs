@@ -26,7 +26,9 @@ public abstract class MonsterBase : MonoBehaviour
         set
         {
             hp += value; // 체력을 감소시킴
-            if (hp > 0) animator.SetTrigger("hit"); 
+            if (hp > 0) { animator.SetTrigger("hit");
+                   
+            }
             if (hp <= 0)
             {
                 animator.SetTrigger("death"); // 체력이 0 이하가 되면 죽음 애니메이션 트리거
