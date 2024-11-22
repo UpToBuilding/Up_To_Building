@@ -22,10 +22,12 @@ public class Gun_monster : MonsterBase
             t = 0;
             sp.flipX = (Player.PlayerTransform.position.x - this.transform.position.x) > 0 ? true : false;
             animator.SetBool("attack",true);
+            animator.SetBool("run",false);
             if (!attack) {
                 StartCoroutine("rateShooting");
             }
         }
+  
         
     }
 

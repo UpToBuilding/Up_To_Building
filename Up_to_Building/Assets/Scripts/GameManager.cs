@@ -36,13 +36,13 @@ public class GameManager : MonoBehaviour
             {
 
 
-
+                
                 stageNum++;
                 ChangeStage(stageNum);
 
-                currentFloor = 1;
+         
                 //StartCoroutine(NextStageTerm());    
-                Player.PlayerTransform.GetComponent<Player>().gameObject.transform.position = initinfo.transform.position;
+                
             }
         }
     }
@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         Upact();
-        //yield return new WaitForSeconds(0.3f);
+    
         currentFloor++;
         yield return null;
     }
@@ -139,14 +139,27 @@ public class GameManager : MonoBehaviour
             Stage[1].SetActive(false);
             BGMManager.Instance.ChangeBGM("Company");
         }
-        else
+        else if(num == 1)
         {
             Stage[0].SetActive(false);
             Stage[1].SetActive(true);
+            Player.PlayerTransform.GetComponent<Player>().gameObject.transform.position = initinfo.transform.position;
+            currentFloor = 1;
             BGMManager.Instance.ChangeBGM("Dungeon");
+        }else if(num == 2)
+        {
+            uiManager.LoadingEffection();
+         
+            StartCoroutine(ChaningBossScence(num));
         }
     }
 
+    IEnumerator ChaningBossScence(int num)
+    {
+        Stage[num].SetActive(true);
+        yield return new WaitForSeconds(4f);
+        SceneManager.LoadScene(3);
+    }
 
 
 

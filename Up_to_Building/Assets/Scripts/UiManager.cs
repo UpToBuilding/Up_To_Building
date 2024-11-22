@@ -10,6 +10,7 @@ public class UiManager : MonoBehaviour
     [SerializeField]
     private GameObject CreditPanel;
 
+
     public void OnMainSence()
     {
         SaveManager.Instance.newGame_DeleteJson();
@@ -19,7 +20,7 @@ public class UiManager : MonoBehaviour
     public void OnReLoad()
     {
         SaveManager.Instance.LoadData();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     public void OnSettingPanel()

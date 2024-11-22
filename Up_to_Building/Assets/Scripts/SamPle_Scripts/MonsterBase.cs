@@ -14,6 +14,8 @@ public abstract class MonsterBase : MonoBehaviour
     protected int x;
     [SerializeField]
     protected int hp; // 몬스터의 체력
+    [SerializeField]
+    private string name;
 
     [SerializeField]
     protected float baseSpeed;
@@ -96,7 +98,7 @@ public abstract class MonsterBase : MonoBehaviour
 
         if (Physics2D.OverlapBox(this.gameObject.transform.position, new Vector2(distance, 2.5f), 0.0f, LayerMask.GetMask("Player")) == null)
         {
-
+            if (name == "Gun") animator.SetBool("run", true);
             t += Time.deltaTime; // 시간 증가
             if (t <= 1.0f)
             {

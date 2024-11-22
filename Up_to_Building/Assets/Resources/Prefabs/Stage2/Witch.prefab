@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
+  name: Gun
   baseSpeed: 3
   distance: 10
   t: 0
@@ -148,7 +149,7 @@ Animator:
   m_GameObject: {fileID: 131900615198949870}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 35555e67a027869488788b334f2850b0, type: 2}
+  m_Controller: {fileID: 9100000, guid: d7add914ef1a3bb468c464105602fe75, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour
 
     public UnityEvent GameStop;
     public UnityEvent GameStart;
+
+    public GameObject[] LodingImage;
+
     [SerializeField]
     private float temp;
     private void Awake()
@@ -30,10 +33,36 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         Player player = FindObjectOfType<Player>();
-        
+       
         JsonSaveinfo += player.SavePlayerInfo;
-        
+
+       // DontDestroyOnLoad(this.gameObject);
     }
+
+    IEnumerator LoadingEffect()
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            for (int i = 0; i < LodingImage.Length; i++)
+            {
+                if (LodingImage[i].activeSelf)
+                LodingImage[i].SetActive(false);
+                else LodingImage[i].SetActive(true);
+                yield return new WaitForSeconds(0.33f);
+            }
+        }
+
+        yield return null;
+     
+    }
+    public void LoadingEffection()
+    {
+  
+            StartCoroutine(LoadingEffect());
+        
+     
+    }
+
 
     public void Pause()
     {
@@ -79,6 +108,9 @@ public class UIManager : MonoBehaviour
     {
         StateObject[1].SetActive(false);
         StateObject[2].SetActive(true);
+        GameManager.Instance.SaveGameinfo();
+        JsonSaveinfo();
+        SaveManager.Instance.SaveJson();
     }
 
     public void CloseSetting()

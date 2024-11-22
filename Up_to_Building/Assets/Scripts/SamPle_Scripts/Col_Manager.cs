@@ -49,8 +49,10 @@ public class Col_Manager : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Stage"))
         {
-            GameManager.Instance.UpFloor();
-            player.PlayerUpFloor();
+     
+                GameManager.Instance.UpFloor();
+                player.PlayerUpFloor();
+           
             //GameManager.Instance.currentFloor++;
         }
     }

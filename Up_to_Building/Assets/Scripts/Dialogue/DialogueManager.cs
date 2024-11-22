@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     private int currentLineIndex;
     private bool isDialogueRunning = false;
 
+    private int chks = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,7 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextLine()
     {
+        
         if (printText.checkCoroutine()) return;
         currentLineIndex++;
         if (currentLineIndex < dialogueData.dialogueLines.Length)
@@ -55,6 +58,9 @@ public class DialogueManager : MonoBehaviour
         {
             isDialogueRunning = false;
             Debug.Log("End of dialogue.");
+            chks++;
+            if (chks > 1)
+                SceneManager.LoadScene(2);
         }
     }
 
