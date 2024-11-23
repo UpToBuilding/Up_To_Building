@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     public GameObject checkpoint;
 
     public UnityEvent DeathSystem;
-
+    
 
     [SerializeField]
     private GameObject fireball; // 발사체 프리팹
@@ -52,13 +52,14 @@ public class Player : MonoBehaviour
 
             if (hp > 0)
             {
-               Revive();
+              Revive();
+              if (GameManager.Instance.BossStage[0].activeSelf) StartCoroutine(invincibility());
             }
             else
             {
                 GameManager.Instance.currentFloor = 1;
                 ani.SetTrigger("death"); // 사망 애니메이션 재생
-            }
+            } 
         }
     }
 
@@ -97,6 +98,13 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource runSound1; // 플레이어 이동 사운드 -> 1, 2 번갈아가며 runSound에 저장
     [SerializeField] private AudioSource runSound2;
     [SerializeField] private AudioSource fireSound;
+
+    public enum State
+    {
+        NORMAL,
+        INVINCIBILLTY 
+    }
+    public State state = State.NORMAL;
 
     private AudioSource runSound; // 플래이어 이동 사운드 저장 변수
 
@@ -149,11 +157,31 @@ public class Player : MonoBehaviour
         }
         else
         {
-            this.transform.position = GameManager.Instance.initinfo.transform.position;
+            this.transform.position = GameManager.Instance.BossStage[0].activeSelf ? GameManager.Instance.BossPos.transform.position: GameManager.Instance.initinfo.transform.position;
             GameManager.Instance.currentFloor = 1;
         }
         //isHIt = false;
         reviveSound.Play();
+    }
+
+    IEnumerator invincibility()
+    {
+        state = State.INVINCIBILLTY;
+     
+        StartCoroutine(invinciblityEffect());
+     
+
+        yield return new WaitForSeconds(2f);
+        state = State.NORMAL;
+        yield return null;
+
+    }
+
+    IEnumerator invinciblityEffect()
+    {
+        sprite.color = new Color(1, 1, 1, 0.5f);
+        yield return new WaitForSeconds(2.0f);
+        sprite.color = new Color(1, 1, 1, 1);
     }
 
     private void MoveManager()
@@ -291,6 +319,14 @@ public class Player : MonoBehaviour
             
         yield return new WaitForSeconds(0.4f);
         isCool = false;
+    }
+
+    public void BossResetPlayer(Transform tr)
+    {
+       transform.position = tr.position;
+       checkpoint = null;
+       ResetData();
+       playerUI.Bossreset();
     }
 
 

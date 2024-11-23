@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using UnityEngine.Events;
 
 public class Boss : MonoBehaviour
 {
@@ -19,17 +21,25 @@ public class Boss : MonoBehaviour
     public float CurrentHp;
     int nextPatternNum = 0;
     int nextPatternTemp = 0;
-    BossPhase bossPhase = BossPhase.NormalPhase;
-    public bool attackEnabled = true;
-    private bool isBossAlive = true;
+    //BossPhase bossPhase = BossPhase.NormalPhase;
+    BossPhase bossPhase;
+    public bool attackEnabled =true;
+    [SerializeField]
+    private bool isBossAlive ;
 
     private BossCombat combat;
     private SpriteRenderer spriteRenderer;
     private static readonly int TintFloat = Shader.PropertyToID("_TintFloat");
 
+    [SerializeField]
+    private UnityEvent deadevent;
+
     void Start()
     {
+
         CurrentHp = MaxHp;
+        isBossAlive = true;
+        bossPhase = BossPhase.NormalPhase;
         combat = GetComponent<BossCombat>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -114,6 +124,27 @@ public class Boss : MonoBehaviour
     void BossSetDead()
     {
         isBossAlive = false;
-        Debug.Log("보스 사망");
+        deadevent.Invoke();
+        this.gameObject.SetActive(false);
+        
+    }
+
+    private void OnEnable()
+    {
+        CurrentHp = MaxHp;
+        attackEnabled = true;
+        isBossAlive = true;
+        bossPhase = BossPhase.NormalPhase;
+        
+    }
+
+ 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            BossTakeDamage(1.0f);
+        } 
     }
 }

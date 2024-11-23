@@ -17,7 +17,7 @@ public class PlayerBullet : Bullet
             Destroy(this.gameObject);
             MonsterBase m = collision.gameObject.GetComponent<MonsterBase>();
             m.HP = -1;
-        } else if (collision.gameObject.CompareTag("Nomal_Obj")||collision.gameObject.CompareTag("Barrier"))
+        } else if (collision.gameObject.CompareTag("Nomal_Obj")||collision.gameObject.CompareTag("Barrier")||collision.gameObject.CompareTag("Boss"))
         {
             Destroy(this.gameObject);
         }

@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text stageText;
     [SerializeField] private TextMeshProUGUI stageTextTMP;
 
+    public GameObject[] Ending;
+
     public Action JsonSaveinfo;
 
     public UnityEvent GameStop;
@@ -74,6 +76,14 @@ public class UIManager : MonoBehaviour
         StateObject[1].SetActive(true);
     }
 
+    public void GameEnd()
+    {
+        temp = Time.deltaTime;
+
+        Time.timeScale = 0;
+        Time.fixedDeltaTime = 0f;
+    }
+
     public void Resume()
     {
         Time.timeScale = 1;
@@ -96,21 +106,30 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
-
-        GameManager.Instance.SaveGameinfo();
-        JsonSaveinfo();
-        SaveManager.Instance.SaveJson();
+        if (!GameManager.Instance.BossStage[0].activeSelf)
+        {
+            GameManager.Instance.SaveGameinfo();
+            JsonSaveinfo();
+            SaveManager.Instance.SaveJson();
+        }
         SceneManager.LoadScene("Start_Scene");
         BGMManager.Instance.ChangeBGM(null);
     }
 
+
+
     public void Setting()
     {
+        if (!GameManager.Instance.BossStage[0].activeSelf) {
+            GameManager.Instance.SaveGameinfo();
+            JsonSaveinfo();
+
+            SaveManager.Instance.SaveJson(); 
+        }
         StateObject[1].SetActive(false);
         StateObject[2].SetActive(true);
-        GameManager.Instance.SaveGameinfo();
-        JsonSaveinfo();
-        SaveManager.Instance.SaveJson();
+       
+        
     }
 
     public void CloseSetting()
@@ -134,12 +153,32 @@ public class UIManager : MonoBehaviour
         SetStageTextTMP();
         StateObject[0].SetActive(true);
         StateObject[3].SetActive(true);
+        if (GameManager.Instance.isBoss)
+        {
+            GameManager.Instance.cam[3].SetActive(false);
+            GameManager.Instance.BossStage[1].SetActive(false);
+        }    
     }
-
+    public void OnClickEnding()
+    {
+        Ending[0].gameObject.SetActive(false);
+        Ending[1].gameObject.SetActive(true) ;  
+    }
+    public void OpenEndingScence()
+    {
+        Ending[0].gameObject.SetActive(true);
+    }
     public void RetryGame()
     {
         StateObject[3].SetActive(false);
         StateObject[0].SetActive(false);
+        if (GameManager.Instance.isBoss)
+        {
+            GameManager.Instance.BossStage[1].SetActive(true);
+            GameManager.Instance.cam[3].SetActive(true);
+          
+            
+        }
         playerUI.HealHp();
     }
 

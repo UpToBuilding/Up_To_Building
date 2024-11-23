@@ -44,7 +44,8 @@ public class Col_Manager : MonoBehaviour
         }   
         else if (collision.gameObject.CompareTag(BarrierTag) || (collision.gameObject.CompareTag("Monster")))
         {
-            player.HP = -1;
+            if (player.state == Player.State.NORMAL)
+                player.HP = -1;
 
         }
         else if (collision.gameObject.CompareTag("Stage"))
@@ -64,7 +65,9 @@ public class Col_Manager : MonoBehaviour
         // �浹�� ��ü�� ��ֹ��� ���
         if (collision.collider.gameObject.CompareTag(BarrierTag) || (collision.gameObject.CompareTag("Monster")))
         {
+            if(player.state == Player.State.NORMAL)
             player.HP = -1;
+            
 
         }
     }

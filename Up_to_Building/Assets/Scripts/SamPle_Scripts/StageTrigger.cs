@@ -19,7 +19,7 @@ public class StageTrigger : MonoBehaviour
         }
         else
         {
-            this .gameObject.SetActive(true);
+            this.gameObject.SetActive(true);
         }
     }
 }

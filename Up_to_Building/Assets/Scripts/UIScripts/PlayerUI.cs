@@ -49,6 +49,15 @@ public class PlayerUI : MonoBehaviour
         player.Revive();
     }
 
+    public void Bossreset()
+    {
+        hpIndex = lifePoints.Length - 1;
+        foreach (Image img in lifePoints)
+        {
+            img.gameObject.SetActive(true);
+        }
+    }
+
     public void moveLeft()
     {
         isMoveLeft = true;

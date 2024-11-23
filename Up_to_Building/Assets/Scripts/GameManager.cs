@@ -21,8 +21,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] Stage;
 
- 
+    public GameObject[] BossStage;
 
+    public Transform BossPos;
     [SerializeField]
     private int currentfloor;
 
@@ -32,17 +33,18 @@ public class GameManager : MonoBehaviour
         set
         {
             currentfloor = value;
-            if (maxfloor == currentfloor)
+            if (currentfloor % 2 != 0&&stageNum==1)
             {
-
-
-                
+                Stage[4].gameObject.SetActive(false);
+            }
+            else
+            {
+                Stage[4].gameObject.SetActive(true);
+            }
+            if (maxfloor == currentfloor)
+            {           
                 stageNum++;
-                ChangeStage(stageNum);
-
-         
-                //StartCoroutine(NextStageTerm());    
-                
+                ChangeStage(stageNum);      
             }
         }
     }
@@ -51,6 +53,8 @@ public class GameManager : MonoBehaviour
     public GameObject SavePoint;
     public GameObject TileObj;
     public GameObject initinfo;
+
+    public GameObject[] cam;
 
     private Vector3 backinfo;
  
@@ -62,6 +66,7 @@ public class GameManager : MonoBehaviour
     public int process = 0;
 
     public bool isResponeCheck;
+    public bool isBoss;
 
     private static GameManager instance;
     public static GameManager Instance { 
@@ -80,7 +85,7 @@ public class GameManager : MonoBehaviour
             instance = this;
       
         }
-
+        isBoss = false;
         stageNum = SaveManager.Instance.GameData.Stage;
         process = SaveManager.Instance.GameData.process;
         currentfloor = SaveManager.Instance.GameData.currentfloor;
@@ -91,6 +96,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ChangeStage(stageNum);
+  
         uiManager.SetStageText();
     }
 
@@ -137,6 +143,7 @@ public class GameManager : MonoBehaviour
         {
             Stage[0].SetActive(true);
             Stage[1].SetActive(false);
+            BossStage[0].SetActive(false);
             BGMManager.Instance.ChangeBGM("Company");
         }
         else if(num == 1)
@@ -148,20 +155,51 @@ public class GameManager : MonoBehaviour
             BGMManager.Instance.ChangeBGM("Dungeon");
         }else if(num == 2)
         {
+            SaveGameinfo();
+            uiManager.JsonSaveinfo();
+            SaveManager.Instance.SaveJson(); 
             uiManager.LoadingEffection();
-         
+            StartCoroutine(ScenceChaing());
+      
+           
+            
             StartCoroutine(ChaningBossScence(num));
         }
+    }
+
+    IEnumerator ScenceChaing()
+    {
+        Stage[3].SetActive(false);
+        BossStage[0].SetActive(true);
+        Player.PlayerTransform.GetComponent<Player>().BossResetPlayer(BossPos);
+      
+        yield return new WaitForSeconds(1.0f);
+        CamSetting();
+        yield return null;
     }
 
     IEnumerator ChaningBossScence(int num)
     {
         Stage[num].SetActive(true);
         yield return new WaitForSeconds(4f);
-        SceneManager.LoadScene(3);
+        Stage[num].SetActive(false);
+        cam[3].gameObject.SetActive(true);
+        BossStage[1].SetActive(true);
+        isBoss = true;
+
+    }
+    public void Cam3Down()
+    {
+        cam[3].gameObject.SetActive(false);
     }
 
-
+    public void CamSetting()
+    {
+        cam[0].gameObject.SetActive(false);
+        cam[1].gameObject.SetActive(false);
+        cam[2].gameObject.SetActive(true);
+      
+    }
 
 }
 

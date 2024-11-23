@@ -11,6 +11,7 @@ TagManager:
   - Check_Point
   - Bullet
   - Stage
+  - Boss
   layers:
   - Default
   - TransparentFX
