@@ -683,14 +683,19 @@ MonoBehaviour:
   maxfloor: 0
   ischangeMap: 0
   Stage: []
+  BossStage: []
+  BossPos: {fileID: 0}
   currentfloor: 0
+  DoorTrigger: {fileID: 0}
   Background: {fileID: 0}
   SavePoint: {fileID: 0}
   TileObj: {fileID: 0}
   initinfo: {fileID: 0}
+  cam: []
   stageNum: 0
   process: 0
   isResponeCheck: 0
+  isBoss: 0
 --- !u!4 &643579969
 Transform:
   m_ObjectHideFlags: 0
@@ -2067,7 +2072,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144529590}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b1e2b5538de24242b6e9d73013d7047, type: 3}
   m_Name: 

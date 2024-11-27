@@ -14,7 +14,7 @@ public class UiManager : MonoBehaviour
     public void OnMainSence()
     {
         SaveManager.Instance.newGame_DeleteJson();
-        SceneManager.LoadScene(1);
+        SceneLoader.LoadSceneWithData("CutScene", "Opening");
     }
 
     public void OnReLoad()

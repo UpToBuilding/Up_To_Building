@@ -15,8 +15,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text stageText;
     [SerializeField] private TextMeshProUGUI stageTextTMP;
 
-    public GameObject[] Ending;
-
     public Action JsonSaveinfo;
 
     public UnityEvent GameStop;
@@ -159,14 +157,9 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.BossStage[1].SetActive(false);
         }    
     }
-    public void OnClickEnding()
-    {
-        Ending[0].gameObject.SetActive(false);
-        Ending[1].gameObject.SetActive(true) ;  
-    }
     public void OpenEndingScence()
     {
-        Ending[0].gameObject.SetActive(true);
+        SceneLoader.LoadSceneWithData("CutScene", "Ending");
     }
     public void RetryGame()
     {

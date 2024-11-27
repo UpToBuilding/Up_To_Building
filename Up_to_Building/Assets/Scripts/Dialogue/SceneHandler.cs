@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SceneHandler : MonoBehaviour
@@ -17,6 +18,7 @@ public class SceneHandler : MonoBehaviour
 
     void Start()
     {
+        BGMManager.Instance.ChangeBGM(dialogueType);
         idx = 0;
         StartCoroutine(ActivateImagesAndShowDialogue());
     }
@@ -30,6 +32,14 @@ public class SceneHandler : MonoBehaviour
             dialogueManager.showDialogue(dialogueType + idx);
 
             yield return new WaitUntil(() => !dialogueManager.IsDialogueRunning());
+        }
+
+        if (dialogueType == "Opening") SceneManager.LoadScene(2);
+        else if (dialogueType == "Ending")
+        {
+            Time.timeScale = 1;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
+            SceneManager.LoadScene(0);
         }
     }
 }

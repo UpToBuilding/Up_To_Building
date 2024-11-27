@@ -44,7 +44,7 @@ public class BGMManager : MonoBehaviour
         else if (name == "Company") clip = companyBGM;
         else if (name == "Dungeon") clip = dungeonBGM;
         else clip = null;
-        if (clip == null)
+        if (audioSource.isPlaying && clip == null)
         {
             audioSource.Stop();
             return;

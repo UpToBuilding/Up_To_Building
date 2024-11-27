@@ -13,7 +13,6 @@ public class DialogueManager : MonoBehaviour
     private int currentLineIndex;
     private bool isDialogueRunning = false;
 
-    private int chks = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,10 +56,6 @@ public class DialogueManager : MonoBehaviour
         else
         {
             isDialogueRunning = false;
-            Debug.Log("End of dialogue.");
-            chks++;
-            if (chks > 1)
-                SceneManager.LoadScene(2);
         }
     }
 

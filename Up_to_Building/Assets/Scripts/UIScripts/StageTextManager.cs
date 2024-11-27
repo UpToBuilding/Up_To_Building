@@ -20,8 +20,8 @@ public class StageTextManager : MonoBehaviour
         
     }
 
-    public void SetStageTextTMP() // todo : GameManager를 Start씬에서도 가동할 수 있도록 해야함
+    public void SetStageTextTMP()
     {
-        stageTextTMP.text = "스테이지 " + (GameManager.Instance.stageNum + 1) + "-" + (GameManager.Instance.process + 1);
+        stageTextTMP.text = "스테이지 " + (SaveManager.Instance.GameData.Stage + 1) + "-" + (SaveManager.Instance.GameData.process + 1);
     }
 }
