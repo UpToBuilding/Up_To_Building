@@ -8,13 +8,10 @@ using System.IO;
 public class SaveManager : MonoBehaviour
 {
     // 플레이어 데이터 저장을 위한 클래스 인스턴스
-    public PlayerData playerData = new PlayerData();
-
-    
-   
+    public PlayerData playerData;
 
     // 게임 매니저 데이터 (게임 상태 관리)
-    public GameManagerData GameData = new GameManagerData();
+    public GameManagerData GameData;
 
     // 저장 경로와 파일명 설정
     private string path;
@@ -43,6 +40,7 @@ public class SaveManager : MonoBehaviour
 
             // 이 오브젝트를 다른 씬에서도 파괴되지 않도록 설정
             DontDestroyOnLoad(this.gameObject);
+            LoadData();
         }
     }
 
@@ -51,10 +49,6 @@ public class SaveManager : MonoBehaviour
     {
         // 플레이어 데이터 JSON으로 변환
         string playerinfo = JsonUtility.ToJson(playerData);
-
-  
-
-     
 
         // 게임 매니저 데이터를 JSON으로 변환
         string gameData = JsonUtility.ToJson(GameData);
@@ -73,24 +67,35 @@ public class SaveManager : MonoBehaviour
     public void LoadData()
     {
         // 플레이어, 게임 매니저, 몬스터 데이터를 파일에서 읽어옴
-        string data = File.ReadAllText(path + filename);
-        string gameData = File.ReadAllText(path + "gameData");
-        string m_data = File.ReadAllText((path + "Monsterinfo"));
+        if (File.Exists(path + filename))
+        {
+            string data = File.ReadAllText(path + filename);
+            playerData = JsonUtility.FromJson<PlayerData>(data);
+        }
+        else
+        {
+            playerData = new PlayerData();
+        }
+        
+        if (File.Exists(path + "gameData"))
+        {
+            string gameData = File.ReadAllText(path + "gameData");
+            GameData = JsonUtility.FromJson<GameManagerData>(gameData);
+        }
+        else
+        {
+            GameData = new GameManagerData();
+        }
+        
+        //string m_data = File.ReadAllText((path + "Monsterinfo"));
 
-        // JSON 데이터를 객체로 변환하여 로드
-        playerData = JsonUtility.FromJson<PlayerData>(data);
-        GameData = JsonUtility.FromJson<GameManagerData>(gameData);
- 
     }
 
     // 새로운 게임을 시작할 때 데이터를 초기화
     public void newGame_DeleteJson()
     {
-        // 저장된 파일이 있으면 데이터 초기화
-        if (File.Exists(path + filename))
-        {
-            playerData = new PlayerData();
-            GameData = new GameManagerData();
-        }
+        playerData = new PlayerData();
+        GameData = new GameManagerData();
+        GameData.isSaveExist = true;
     }
 }

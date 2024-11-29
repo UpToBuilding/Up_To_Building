@@ -22,6 +22,18 @@ public class StageTextManager : MonoBehaviour
 
     public void SetStageTextTMP()
     {
-        stageTextTMP.text = "스테이지 " + (SaveManager.Instance.GameData.Stage + 1) + "-" + (SaveManager.Instance.GameData.process + 1);
+        if (!SaveManager.Instance.GameData.isSaveExist)
+        {
+            stageTextTMP.text = "";
+
+        }
+        else if (SaveManager.Instance.GameData.Stage == 2)
+        {
+            stageTextTMP.text = "Boss";
+        }
+        else
+        {
+            stageTextTMP.text = "스테이지 " + (SaveManager.Instance.GameData.Stage + 1) + "-" + (SaveManager.Instance.GameData.process + 1);
+        }
     }
 }

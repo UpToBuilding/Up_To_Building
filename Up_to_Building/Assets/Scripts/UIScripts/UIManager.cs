@@ -74,14 +74,6 @@ public class UIManager : MonoBehaviour
         StateObject[1].SetActive(true);
     }
 
-    public void GameEnd()
-    {
-        temp = Time.deltaTime;
-
-        Time.timeScale = 0;
-        Time.fixedDeltaTime = 0f;
-    }
-
     public void Resume()
     {
         Time.timeScale = 1;

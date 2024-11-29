@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
             if (maxfloor == currentfloor)
             {           
                 stageNum++;
+                process = 0;
                 ChangeStage(stageNum);      
             }
         }
@@ -208,4 +209,5 @@ public class GameManagerData
     public int Stage = 0;
     public int process = 0;
     public int currentfloor = 1;
+    public bool isSaveExist = false;
 }
