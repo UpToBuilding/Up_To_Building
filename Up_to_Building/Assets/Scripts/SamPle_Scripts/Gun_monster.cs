@@ -14,6 +14,7 @@ public class Gun_monster : MonsterBase
     private Transform Left;
     [SerializeField]
     private bool attack;
+    
     public override void Base_Movement()
     {
         base.Base_Movement();
@@ -44,5 +45,9 @@ public class Gun_monster : MonsterBase
         yield return new WaitForSeconds(1.5f);
         attack = false;
         
+    }
+    private void OnEnable()
+    {
+        attack = false;
     }
 }

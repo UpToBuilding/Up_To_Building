@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
     {
         ChangeStage(stageNum);
   
-        uiManager.SetStageText();
+         uiManager.SetStageText();
     }
 
     public void SaveGameinfo()
