@@ -131,8 +131,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-       // if (SaveManager.Instance.playerData.player_position != Vector3.zero) this.transform.localPosition = SaveManager.Instance.playerData.player_position;
-        //hp = SaveManager.Instance.playerData.hp;
+        if (SaveManager.Instance.playerData.player_position != Vector3.zero) this.transform.localPosition = SaveManager.Instance.playerData.player_position;
+        hp = SaveManager.Instance.playerData.hp;
     }
 
     void Update()

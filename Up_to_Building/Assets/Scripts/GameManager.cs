@@ -87,9 +87,9 @@ public class GameManager : MonoBehaviour
       
         }
         isBoss = false;
-        //stageNum = SaveManager.Instance.GameData.Stage;
-        //process = SaveManager.Instance.GameData.process;
-        //currentfloor = SaveManager.Instance.GameData.currentfloor;
+        stageNum = SaveManager.Instance.GameData.Stage;
+        process = SaveManager.Instance.GameData.process;
+        currentfloor = SaveManager.Instance.GameData.currentfloor;
         backinfo = Background.transform.position;
        
     }
