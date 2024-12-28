@@ -10,7 +10,7 @@ public class ElevatorEvent : MonoBehaviour
 
     public AudioSource audio;
     public Animator ani;
-
+    private bool count = false;
     void Start()
     {
         ani = GetComponent<Animator>();
@@ -28,9 +28,12 @@ public class ElevatorEvent : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            ani.SetTrigger("start");
-            audio.Play();
-            
+            if (!count)
+            {
+                count = true;
+                ani.SetTrigger("start");
+                audio.Play();
+            }
         }
     }
 

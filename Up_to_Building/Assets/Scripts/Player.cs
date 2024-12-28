@@ -14,8 +14,8 @@ public class Player : MonoBehaviour
     // 플레이어 위치를 저장하는 정적 변수
     public static Transform PlayerTransform;
 
-    // UI 업데이트를 위한 PlayerUI 컴포넌트
-    [SerializeField] private PlayerUI playerUI;
+    // UI 업데이트를 위한 PlayrUI 컴포넌트
+    public PlayerUI playerUI;
     [SerializeField] private UIManager uiManager;
     
 
@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     public Animator ani; // 애니메이터
     public GameObject checkpoint;
 
-    public UnityEvent DeathSystem;
+    public UnityEvent AttackEvent;
     
 
     [SerializeField]
@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
 
     private bool isHIt;
 
+    [SerializeField]
     private int hp; // 플레이어의 체력
     public int HP
     {
@@ -48,17 +49,19 @@ public class Player : MonoBehaviour
             hp += value;
             playerUI.lostLife(); // 체력 감소 UI 업데이트
             hitSound.Play();
-            playerDead();
+            
 
             if (hp > 0)
             {
-              Revive();
-              if (GameManager.Instance.BossStage[0].activeSelf) StartCoroutine(invincibility());
+                if (hp<4)
+                StartCoroutine(deathEffect());
+                if (GameManager.Instance.BossStage[0].activeSelf) StartInvinciblity();
             }
             else
             {
                 GameManager.Instance.currentFloor = 1;
                 ani.SetTrigger("death"); // 사망 애니메이션 재생
+                playerDead();
             } 
         }
     }
@@ -102,7 +105,8 @@ public class Player : MonoBehaviour
     public enum State
     {
         NORMAL,
-        INVINCIBILLTY 
+        INVINCIBILLTY,
+        DEATH
     }
     public State state = State.NORMAL;
 
@@ -127,8 +131,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        if (SaveManager.Instance.playerData.player_position != Vector3.zero) this.transform.localPosition = SaveManager.Instance.playerData.player_position;
-        hp = SaveManager.Instance.playerData.hp;
+       // if (SaveManager.Instance.playerData.player_position != Vector3.zero) this.transform.localPosition = SaveManager.Instance.playerData.player_position;
+        //hp = SaveManager.Instance.playerData.hp;
     }
 
     void Update()
@@ -163,6 +167,19 @@ public class Player : MonoBehaviour
         //isHIt = false;
         reviveSound.Play();
     }
+    
+    public void StartInvinciblity()
+    {
+        StartCoroutine(invincibility());
+
+    }
+    IEnumerator deathEffect()
+    {
+        StartCoroutine(dEffect());
+        yield return new WaitForSeconds (2.0f);
+        playerDead();
+        Revive();
+    }
 
     IEnumerator invincibility()
     {
@@ -181,8 +198,30 @@ public class Player : MonoBehaviour
     {
         sprite.color = new Color(1, 1, 1, 0.5f);
         yield return new WaitForSeconds(2.0f);
+        
         sprite.color = new Color(1, 1, 1, 1);
     }
+    IEnumerator dEffect()
+    {
+        float temp = speed;
+        speed = 0;
+        state = State.DEATH;
+
+
+        sprite.color = new Color(1, 1, 1, 0f);
+        yield return new WaitForSeconds(0.65f);
+        sprite.color = new Color(1, 1, 1, 1);
+        yield return new WaitForSeconds(0.65f);
+        sprite.color = new Color(1, 1, 1, 0f);
+        yield return new WaitForSeconds(0.65f);
+        sprite.color = new Color(1, 1, 1, 1);
+        speed = temp;
+        state = State.NORMAL;
+        yield return null ;
+  
+
+    }
+
 
     private void MoveManager()
     {
@@ -261,7 +300,7 @@ public class Player : MonoBehaviour
                 rb.AddForce(Vector2.up * 13f, ForceMode2D.Impulse); // 몬스터를 밟았을 때 다시 점프
                 isjump = true;
 
-                hit.collider.gameObject.GetComponent<MonsterBase>().HP = -100;
+                hit.collider.gameObject.SetActive(false);
 
             }
         }
@@ -340,4 +379,5 @@ public class PlayerData
 {
     public int hp = 4;
     public Vector3 player_position;
+ 
 }

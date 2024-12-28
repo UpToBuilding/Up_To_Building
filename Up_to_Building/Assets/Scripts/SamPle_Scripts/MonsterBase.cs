@@ -48,7 +48,7 @@ public abstract class MonsterBase : MonoBehaviour
     private void InitInfo()
     {
         this.transform.localPosition = initPostion;
-        hp = 2;
+        hp = 3;
         baseSpeed = 3;
         
     }
@@ -98,6 +98,7 @@ public abstract class MonsterBase : MonoBehaviour
 
         if (Physics2D.OverlapBox(this.gameObject.transform.position, new Vector2(distance, 2.5f), 0.0f, LayerMask.GetMask("Player")) == null)
         {
+         
             if (name == "Gun") animator.SetBool("run", true);
             t += Time.deltaTime; // 시간 증가
             if (t <= 1.0f)
@@ -137,7 +138,7 @@ public abstract class MonsterBase : MonoBehaviour
 
    private void Startdeath()
    {
-        rb.velocity = Vector2.zero;
+        baseSpeed = 0 ;
    }
 
 
@@ -163,7 +164,7 @@ public abstract class MonsterBase : MonoBehaviour
 
 public class MonsterData
 {
-    public int hp = 2;
+    public int hp = 3;
     public Vector3 monsterPostion;
 
 }

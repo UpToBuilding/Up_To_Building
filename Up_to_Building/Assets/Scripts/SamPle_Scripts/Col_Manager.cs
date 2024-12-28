@@ -28,12 +28,16 @@ public class Col_Manager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+       
         if (collision.gameObject.CompareTag("Check_Point"))
         {
             // EffectSystem.Invoke();
             GameObject checkPoint = collision.gameObject;
             if (player.checkpoint != checkPoint)
             {
+               
+                player.HP = 4;
+                player.AttackEvent.Invoke();
                 player.checkpoint = checkPoint;
                 checkPoint.GetComponent<CheckPointEffect>().PlayCheckPointSound();
                 GameManager.Instance.process++;
@@ -50,11 +54,20 @@ public class Col_Manager : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Stage"))
         {
-     
+                player.playerUI.isattack = false;
                 GameManager.Instance.UpFloor();
                 player.PlayerUpFloor();
            
             //GameManager.Instance.currentFloor++;
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Stage"))
+        {
+            player.StartInvinciblity();
+            player.playerUI.isattack = true;
         }
     }
 

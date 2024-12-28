@@ -5655,7 +5655,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3242538, y: 3.94417, z: -10}
+  m_LocalPosition: {x: -3.3243961, y: 3.8938098, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12578,6 +12578,7 @@ GameObject:
   - component: {fileID: 1137716053}
   - component: {fileID: 1137716052}
   - component: {fileID: 1137716054}
+  - component: {fileID: 1137716055}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -12633,7 +12634,7 @@ Transform:
   m_GameObject: {fileID: 1137716051}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.49, y: 3.946, z: -10}
+  m_LocalPosition: {x: -5.49, y: 2.5820003, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12655,6 +12656,19 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 2121701097}
   m_Damping: 0.5
   m_MaxWindowSize: -1
+--- !u!114 &1137716055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137716051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d74ef67f9f6df2e439e1ebf91501ce50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _virtualCamera: {fileID: 0}
 --- !u!4 &1139006528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7461703432062948992, guid: 1fe1e005f432d2d46a5b5ae782f80b2f, type: 3}
@@ -17653,7 +17667,7 @@ Transform:
   m_GameObject: {fileID: 1494061353}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1197.372, y: 603.9671, z: -23.554565}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17678,6 +17692,7 @@ MonoBehaviour:
   - {fileID: 193157823}
   - {fileID: 1243314259}
   hpIndex: 0
+  isattack: 0
 --- !u!114 &1494061357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18705,6 +18720,34 @@ PrefabInstance:
       propertyPath: reviveSound
       value: 
       objectReference: {fileID: 1902910953}
+    - target: {fileID: 6028196282334563461, guid: 66ca9bbd15870f84bb6893eb86799d8b, type: 3}
+      propertyPath: AttackEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6028196282334563461, guid: 66ca9bbd15870f84bb6893eb86799d8b, type: 3}
+      propertyPath: AttackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6028196282334563461, guid: 66ca9bbd15870f84bb6893eb86799d8b, type: 3}
+      propertyPath: AttackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1494061356}
+    - target: {fileID: 6028196282334563461, guid: 66ca9bbd15870f84bb6893eb86799d8b, type: 3}
+      propertyPath: AttackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6028196282334563461, guid: 66ca9bbd15870f84bb6893eb86799d8b, type: 3}
+      propertyPath: AttackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CheckHealup
+      objectReference: {fileID: 0}
+    - target: {fileID: 6028196282334563461, guid: 66ca9bbd15870f84bb6893eb86799d8b, type: 3}
+      propertyPath: AttackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6028196282334563461, guid: 66ca9bbd15870f84bb6893eb86799d8b, type: 3}
+      propertyPath: AttackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7889486883454610152, guid: 66ca9bbd15870f84bb6893eb86799d8b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -23309,7 +23352,7 @@ MonoBehaviour:
   m_ZDamping: 1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
-  m_ScreenY: 0.8
+  m_ScreenY: 0.6
   m_CameraDistance: 10
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0

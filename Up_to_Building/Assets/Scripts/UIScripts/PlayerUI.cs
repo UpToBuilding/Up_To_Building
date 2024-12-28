@@ -14,6 +14,9 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     private int hpIndex;
     
+    public bool isattack;
+
+
 
     private bool isMoveLeft;
     public bool IsMoveLeft {  get { return isMoveLeft; } }
@@ -22,6 +25,7 @@ public class PlayerUI : MonoBehaviour
 
     private void Awake()
     {
+        isattack = true;
         hpIndex = lifePoints.Length-1;
     }
 
@@ -47,6 +51,15 @@ public class PlayerUI : MonoBehaviour
         player.ResetData();
         player.gameObject.SetActive(true);
         player.Revive();
+    }
+
+    public void CheckHealup()
+    {
+        hpIndex = lifePoints.Length - 1;
+        foreach (Image img in lifePoints)
+        {
+            img.gameObject.SetActive(true);
+        }
     }
 
     public void Bossreset()
@@ -85,7 +98,8 @@ public class PlayerUI : MonoBehaviour
 
     public void attack()
     {
-        player.Shooting();
+        
+        if(isattack)player.Shooting();
     }
 
     public void Clicked()
