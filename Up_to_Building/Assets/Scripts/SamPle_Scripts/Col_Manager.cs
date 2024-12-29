@@ -82,6 +82,9 @@ public class Col_Manager : MonoBehaviour
             player.HP = -1;
             
 
+        }else if (collision.collider.gameObject.CompareTag("Ground"))
+        {
+            player.Isjump = false;
         }
     }
     

@@ -15,13 +15,16 @@ public class ElevatorEvent : MonoBehaviour
     {
         ani = GetComponent<Animator>();
         audio = GetComponent<AudioSource>();
+        Player player = Player.PlayerTransform.gameObject.GetComponent<Player>();
+        player.initElv += countTrigger;
     }
 
-    
-    void Update()
+    public void countTrigger()
     {
-        
+       count = false;
     }
+
+  
 
 
     private void OnTriggerEnter2D(Collider2D collision)

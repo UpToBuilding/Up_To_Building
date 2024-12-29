@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -99,7 +100,8 @@ public class PlayerUI : MonoBehaviour
     public void attack()
     {
         
-        if(isattack)player.Shooting();
+        if(isattack)
+            player.Shooting();
     }
 
     public void Clicked()

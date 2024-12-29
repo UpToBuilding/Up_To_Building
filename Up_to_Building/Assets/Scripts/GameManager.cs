@@ -1,10 +1,11 @@
+//using static UnityEditor.Progress;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Progress;
+
 
 
 

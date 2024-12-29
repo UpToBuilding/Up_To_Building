@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     public GameObject checkpoint;
 
     public UnityEvent AttackEvent;
-    
+    public Action initElv;
 
     [SerializeField]
     private GameObject fireball; // 발사체 프리팹
@@ -49,12 +49,18 @@ public class Player : MonoBehaviour
             hp += value;
             playerUI.lostLife(); // 체력 감소 UI 업데이트
             hitSound.Play();
-            
+            initElv?.Invoke();
 
             if (hp > 0)
             {
-                if (hp<4)
-                StartCoroutine(deathEffect());
+                if (hp < 4)
+                {
+                    StartCoroutine(deathEffect());
+                    //Revive();
+                    //playerDead();
+                }
+                
+
                 if (GameManager.Instance.BossStage[0].activeSelf) StartInvinciblity();
             }
             else
@@ -134,6 +140,7 @@ public class Player : MonoBehaviour
         if (SaveManager.Instance.playerData.player_position != Vector3.zero) this.transform.localPosition = SaveManager.Instance.playerData.player_position;
         hp = SaveManager.Instance.playerData.hp;
     }
+
 
     void Update()
     {
