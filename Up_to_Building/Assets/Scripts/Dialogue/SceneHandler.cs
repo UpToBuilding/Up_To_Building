@@ -34,7 +34,11 @@ public class SceneHandler : MonoBehaviour
             yield return new WaitUntil(() => !dialogueManager.IsDialogueRunning());
         }
 
-        if (dialogueType == "Opening") SceneManager.LoadScene(2);
+        if (dialogueType == "Opening")
+        {
+            PlayerPrefs.SetInt("IsPlayed", 1);
+            SceneManager.LoadScene(2);
+        }
         else if (dialogueType == "Ending")
         {
             Time.timeScale = 1;

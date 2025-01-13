@@ -9,12 +9,22 @@ public class UiManager : MonoBehaviour
     private GameObject SettingPanel;
     [SerializeField]
     private GameObject CreditPanel;
+    [SerializeField] private Tutorial tutorial;
+
+    private string isPlayed = "IsPlayed";
 
 
     public void OnMainSence()
     {
         SaveManager.Instance.newGame_DeleteJson();
-        SceneLoader.LoadSceneWithData("CutScene", "Opening");
+        if (PlayerPrefs.GetInt(isPlayed, 0) == 1)
+        {
+            SceneManager.LoadScene(2);
+        }
+        else
+        {
+            tutorial.StartTutorial();
+        }
     }
 
     public void OnReLoad()
@@ -43,5 +53,11 @@ public class UiManager : MonoBehaviour
     public void OffCreditPanel()
     {
         CreditPanel.SetActive(false);
+    }
+
+    [ContextMenu("Reset IsPlayed")]
+    public void ResetIsPlayed()
+    {
+        PlayerPrefs.DeleteKey(isPlayed);
     }
 }

@@ -14,7 +14,7 @@ public class Tutorial : MonoBehaviour
     void Start()
     {
         textIdx = -1;
-        maxIdx = 2;
+        maxIdx = tutorialTexts.childCount;
     }
 
     // Update is called once per frame
@@ -23,15 +23,21 @@ public class Tutorial : MonoBehaviour
         
     }
 
-    public void showNextText()
+    public void StartTutorial()
+    {
+        tutorialTexts.gameObject.SetActive(true);
+        ShowNextText();
+    }
+
+    public void ShowNextText()
     {
         if (printText.checkCoroutine()) return;
         if (textIdx >= 0) tutorialTexts.GetChild(textIdx).gameObject.SetActive(false);
-        if (++textIdx == maxIdx) SceneManager.LoadScene("MainScence");
+        if (++textIdx == maxIdx) SceneLoader.LoadSceneWithData("CutScene", "Opening");
         else
         {
             Transform targetText = tutorialTexts.GetChild(textIdx);
-            TextMeshProUGUI targetTmp = tutorialTexts.GetChild(textIdx).GetChild(0).GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI targetTmp = targetText.GetChild(0).GetComponent<TextMeshProUGUI>();
 
             targetText.gameObject.SetActive(true);
             printText.printText(targetTmp, targetTmp.text);
