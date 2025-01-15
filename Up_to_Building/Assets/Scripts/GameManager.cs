@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] BossStage;
 
+    [SerializeField]
+    private GameObject[] checkPoint;
+
     public Transform BossPos;
     [SerializeField]
     private int currentfloor;
@@ -80,26 +83,54 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-       
+
         if (instance == null)
         {
-            
+
             instance = this;
-      
+
         }
         isBoss = false;
         stageNum = SaveManager.Instance.GameData.Stage;
         process = SaveManager.Instance.GameData.process;
         currentfloor = SaveManager.Instance.GameData.currentfloor;
         backinfo = Background.transform.position;
+
+        
        
     }
 
     void Start()
-    {
+    { 
+
+
         ChangeStage(stageNum);
   
          uiManager.SetStageText();
+    }
+
+    public GameObject LoadingCheckPoint()
+    {
+        if (stageNum == 0)
+        {
+            if (currentfloor <= 22 && currentfloor >= 19) return checkPoint[3];
+            else if (currentfloor <= 18 && currentfloor >= 14) return checkPoint[2];
+            else if (currentfloor <= 13 && currentfloor >= 9) return checkPoint[1];
+            else if(currentfloor <= 9 && currentfloor >= 4) return checkPoint[0];
+            
+        }else if(stageNum == 1)
+        {
+            if (currentfloor <= 22 && currentfloor >= 19) return checkPoint[7];
+            else if (currentfloor <= 18 && currentfloor >= 14) return checkPoint[6];
+            else if (currentfloor <= 13 && currentfloor >= 9) return checkPoint[5];
+            else if (currentfloor <= 9 && currentfloor >= 4) return checkPoint[4];
+        }
+        return null;
+    }
+
+    private void FIndpoint(int num)
+    {
+
     }
 
     public void SaveGameinfo()

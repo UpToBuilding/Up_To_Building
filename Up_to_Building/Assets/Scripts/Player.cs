@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
-using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
+//using Unity.VisualScripting;
+//using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Audio;
@@ -152,6 +152,7 @@ public class Player : MonoBehaviour
     {
         if (SaveManager.Instance.playerData.player_position != Vector3.zero) this.transform.localPosition = SaveManager.Instance.playerData.player_position;
         hp = SaveManager.Instance.playerData.hp;
+        checkpoint = GameManager.Instance.LoadingCheckPoint();
     }
 
 
