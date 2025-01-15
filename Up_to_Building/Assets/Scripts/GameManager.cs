@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public Transform BossPos;
     [SerializeField]
     private int currentfloor;
-
+    
     public int currentFloor
     {
         get { return currentfloor; }
@@ -152,6 +152,7 @@ public class GameManager : MonoBehaviour
         {
             Stage[0].SetActive(false);
             Stage[1].SetActive(true);
+            
             Player.PlayerTransform.GetComponent<Player>().gameObject.transform.position = initinfo.transform.position;
             currentFloor = 1;
             BGMManager.Instance.ChangeBGM("Dungeon");
@@ -167,7 +168,16 @@ public class GameManager : MonoBehaviour
             
             StartCoroutine(ChaningBossScence(num));
         }
+        StagenumUp(num);
     }
+
+
+    //테스트용
+    private void StagenumUp(int n)
+    {
+        stageNum = n;
+    }
+
 
     IEnumerator ScenceChaing()
     {

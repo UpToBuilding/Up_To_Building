@@ -106,7 +106,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -130,10 +130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ce4496591bab245843ad8c7a196bb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
+  hp: 1
   name: Gun
   baseSpeed: 3
   distance: 10
+  isattack: 0
   t: 0
   bullet: {fileID: 5079589698609367244, guid: f82749485ddb7e9409109d0b182c8319, type: 3}
   Right: {fileID: 4577543488239990836}

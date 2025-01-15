@@ -35,8 +35,8 @@ public class Col_Manager : MonoBehaviour
             GameObject checkPoint = collision.gameObject;
             if (player.checkpoint != checkPoint)
             {
-               
-                player.HP = 4;
+
+                player.initHp();
                 player.AttackEvent.Invoke();
                 player.checkpoint = checkPoint;
                 checkPoint.GetComponent<CheckPointEffect>().PlayCheckPointSound();
@@ -49,7 +49,7 @@ public class Col_Manager : MonoBehaviour
         else if (collision.gameObject.CompareTag(BarrierTag) || (collision.gameObject.CompareTag("Monster")))
         {
             if (player.state == Player.State.NORMAL)
-                player.HP = -1;
+                player.HP -= 1;
 
         }
         else if (collision.gameObject.CompareTag("Stage"))
@@ -79,7 +79,7 @@ public class Col_Manager : MonoBehaviour
         if (collision.collider.gameObject.CompareTag(BarrierTag) || (collision.gameObject.CompareTag("Monster")))
         {
             if(player.state == Player.State.NORMAL)
-            player.HP = -1;
+            player.HP -= 1;
             
 
         }else if (collision.collider.gameObject.CompareTag("Ground"))

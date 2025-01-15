@@ -22,6 +22,9 @@ public abstract class MonsterBase : MonoBehaviour
     [SerializeField]
     protected float distance;
 
+    [SerializeField]
+    private bool isattack;
+
     public int HP
     {
         get { return hp; }
@@ -103,9 +106,9 @@ public abstract class MonsterBase : MonoBehaviour
             t += Time.deltaTime; // 시간 증가
             if (t <= 1.0f)
             {
-                rb.velocity = new Vector2(1, rb.velocity.y) * baseSpeed; // 오른쪽으로 이동
+                rb.velocity = new Vector2(1 * baseSpeed, rb.velocity.y) ; // 오른쪽으로 이동
             }
-            else if (t <= 2.0f) rb.velocity = new Vector2(-1, rb.velocity.y) * baseSpeed; // 왼쪽으로 이동
+            else if (t <= 2.0f) rb.velocity = new Vector2(-1 * baseSpeed, rb.velocity.y) ; // 왼쪽으로 이동
             else t = 0; // 시간 초기화
             //StartCoroutine(FIndPlayer());
         }
@@ -121,6 +124,8 @@ public abstract class MonsterBase : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
+
+
     
 
 
@@ -140,6 +145,7 @@ public abstract class MonsterBase : MonoBehaviour
    {
         baseSpeed = 0 ;
    }
+
 
 
     IEnumerator FIndPlayer()

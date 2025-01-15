@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Audio;
@@ -46,7 +47,7 @@ public class Player : MonoBehaviour
             //if (isHIt) return; // 이미 맞은 상태인지 여부 확인
             //isHIt = true;
 
-            hp += value;
+            hp = value;
             playerUI.lostLife(); // 체력 감소 UI 업데이트
             hitSound.Play();
             initElv?.Invoke();
@@ -55,13 +56,19 @@ public class Player : MonoBehaviour
             {
                 if (hp < 4)
                 {
-                    StartCoroutine(deathEffect());
+                    if (GameManager.Instance.stageNum != 2)
+                    {
+                        StartCoroutine(deathEffect());
+                    }
+                    else if (GameManager.Instance.BossStage[0].activeSelf) StartInvinciblity();
+
+
                     //Revive();
                     //playerDead();
                 }
                 
 
-                if (GameManager.Instance.BossStage[0].activeSelf) StartInvinciblity();
+               
             }
             else
             {
@@ -112,7 +119,8 @@ public class Player : MonoBehaviour
     {
         NORMAL,
         INVINCIBILLTY,
-        DEATH
+        DEATH,
+        BOSS
     }
     public State state = State.NORMAL;
 
@@ -120,7 +128,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        hp = 4; // 초기 체력 설정
+        initHp();
         //jump_power = 12; // 초기 점프 파워 설정
         isHIt = false;
         isCool = false;
@@ -133,6 +141,11 @@ public class Player : MonoBehaviour
         ani = GetComponent<Animator>();
 
         runSound = runSound2;
+    }
+
+    public void initHp()
+    {
+        hp = 4; // 초기 체력 설정
     }
 
     private void Start()
@@ -196,6 +209,7 @@ public class Player : MonoBehaviour
      
 
         yield return new WaitForSeconds(2f);
+       
         state = State.NORMAL;
         yield return null;
 
@@ -211,21 +225,22 @@ public class Player : MonoBehaviour
     IEnumerator dEffect()
     {
         float temp = speed;
+      
         speed = 0;
         state = State.DEATH;
 
 
-        sprite.color = new Color(1, 1, 1, 0f);
+        sprite.color = new Color(1, 1, 1, 0.5f);
         yield return new WaitForSeconds(0.65f);
         sprite.color = new Color(1, 1, 1, 1);
         yield return new WaitForSeconds(0.65f);
-        sprite.color = new Color(1, 1, 1, 0f);
+        sprite.color = new Color(1, 1, 1, 0.5f);
         yield return new WaitForSeconds(0.65f);
         sprite.color = new Color(1, 1, 1, 1);
         speed = temp;
         state = State.NORMAL;
         yield return null ;
-  
+      
 
     }
 
@@ -331,7 +346,7 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
-        if (Isjump == false)
+        if (Isjump == false&&state!=State.DEATH)
         {
             Isjump = true; // 점프 상태 설정
             rb.AddForce(Vector2.up * jump_power, ForceMode2D.Impulse); // 점프

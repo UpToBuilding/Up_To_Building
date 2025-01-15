@@ -47,10 +47,10 @@ public class Boss : MonoBehaviour
     void Update()
     {
         // 테스트용 코드. 나중에 없애야 함
-        if (Input.GetKeyDown(KeyCode.Space))
+       /* if (Input.GetKeyDown(KeyCode.Space))
         {
             TestAttack();
-        }
+        }*/
 
         if (isBossAlive)
         {

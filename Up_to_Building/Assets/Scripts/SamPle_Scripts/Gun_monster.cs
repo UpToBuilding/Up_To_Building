@@ -62,6 +62,8 @@ public class Gun_monster : MonsterBase
     }
     private void OnEnable()
     {
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         attack = false;
     }
 }

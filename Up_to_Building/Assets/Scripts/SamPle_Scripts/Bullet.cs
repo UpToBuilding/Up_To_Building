@@ -31,10 +31,11 @@ public class Bullet : MonoBehaviour
     {
         spriteRenderer.flipX = dir;
         if (dir)
-        {         
-            rb.AddForce(Vector2.right * bulletSpeed,ForceMode2D.Impulse);
+        {
+            this.transform.Translate(Vector2.right * bulletSpeed * Time.deltaTime);
         }
-        else  rb.AddForce( Vector2.left * bulletSpeed,ForceMode2D.Impulse);
+        else this.transform.Translate(Vector2.left * bulletSpeed*Time.deltaTime);
+        //rb.AddForce( Vector2.left * bulletSpeed,ForceMode2D.Impulse);
     }
 
     public void OndestroyThis()
