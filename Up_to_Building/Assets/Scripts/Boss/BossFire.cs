@@ -46,16 +46,15 @@ public class BossFire : MonoBehaviour
         {
             case BossAttackType.SingleAttack:
                 collider.size = new Vector2(2.69f, 3.0f);
-                spriteRenderer.color = Color.red;
+                spriteRenderer.color = Color.clear;
                 spriteRenderer.sprite = Firesprites[(int)BossAttackType.SingleAttack];
                 gameObject.transform.position = new Vector3(-8.25f + 2.69f * (sectionNumber + sectionSize - 1), -3.55f, 0f);
                 break;
 
             case BossAttackType.PersistantAttack:
-                collider.size = new Vector2(1.35f, 3.0f);
-                spriteRenderer.color = Color.magenta;
+                collider.size = new Vector2(1.0f, 1.0f);
                 spriteRenderer.sprite = Firesprites[(int)BossAttackType.PersistantAttack];
-                gameObject.transform.position = new Vector3(-8.25f + 2.69f * (sectionNumber + sectionSize - 1), -3.1f, 0f);
+                gameObject.transform.position = new Vector3(-8.25f + 2.69f * (sectionNumber + sectionSize - 1), -3.85f, 0f);
                 break;
         }
 

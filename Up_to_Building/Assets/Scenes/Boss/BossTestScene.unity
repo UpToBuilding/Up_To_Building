@@ -766,6 +766,7 @@ MonoBehaviour:
   - {fileID: 724585730}
   - {fileID: 1572841897}
   hpIndex: 0
+  isattack: 0
 --- !u!1 &1852155135
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,6 +906,10 @@ PrefabInstance:
     - target: {fileID: 1886642927581529919, guid: 66ca9bbd15870f84bb6893eb86799d8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976022921477023743, guid: 66ca9bbd15870f84bb6893eb86799d8b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7889486883454610152, guid: 66ca9bbd15870f84bb6893eb86799d8b, type: 3}
       propertyPath: m_Name

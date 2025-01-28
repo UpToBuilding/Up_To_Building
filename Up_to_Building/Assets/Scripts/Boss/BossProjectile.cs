@@ -20,7 +20,7 @@ public class BossProjectile : MonoBehaviour
         TargetLocation = new Vector3(-8.25f + 2.69f * (info.sectionNumber + info.sectionLength - 1), -3.55f, 0f);
 
         float distStartEnd = Vector3.Distance(StartLocation, TargetLocation);
-        speedMagnification = (distStartEnd / 12.0f);
+        speedMagnification = (distStartEnd / 36.0f);
 
         Vector2 newPos = TargetLocation - StartLocation;
         float rotZ = Mathf.Atan2(newPos.y, newPos.x) * Mathf.Rad2Deg;
