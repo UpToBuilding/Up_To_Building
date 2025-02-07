@@ -51,7 +51,7 @@ public abstract class MonsterBase : MonoBehaviour
     private void InitInfo()
     {
         this.transform.localPosition = initPostion;
-        hp = 3;
+        hp = 1;
         baseSpeed = 3;
         
     }
@@ -61,7 +61,7 @@ public abstract class MonsterBase : MonoBehaviour
         t = 0; // 초기 시간 설정
         Player player = FindObjectOfType<Player>();
         player.playerDead += MonsterObjSetActivation;
-        
+        player.SetMonsterTransform += InitInfo;
         sp = GetComponent<SpriteRenderer>(); // 스프라이트 렌더러 컴포넌트 가져오기
         rb = GetComponent<Rigidbody2D>(); // 리지드바디 컴포넌트 가져오기
         animator = GetComponent<Animator>(); // 애니메이터 컴포넌트 가져오기
@@ -71,15 +71,16 @@ public abstract class MonsterBase : MonoBehaviour
     private void Start()
     {
        initPostion =  new Vector2(this.transform.localPosition.x,this.transform.localPosition.y);
-       
-        StartCoroutine(activeterm());
+       InitInfo();
+       StartCoroutine(activeterm());
           
         
     }
 
     void Update()
     {
-        Base_Movement(); // 기본 이동 동작
+        if (math.abs(this.transform.position.y - Player.PlayerTransform.position.y) > 6.0f) rb.velocity = Vector2.zero;
+        else Base_Movement(); // 기본 이동 동작
     }
 
     // 몬스터의 기본 이동 로직

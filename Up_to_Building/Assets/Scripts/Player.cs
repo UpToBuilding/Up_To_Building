@@ -32,8 +32,10 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private GameObject fireball; // 발사체 프리팹
-
+   
+    public Action SetMonsterTransform;//몬스터 위치 초기화 이벤트
     public Action playerDead;
+
 
     private bool isHIt;
 
@@ -51,9 +53,11 @@ public class Player : MonoBehaviour
             playerUI.lostLife(); // 체력 감소 UI 업데이트
             hitSound.Play();
             initElv?.Invoke();
+            SetMonsterTransform(); 
 
             if (hp > 0)
             {
+                
                 if (hp < 4)
                 {
                     if (GameManager.Instance.stageNum != 2)
@@ -179,11 +183,13 @@ public class Player : MonoBehaviour
         {
             this.transform.position = checkpoint.transform.position;
             GameManager.Instance.currentFloor = GameManager.Instance.TempFloor;
+            StartInvinciblity();
         }
         else
         {
             this.transform.position = GameManager.Instance.BossStage[0].activeSelf ? GameManager.Instance.BossPos.transform.position: GameManager.Instance.initinfo.transform.position;
             GameManager.Instance.currentFloor = 1;
+            
         }
         //isHIt = false;
         reviveSound.Play();

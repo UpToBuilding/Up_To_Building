@@ -128,10 +128,7 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
-    private void FIndpoint(int num)
-    {
 
-    }
 
     public void SaveGameinfo()
     {
